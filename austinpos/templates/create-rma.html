@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Create Rma{% endblock title %}
+{% block content %}
+  <h1>Create Rma</h1>
+  <form class='border' method="post">
+    <div class="container form">
+      {{ form.hidden_tag() }}
+      {{ form.RmaNumber(placeholder='Enter Rma Number', class='create') }}<br><br>
+      {{ form.Vendor.label() }}<br>
+      {{ form.Vendor(class='create') }}<br><br>
+      {{ form.Client.label() }}<br>
+      {{ form.Client(class='create') }}<br><br>
+      {{ form.Issue.label() }}<br>
+      {{ form.Issue(class='create') }}<br><br>
+      {{ form.Date_Sent.label() }}<br>
+      {{ form.Date_Sent(class='create') }}<br><br>
+      {{ form.Date_Received.label() }}<br>
+      {{ form.Date_Received(class='create') }}<br><br>
+      {{ form.Rep.label() }}<br>
+      {{ form.Rep(class='create') }}<br><br>
+      {{form.Notes.label()}}<br>
+      {{form.Notes(class='create')}}<br><br>
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+{% endblock content %}

@@ -1,0 +1,48 @@
+.nav-link:hover{
+  color: #44659b !important;
+  background-color: white !important;
+}
+
+.nav-link{
+  color: white !important;
+}
+
+.rma{
+  margin-top: 25px;
+}
+
+.rma th{
+  text-align: center;
+}
+
+.rma td{
+  text-align: center;
+}
+
+
+.create{
+  width: 500px;
+}
+
+
+.border{
+  padding-top: 25px;
+}
+
+.loginblock{
+  background-color: #fcfcfc;
+}
+
+.form{
+  margin-top: 5px;
+  margin-left: 25px;
+  margin-bottom: 25px;
+}
+
+#logintitle{
+  margin-bottom: 10px;
+}
+
+#pricingtable{
+  margin-bottom: 25px;
+}

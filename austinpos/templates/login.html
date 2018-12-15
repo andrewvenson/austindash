@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-light" style="background-color: #44659b; color:white;">
+        <h1>@ustinpos</h1>
+      </nav>
+
+      <div class="container border loginblock">
+
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="container alert alert-danger">
+                {% for mess in messages %}
+                  {{ mess }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
+
+        <h2 id='logintitle'>Login</h2>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {% if form.username.errors %}
+                {{ form.username(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                  {% for errors in form.username.errors %}
+                    <span>{{ errors}}</span>
+                  {% endfor %}
+                </div></span>
+              {% else %}
+                {{ form.username(placeholder="Username") }}
+              {% endif %}
+            </div>
+            <div class="form-group">
+              {% if form.password.errors %}
+                {{ form.password(class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                  {% for errors in form.password.errors %}
+                    <span>{{errors}}</span>
+                  {% endfor %}
+                </div></span>
+              {% else %}
+                {{ form.password(placeholder="Password") }}
+              {% endif %}
+            </div>
+            {{ form.submit() }}<br><br>
+            {{ form.remember() }}
+            {{ form.remember.label() }}
+        </form>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

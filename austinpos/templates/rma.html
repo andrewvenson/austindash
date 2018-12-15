@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="" action="{{ url_for('createrma') }}">
+  <button class="btn btn-primary" type="submit" name="button">New Rma</button>
+</form>
+<div class="container">
+  <div class="col-sm-12">
+    <table class='rma'>
+      <thead class='border'>
+        <th>Rma Number</th>
+        <th>Vendor</th>
+        <th>Customer</th>
+        <th>Issue</th>
+        <th style="background-color:yellow;">Sent</th>
+        <th>Recieved</th>
+        <th>Rep</th>
+        <th>Notes</th>
+      </thead>
+      {% for data in info %}
+        <tr>
+          <td class='border'>{{data.rmanumber}}</td>
+          <td class='border'>{{data.Vendor}}</td>
+          <td class='border'>{{data.Customer}}</td>
+          <td class='border'>{{data.Issue}}</td>
+          <td class='border' style='background-color:yellow;'>{{data.Date_Sent}}</td>
+          <td class='border'>{{data.Date_Received}}</td>
+          <td class='border'>{{data.Rep}}</td>
+          <td class='border'>{{data.Notes}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+
+{% endblock content %}
