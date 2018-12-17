@@ -11,14 +11,9 @@
           </thead>
             {% for quip in pricing %}
               <tr style="height:25px;" class="border">
-                <form method="post">
-                  {{orders.hidden_tag()}}
-                  <td id='pricewidth'>{{quip}}</td>
-                  <td id='pricewidth' style='text-align:center;'><strong>${{pricing[quip]}}</strong></td>
-                  <td style='Display:none;'>{{ orders.type(value=quip) }}</td>
-                  <td style='Display:none;'>{{ orders.price(value=pricing[quip]) }}</td>
-                  <td >{{orders.submit(class='btn btn-primary btn-sm')}}</td>
-                </form>
+                <td id='pricewidth'>{{quip}}</td>
+                <td id='pricewidth' style='text-align:center;'><strong>${{pricing[quip]}}</strong></td>
+                <td ><button type="button" name="button" class="btn btn-primary">Add</button></td>
               </tr>
             {% endfor %}
         </table>
@@ -26,28 +21,8 @@
     </div>
     <div class="container col-sm-6">
       <table id='pricingtable'>
-        <thead>
-          <th><h5>My Orders</h5></th>
-          <th style="text-align:center;"><h5>Amt.</h5></th>
-        </thead>
-        <!-- Loop through keys in addedorders -->
-          {% for ord in orders__ %}
-          <!-- Loop through dicts in keys-->
-              {% for val in orders__[ord] %}
-                {% if val %}
-                  <form method="post">
-                    {{ delete.hidden_tag() }}
-                    <tr id="{{ord}}" style="height:25px;" class="border">
-                        <td id='pricewidth'>{{ val }}</td>
-                        <td class= "text-align:center;" id='pricewidth'><strong>${{ orders__[ord][val] }}</strong></td>
-                        <td style="display:none;">{{delete.deletetype(value=ord)}}</td>
-                        <td style="display:none">{{delete.deleteprice(value=ord)}}</td>
-                        <td><button type="submit" onclick="" name="button" class='btn btn-danger btn-sm'>Delete</button></td>
-                    </tr>
-                  </form>
-                {% endif %}
-              {% endfor %}
-        {% endfor %}
+        <form class="" action="index.html" method="post">
+        </form>
       </table>
     </div>
   </div>

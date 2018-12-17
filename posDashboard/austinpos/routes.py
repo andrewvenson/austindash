@@ -30,8 +30,8 @@ equipment = {
     'SSD 120GB': '99'
 }
 
-orders_price = defaultdict(lambda: defaultdict())
 
+# LOGIN TO SITE
 @app.route('/', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
@@ -46,16 +46,19 @@ def login():
             flash('Login unsuccesful. Please check email and password')
     return render_template('login.html', name = 'login', form=form)
 
+# SITE'S DASHBOARD
 @app.route("/Dash")
 @login_required
 def dash():
     return render_template('dash.html')
 
+# LOGOUT USER
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
+# REGISTER NEW USER
 @app.route('/register', methods=['POST', 'GET'])
 @login_required
 def register():
@@ -71,6 +74,7 @@ def register():
 
     return render_template('register.html', name = 'login', form=form)
 
+# CREATE AN RMA AFTER CLICKING RMA BUTTON ON RMA PAGE
 @app.route('/rma/create-rma', methods=['POST', 'GET'])
 @login_required
 def createrma():
@@ -87,39 +91,24 @@ def createrma():
         print('invalide submission')
     return render_template('create-rma.html', name = 'createrma_', form=form2)
 
+#VIEW SITE'S RMA'S
 @app.route('/rma', methods=['GET', 'POST'])
 @login_required
 def rma():
     rmas = Rma.query.all()
     return render_template('rma.html', name = 'rma', info=rmas)
 
+# ADD ORDER TO PRICING
 @app.route('/pricing', methods=['POST', 'GET'])
 @login_required
 def pricing():
     orders = submitForm()
     price_info = equipment
     x = OrderCart()
-    y = x.query.count()
-    myOrders = x.query.get(y)
-    orders__ = orders_price
-    x = random.randrange(100000)
-    delete = DeleteOrder()
+return render_template('pricing', pricing = price_info, orders = orders)
 
-    if orders.validate_on_submit():
-        # ordertodb = OrderCart(equipment=orders.type.data,pricing=orders.price.data)
-        orders_price[str(x)][orders.type.data] = orders.price.data
-        for key in orders_price:
-            for k in orders_price[key]:
-                print(k, orders_price[key][k])
-        # print(orders.type.data, orders.price.data)
 
-    if delete.validate_on_submit():
-        if delete.deleteprice.data in orders_price:
-            print(delete.deleteprice.data)
-            del orders_price[delete.deleteprice.data]
-        # print(orders_price)
-    return render_template('pricing.html', name='pricing', pricing = price_info, orders=orders, myOrders=myOrders, orders__ = orders__, delete=delete)
-
+# PAYMENT PAGE
 @app.route('/pricing/orders')
 @login_required
 def Order():
