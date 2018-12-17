@@ -30,7 +30,6 @@ equipment = {
     'SSD 120GB': '99'
 }
 
-
 # LOGIN TO SITE
 @app.route('/', methods=['POST', 'GET'])
 def login():
