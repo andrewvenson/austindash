@@ -1,9 +1,7 @@
 from flask import url_for, render_template, redirect, flash
 from austinpos import app, db, bcrypt
-from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, submitForm, DeleteOrder
+from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, submitForm
 from austinpos.models import User, Rma, OrderCart
-from collections import defaultdict
-import random
 from flask_login import login_user, current_user, logout_user, login_required
 
 equipment = {
@@ -98,7 +96,7 @@ def rma():
 
 # ADD ORDER TO PRICING
 @app.route('/pricing', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def pricing():
     orders = submitForm()
     price_info = equipment
