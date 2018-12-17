@@ -1,16 +1,19 @@
 var tablerows = document.getElementById('tabletest').rows.length;
 var table = document.getElementById('tabletest');
-var requestURL = "cart.json"
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
+
+var jsonTest = '[{"Epson":"65"}, {"Termnial":"65"}]';
+var jsonObj = JSON.parse(jsonTest);
+console.log(jsonObj[0].Epson)
 
 for(x = 0; x < tablerows; x++){
   table.rows[x].addEventListener('click', addTah);
 }
 
 function addTah(ev){
+
+  jsonObj["whoah"] = "tah";
+  console.log(jsonObj);
+
   var cart = document.getElementById('cart');
   index = this.rowIndex;
   equipmentCell = table.rows[index].cells[0];
