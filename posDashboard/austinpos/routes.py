@@ -80,15 +80,13 @@ def register():
 def createrma():
     form2 = CrazyForm()
     if form2.validate_on_submit():
-        print('Whoaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-
         rma = Rma(rmanumber=form2.RmaNumber.data, Vendor=form2.Vendor.data, Customer=form2.Client.data, Issue=form2.Issue.data, Date_Sent=form2.Date_Sent.data, Date_Received=form2.Date_Received.data, Rep=form2.Rep.data, Notes=form2.Notes.data)
         db.create_all()
         db.session.add(rma)
         db.session.commit()
         return redirect(url_for('rma'))
     else:
-        print('invalide submission')
+        print('Invalid submission')
     return render_template('create-rma.html', name = 'createrma_', form=form2)
 
 #VIEW SITE'S RMA'S
@@ -105,7 +103,7 @@ def pricing():
     orders = submitForm()
     price_info = equipment
     x = OrderCart()
-return render_template('pricing', pricing = price_info, orders = orders)
+    return render_template('pricing.html', pricing = price_info, orders = orders)
 
 
 # PAYMENT PAGE
