@@ -12,7 +12,7 @@
             {% for quip in pricing %}
               <tr style="height:25px;" class="border">
                 <td id='pricewidth'>{{quip}}</td>
-                <td id='pricewidth' style='text-align:center;'><strong>${{pricing[quip]}}</strong></td>
+                <td id='pricewidth' style='text-align:center;'>${{pricing[quip]}}</td>
                 <td ><button type="button" name="button" class="btn btn-primary">Add</button></td>
               </tr>
             {% endfor %}
