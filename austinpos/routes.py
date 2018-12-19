@@ -1,8 +1,10 @@
-from flask import url_for, render_template, redirect, flash
+from flask import url_for, render_template, redirect, flash, jsonify, json, request
 from austinpos import app, db, bcrypt
 from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, submitForm
 from austinpos.models import User, Rma, OrderCart
 from flask_login import login_user, current_user, logout_user, login_required
+
+cart = []
 
 equipment = {
     'Loaner Terminal': '150',
@@ -95,16 +97,24 @@ def rma():
 
 # ADD ORDER TO PRICING
 @app.route('/pricing', methods=['POST', 'GET'])
-# @login_required
+@login_required
 def pricing():
     orders = submitForm()
     price_info = equipment
     x = OrderCart()
     return render_template('pricing.html', pricing = price_info, orders = orders)
 
-
 # PAYMENT PAGE
 @app.route('/pricing/orders')
 @login_required
 def Order():
     return render_template('order.html', name='order')
+
+# User Orders API
+@app.route('/pricing/orders/<user_name>/api', methods=['POST', 'GET'])
+@login_required
+def api(user_name):
+    user_name = current_user.username
+    if request.method == 'POST':
+        cart.append(json.loads(request.form["javascript_data"]))
+    return jsonify(cart)
