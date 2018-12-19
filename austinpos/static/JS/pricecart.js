@@ -1,5 +1,5 @@
-var tablerows = document.getElementById('tabletest').rows.length;
-var table = document.getElementById('tabletest');
+var tablerows = document.getElementById('table').rows.length;
+var table = document.getElementById('table');
 var cart = document.getElementById('cart');
 username = document.getElementById('username').innerHTML
 
