@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
     <title>Login</title>
   </head>
   <body>
     <div class="container">
-      <nav class="navbar navbar-light" style="background-color: #44659b; color:white;">
-        <h1>@ustinpos</h1>
+      <nav class="navbar navbar-light" style="background-color: #3a414c; color:white;">
+        <img src="{{url_for('static',filename = 'images/Austin_POS_Logo.png')}}" alt="apos_logo" style="width: 150px">
       </nav>
 
       <div class="container border loginblock">

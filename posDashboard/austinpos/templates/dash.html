@@ -1,6 +1,107 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>{{ current_user.site }}'s Dash</h1>
+  <h1 style="font-weight: 600">{{ current_user.site }} Dash</h1>
+  </br>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+            <div class="hero-widget well well-sm">
+                  <div class="icon">
+                       <i class="glyphicon glyphicon-user"></i>
+                  </div>
+                  <div class="text">
+                      <var>3</var>
+                      <label class="text-muted" style="font-weight:700">Pending Tickets</label>
+                  </div>
+                  <div class="options">
+                      <a href="javascript:;" class="btn btn-primary btn-lg" style="font-weight: 600"><i class="glyphicon glyphicon-plus"></i> New Ticket</a>
+                  </div>
+              </div>
+      </div>
+          <div class="col-sm-3">
+              <div class="hero-widget well well-sm">
+                  <div class="icon">
+                       <i class="glyphicon glyphicon-star"></i>
+                  </div>
+                  <div class="text">
+                      <var>5</var>
+                      <label class="text-muted" style="font-weight:700">Notifications</label>
+                  </div>
+                  <div class="options">
+                      <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View notifications</a>
+                  </div>
+              </div>
+      </div>
+          <div class="col-sm-3 ">
+              <div class="hero-widget well well-sm">
+                  <div class="icon">
+                       <i class="glyphicon glyphicon-tags"></i>
+                  </div>
+                  <div class="text">
+                      <var>00</var>
+                      <label class="text-muted" style="font-weight:700">Total orders</label>
+                  </div>
+                  <div class="options">
+                      <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View orders</a>
+                  </div>
+              </div>
+        </div>
+          <div class="col-sm-3">
+              <div class="hero-widget well well-sm">
+                  <div class="icon">
+                       <i class="glyphicon glyphicon-cog"></i>
+                  </div>
+                  <div class="text">
+                      <label class="text-muted" style="font-weight:700">Quotes</label>
+                  </div>
+                  <div class="options">
+                      <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-wrench"></i> View</a>
+                  </div>
+              </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="hero-widget well well-sm">
+              <div class="icon">
+                   <i class="glyphicon glyphicon-user"></i>
+              </div>
+              <div class="text">
+                  <var>1</var>
+                  <label class="text-muted" style="font-weight:700">Shopping Cart</label>
+              </div>
+              <div class="options">
+                  <a href="javascript:;" class="btn btn-primary btn-lg" style="font-weight: 600"><i class="glyphicon glyphicon-plus"></i>Checkout</a>
+              </div>
+          </div>
+  </div>
+      <div class="col-sm-3">
+          <div class="hero-widget well well-sm">
+              <div class="icon">
+                   <i class="glyphicon glyphicon-star"></i>
+              </div>
+              <div class="text">
+                  <label class="text-muted" style="font-weight:700">Contract Info</label>
+              </div>
+              <div class="options">
+                  <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View</a>
+              </div>
+          </div>
+  </div>
+      <div class="col-sm-3">
+          <div class="hero-widget well well-sm">
+              <div class="icon">
+                   <i class="glyphicon glyphicon-tags"></i>
+              </div>
+              <div class="text">
+
+                  <label class="text-muted" style="font-weight:700">Settings</label>
+              </div>
+              <div class="options">
+                  <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i>Edit</a>
+              </div>
+          </div>
+    </div>
+  </div>
+</br>
   {% if current_user.user_data %}
     {% for users in current_user.user_data %}
       {{ users.rmanumber }}<br><br>
