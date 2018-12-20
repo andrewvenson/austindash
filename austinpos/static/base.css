@@ -150,6 +150,10 @@ html, body {
   border-color: lightblue;
 }
 
+#account-input {
+  border-radius: 5px;
+}
+
 .descrippy {
   margin-top: 50px;
 }
@@ -159,6 +163,10 @@ html, body {
   border-style: solid;
   border-width: medium;
   border-color: lightblue;
+}
+
+.desc-box {
+  border-radius: 5px;
 }
 /* Add a red background color to the cancel button */
 .form-container .cancel {
