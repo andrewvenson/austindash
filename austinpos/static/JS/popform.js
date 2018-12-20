@@ -1,4 +1,4 @@
-
+// Ticket form open and close script ===================================================================================================================================>
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }
@@ -6,7 +6,9 @@ function openForm() {
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
+// end ------------------------------------------------------|
 
+// Issue Selection script ===============================================================================================================================================>
 var x, i, j, selElmnt, a, b, c;
 /*look for any elements with the class "custom-select":*/
 x = document.getElementsByClassName("custom-select");
@@ -79,3 +81,8 @@ function closeAllSelect(elmnt) {
 /*if the user clicks anywhere outside the select box,
 then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
+// end --------------------------------------------------------------|
+
+
+
+
