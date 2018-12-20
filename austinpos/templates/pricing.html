@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+p{% extends 'base.html' %}
 {% block content %}
   <h1>Pricing</h1>
   <div class="row">
@@ -12,7 +12,7 @@
             {% for quip in pricing %}
               <tr style="height:25px;" class="border">
                 <td id='pricewidth'>{{quip}}</td>
-                <td id='pricewidth' style='text-align:center;'>${{pricing[quip]}}</td>
+                <td id='pricewidth' style='text-align:center;'>{{pricing[quip]}}</td>
                 <td ><button type="button" name="button" class="btn btn-primary">Add</button></td>
               </tr>
             {% endfor %}
@@ -22,8 +22,10 @@
     <div class="container col-sm-6">
       <table id='cart'>
       </table>
-      <h1>Subtotal: </h1>
-      <button type="submit" name="button" class='btn btn-warning'>Order</button>
+      <div id='pricefooter'>
+        <h1 style='margin-top:25px; border-top:.5px black solid;'>Subtotal: $<span id='subtotal'>0</span></h1>
+        <form action="{{url_for('Order')}}"><button type="submit" name="button" class='btn btn-warning'>Order</button></form>
+      </div>
     </div>
   </div>
 {% endblock content %}

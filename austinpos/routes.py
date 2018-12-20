@@ -108,7 +108,7 @@ def pricing():
 @app.route('/pricing/orders')
 @login_required
 def Order():
-    return render_template('order.html', name='order')
+    return render_template('Order.html', name='order')
 
 # User Orders API
 @app.route('/pricing/orders/<user_name>/api', methods=['POST', 'GET'])
