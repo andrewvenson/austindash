@@ -72,16 +72,36 @@
                       <a href="javascript:;" class="btn btn-primary btn-lg" style="font-weight: 600" onclick="openForm()"><i class="glyphicon glyphicon-plus"></i> New Ticket</a>
                       <div class="form-popup" id="myForm">
                             <form action="/action_page.php" class="form-container">
-                              <h1>Login</h1>
                           
-                              <label for="email"><b>Email</b></label>
-                              <input type="text" placeholder="Enter Email" name="email" required>
+                              <label for="account"><b>Account</b></label>
+                              <input id="account-input" type="text" placeholder="Enter Account Name" name="acccount" required>
                           
-                              <label for="psw"><b>Password</b></label>
-                              <input type="password" placeholder="Enter Password" name="psw" required>
-                          
-                              <button type="submit" class="btn">Login</button>
-                              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                              <label for="issue"><b>Issue Type</b></label>
+
+                              <div class="custom-select" style="width:250px;">
+                                <select>
+                                  <option value="0">Select:</option>
+                                  <option value="1">Billing</option>
+                                  <option value="2">Gift Card</option>
+                                  <option value="3">CC Processing</option>
+                                  <option value="4">Internet</option>
+                                  <option value="5">LogMein</option>
+                                  <option value="6">New Parts</option>
+                                  <option value="7">Install</option>
+                                  <option value="8">MyFocus</option>
+                                  <option value="9">Term Down</option>
+                                  <option value="10">System Down</option>
+                                  <option value="11">Training</option>
+                                  <option value="12">Other</option>
+                                </select>
+                              </div>
+                            </br>
+                            <label for="desc"><span class="descrippy">Description</span></label>
+                            <textarea class="desc-box" rows="4" cols="50" style="width: 250px">
+                                
+                                </textarea>
+
+                              <button type="button" class="btn cancel" onclick="closeForm()">Submit</button> <!--Change event-->
                             </form>
                           </div>
                   </div>
