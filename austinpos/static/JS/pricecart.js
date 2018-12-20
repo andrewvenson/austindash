@@ -15,13 +15,10 @@ window.onload = function wowzers(){
           row = cart.insertRow(-1);
           row.addEventListener('click', function deleterow(){
             index = this.rowIndex;
-            console.log("Delete row " + index);
-            // $.ajax({
-            //   url: '/pricing/orders/' + username + '/api',
-            //   type: 'DELETE',
-            //   dataType: 'json',
-            //   data: {_method:"DELETE" data[index]}
-            // });
+            $.post('pricing/orders/delete', {
+              delete_item: index
+            });
+             cart.deleteRow(index);
           });
           cell1 = row.insertCell(0);
           cell2 = row.insertCell(1);
@@ -55,13 +52,10 @@ function addTah(ev){
 
   cartrow.addEventListener('click', function deleterow(){
     index = this.rowIndex;
-    console.log("Delete row " + index);
-    // $.ajax({
-    //   url: '/pricing/orders/' + username + '/api',
-    //   type: 'POST',
-    //   data: {_method:"DELETE" data[index]},
-    // });
-    console.log("Delete Row");
+    $.post('pricing/orders/delete', {
+      delete_item: index
+    });
+    cart.deleteRow(index);
   });
 
   cell1 = cartrow.insertCell(0);

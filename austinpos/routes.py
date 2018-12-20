@@ -118,3 +118,12 @@ def api(user_name):
     if request.method == 'POST':
         cart.append(json.loads(request.form["javascript_data"]))
     return jsonify(cart)
+
+@app.route('/pricing/orders/delete', methods=['POST', 'GET'])
+@login_required
+def delete_item():
+    if request.method == 'POST':
+        print(cart[json.loads(request.form["delete_item"])])
+        cart.pop(json.loads(request.form["delete_item"]))
+        print(cart)
+    return jsonify({"whoa": "there"})
