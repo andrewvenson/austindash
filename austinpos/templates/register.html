@@ -5,12 +5,12 @@
     {{ form.hidden_tag() }}
 
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Site</label>
-      {{form.site.label()}}<br>
-      {{form.site()}}
+      {{form.site.label()}} <br>
+      {{form.site()}} <br>
     </div>
 
     <div class="form-group">
+      {{form.username.label()}} <br>
       {% if form.username.errors %}
         {{ form.username(class='is-invalid') }}
         <div class="invalid-feedback">
@@ -19,13 +19,14 @@
           {% endfor %}
         </div>
         {% else %}
-          {{ form.username(placeholder = "Enter Username") }}<br><br>
+          {{ form.username(placeholder = "Enter Username") }}<br>
       {% endif %}
     </div>
 
 
 
     <div class="form-group">
+      {{form.email.label()}} <br>
       {% if form.email.errors %}
         {{ form.email(class='is-invalid') }}
         <div class="invalid-feedback">
@@ -34,12 +35,13 @@
           {% endfor %}
         </div>
         {% else %}
-          {{ form.email(placeholder = "Enter Email") }}<br><br>
+          {{ form.email(placeholder = "Enter Email") }}<br>
       {% endif %}
     </div>
 
 
     <div class="form-group">
+      {{form.password.label()}} <br>
       {% if form.password.errors %}
         {{ form.password(class='is-invalid') }}
         <div class="invalid-feedback">
@@ -48,12 +50,13 @@
           {% endfor %}
         </div>
         {% else %}
-          {{ form.password(placeholder = "Create Password") }}<br><br>
+          {{ form.password(placeholder = "Create Password") }}<br>
       {% endif %}
     </div>
 
 
     <div class="form-group">
+      {{form.confirm_pass.label()}} <br>
       {% if form.confirm_pass.errors %}
         {{ form.confirm_pass(class='is-invalid') }}
         <div class="invalid-feedback">
@@ -62,10 +65,14 @@
           {% endfor %}
         </div>
       {% else %}
-          {{ form.confirm_pass(placeholder = "Confirm Password") }}<br><br>
+          {{ form.confirm_pass(placeholder = "Confirm Password") }}<br>
       {% endif %}
     </div>
 
+    <div class='form-group'>
+      {{form.admin_status()}} 
+      {{form.admin_status.label()}} <br>
+    </div>
 
     {{ form.submit() }}<br>
   </form>

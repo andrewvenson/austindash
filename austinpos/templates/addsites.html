@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} Add Site {% endblock title %}
+{% block content %}
+    <h1> Add Site </h1>
+    <div class='form-group'>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.contractstart.label() }} <br>
+            {{ form.contractstart() }} <br><br>
+            {{ form.contractend.label() }} <br>
+            {{ form.contractend() }} <br><br>
+            {{ form.hwkey.label() }} <br>
+            {{ form.hwkey() }} <br><br>
+            {{ form.stations.label() }} <br>
+            {{ form.stations() }} <br><br>
+            {{ form.printers.label() }} <br>
+            {{ form.printers() }} <br><br>
+            {{ form.remprinters.label() }} <br>
+            {{ form.remprinters() }} <br><br>
+            {{ form.bof() }}
+            {{ form.bof.label() }} <br>
+            {{ form.processor.label() }} <br>
+            {{ form.processor() }} <br><br>
+            {{ form.giftopt.label() }} <br>
+            {{ form.giftopt() }} <br><br>
+    
+            <button type='submit' class='btn btn-primary'>Add Site</button>
+        </form>
+    </div>
+    
+
+{% endblock content %}

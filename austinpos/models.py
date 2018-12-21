@@ -1,14 +1,14 @@
 from austinpos import db, login_manager
 from flask_login import UserMixin
 
-
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
+# usertosite = db.Table('usertosite',
+#             db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+#             db.Column('sites_id', db.Integer, db.ForeignKey('rma.id'))
+# )
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,7 +16,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    adminstatus = db.Column(db.Boolean)
     user_data = db.relationship('Rma', backref='userdata', lazy=True)
+    # sites = db.relationship('Sites', secondary=usertosite, backref=db.backref('sites', lazy='dynamic'))
 
     def __repr__(self):
         return f"User('{self.username}, '{self.email}')"
@@ -38,3 +40,18 @@ class OrderCart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     equipment = db.Column(db.String())
     pricing = db.Column(db.String())
+
+class Sites(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sitename = db.Column(db.String(), nullable=False)
+    contractstart = db.Column(db.String(), nullable=False)
+    contractend = db.Column(db.String(), nullable = False)
+    hwkey = db.Column(db.String(), nullable=False)
+    stations = db.Column(db.String(), nullable=False)
+    printers = db.Column(db.String(), nullable = False)
+    remprinters = db.Column(db.String(), nullable = False)
+    bof = db.Column(db.Boolean())
+    processor = db.Column(db.String(), nullable = False)
+    giftopt = db.Column(db.String(), nullable = False)
+    # sites_users = db.relationship('User', backref='sitesusers', lazy=True)
+

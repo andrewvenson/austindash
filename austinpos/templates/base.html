@@ -8,40 +8,69 @@
     <link rel="stylesheet" href="{{url_for('static', filename='base.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
     <title>{% block title %}{% endblock title %}</title>
-
   </head>
+  
   <body style="padding-bottom:70px;">
     <span id='username' style='display:none;'>{{current_user.username}}</span>
     <div class="container"> <!--APOS Header srt-->
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#3a414c;">
-        <a class="navbar-left" href="#"><img src="{{url_for('static',filename = 'images/Austin_POS_Logo.png')}}" alt="apos_logo" style="width: 150px"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            {% if current_user.is_authenticated %}
-              <li class='nav-item'>
-                <a class="nav-link" href="{{url_for('dash')}}" style="font-weight:600">{{ current_user.site }}</a>
+      {% if current_user.adminstatus == 1 %}
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#3a414c;">
+          <a class="navbar-left" href="#"><img src="{{url_for('static',filename = 'images/Austin_POS_Logo.png')}}" alt="apos_logo" style="width: 150px"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              {% if current_user.is_authenticated %}
+                <li class='nav-item'>
+                  <a class="nav-link" href="{{url_for('dash')}}" style="font-weight:600">{{ current_user.site }}</a>
+                </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('pricing')}}">Pricing</a>
               </li>
-            {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('pricing')}}">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contracts</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('rma')}}">Rma</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-            </li>
-          </ul>
-            <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'></span></strong></a>
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color:white;" href="{{url_for('logout')}}">Logout</a></button>
-        </div>
-      </nav>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('sites') }}">Sites</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('rma')}}">Rma</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+              </li>
+            </ul>
+              <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'></span></strong></a>
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color:white;" href="{{url_for('logout')}}">Logout</a></button>
+          </div>
+        </nav>
+      {% else %}
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#3a414c;">
+          <a class="navbar-left" href="#"><img src="{{url_for('static',filename = 'images/Austin_POS_Logo.png')}}" alt="apos_logo" style="width: 150px"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              {% if current_user.is_authenticated %}
+                <li class='nav-item'>
+                  <a class="nav-link" href="{{url_for('dash')}}" style="font-weight:600">{{ current_user.site }}</a>
+                </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('pricing')}}">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('rma')}}">Rma</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('siteinfo')}}">{{current_user.site}} Info</a>
+              </li>
+            </ul>
+              <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'></span></strong></a>
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color:white;" href="{{url_for('logout')}}">Logout</a></button>
+          </div>
+        </nav>
+      {% endif %}
     </div>
 
     <div class="container"><!--end-->
@@ -58,7 +87,6 @@
       {% block content %}{% endblock content %}
     </div>
 
-    
     <script type="text/javascript" src="{{url_for('static', filename = 'JS/pricecart.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename = 'JS/popform.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>

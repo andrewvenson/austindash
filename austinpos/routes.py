@@ -1,6 +1,6 @@
 from flask import url_for, render_template, redirect, flash, jsonify, json, request
 from austinpos import app, db, bcrypt
-from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, submitForm
+from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm
 from austinpos.models import User, Rma, OrderCart
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -64,7 +64,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(site = form.site.data, username = form.username.data, email = form.email.data, password = hashed_pw)
+        user = User(site = form.site.data, username = form.username.data, email = form.email.data, password = hashed_pw, adminstatus= form.admin_status.data)
         db.create_all()
         db.session.add(user)
         db.session.commit()
@@ -99,7 +99,7 @@ def rma():
 @app.route('/pricing', methods=['POST', 'GET'])
 @login_required
 def pricing():
-    orders = submitForm()
+    orders = SubmitForm()
     price_info = equipment
     x = OrderCart()
     return render_template('pricing.html', pricing = price_info, orders = orders)
@@ -119,6 +119,7 @@ def api(user_name):
         cart.append(json.loads(request.form["javascript_data"]))
     return jsonify(cart)
 
+# Delete item in cart route
 @app.route('/pricing/orders/delete', methods=['POST', 'GET'])
 @login_required
 def delete_item():
@@ -127,3 +128,23 @@ def delete_item():
         cart.pop(json.loads(request.form["delete_item"]))
         print(cart)
     return jsonify({"whoa": "there"})
+
+# ADD SITE ROUTE
+@app.route('/sites/addsite', methods=['POST', 'GET'])
+@login_required
+def addsites():
+    form = AddSiteForm()
+    # if form.validate_on_submit:
+    #     return redirect(url_for('sites'))
+    return render_template('addsites.html', form = form)
+
+#ADMIN VIEW SITES
+@app.route('/sites', methods=['POST','GET'])
+@login_required
+def sites():
+    return render_template('sites.html')
+
+@app.route('/siteinfo', methods=['POST', 'GET'])
+@login_required
+def siteinfo():
+    return render_template('siteinfo.html')
