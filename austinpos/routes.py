@@ -1,7 +1,7 @@
 from flask import url_for, render_template, redirect, flash, jsonify, json, request
 from austinpos import app, db, bcrypt
 from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm
-from austinpos.models import User, Rma, OrderCart
+from austinpos.models import User, Rma, OrderCart, Sites
 from flask_login import login_user, current_user, logout_user, login_required
 
 cart = []
@@ -30,7 +30,7 @@ equipment = {
     'SSD 120GB': '99'
 }
 
-# LOGIN TO SITE
+# SITE LOGIN
 @app.route('/', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
@@ -59,12 +59,15 @@ def logout():
 
 # REGISTER NEW USER
 @app.route('/register', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def register():
+    db.create_all()
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(site = form.site.data, username = form.username.data, email = form.email.data, password = hashed_pw, adminstatus= form.admin_status.data)
+        siteid = Sites.query.filter_by(sitename=form.site.data).first().id
+        user = User(site = form.site.data, username = form.username.data, email = form.email.data, 
+        password = hashed_pw, adminstatus= form.admin_status.data, sitelink=siteid)
         db.create_all()
         db.session.add(user)
         db.session.commit()
@@ -110,7 +113,7 @@ def pricing():
 def Order():
     return render_template('Order.html', name='order')
 
-# User Orders API
+# USER CART API
 @app.route('/pricing/orders/<user_name>/api', methods=['POST', 'GET'])
 @login_required
 def api(user_name):
@@ -119,7 +122,7 @@ def api(user_name):
         cart.append(json.loads(request.form["javascript_data"]))
     return jsonify(cart)
 
-# Delete item in cart route
+# DELETE ITEM IN CART ROUTE
 @app.route('/pricing/orders/delete', methods=['POST', 'GET'])
 @login_required
 def delete_item():
@@ -131,11 +134,20 @@ def delete_item():
 
 # ADD SITE ROUTE
 @app.route('/sites/addsite', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def addsites():
     form = AddSiteForm()
-    # if form.validate_on_submit:
-    #     return redirect(url_for('sites'))
+    print(form.sitename.data)
+    if form.validate_on_submit():
+        newsite = Sites(sitename=form.sitename.data, contractstart=form.contractstart.data, contractend=form.contractend.data, 
+        hwkey=form.hwkey.data, stations=str(form.stations.data), printers=str(form.printers.data), remprinters=str(form.remprinters.data), 
+        bof=form.bof.data, processor=str(form.processor.data), giftopt=str(form.giftopt.data))
+        db.session.add(newsite)
+        db.session.commit()
+        flash(f'{form.sitename.data} has been added to the database')
+        return redirect(url_for('sites'))
+    else:
+        print('Invalid submission')
     return render_template('addsites.html', form = form)
 
 #ADMIN VIEW SITES
@@ -144,6 +156,7 @@ def addsites():
 def sites():
     return render_template('sites.html')
 
+#SITE INFO
 @app.route('/siteinfo', methods=['POST', 'GET'])
 @login_required
 def siteinfo():

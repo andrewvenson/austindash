@@ -5,10 +5,6 @@ from flask_login import UserMixin
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# usertosite = db.Table('usertosite',
-#             db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-#             db.Column('sites_id', db.Integer, db.ForeignKey('rma.id'))
-# )
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,8 +13,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     adminstatus = db.Column(db.Boolean)
-    user_data = db.relationship('Rma', backref='userdata', lazy=True)
-    # sites = db.relationship('Sites', secondary=usertosite, backref=db.backref('sites', lazy='dynamic'))
+    sitelink = db.Column(db.Integer, db.ForeignKey('sites.id'))
 
     def __repr__(self):
         return f"User('{self.username}, '{self.email}')"
@@ -33,7 +28,7 @@ class Rma(db.Model):
     Date_Received = db.Column(db.String(50))
     Rep = db.Column(db.String(50))
     Notes = db.Column(db.Text())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class OrderCart(db.Model):
@@ -50,8 +45,7 @@ class Sites(db.Model):
     stations = db.Column(db.String(), nullable=False)
     printers = db.Column(db.String(), nullable = False)
     remprinters = db.Column(db.String(), nullable = False)
-    bof = db.Column(db.Boolean())
+    bof = db.Column(db.Boolean)
     processor = db.Column(db.String(), nullable = False)
     giftopt = db.Column(db.String(), nullable = False)
-    # sites_users = db.relationship('User', backref='sitesusers', lazy=True)
-
+    # site_user = db.relationship('User', backref='site_users', lazy='dynamic')

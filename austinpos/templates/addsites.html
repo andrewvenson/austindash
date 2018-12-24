@@ -5,6 +5,8 @@
     <div class='form-group'>
         <form method="POST">
             {{ form.hidden_tag() }}
+            {{ form.sitename.label() }} <br>
+            {{ form.sitename()}} <br><br>
             {{ form.contractstart.label() }} <br>
             {{ form.contractstart() }} <br><br>
             {{ form.contractend.label() }} <br>

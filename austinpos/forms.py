@@ -9,7 +9,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_pass = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     admin_status = BooleanField('Check for Admin Status')
-    site = SelectField('Site', choices = [('Austin Pos', 'Austin Pos'),('2 Bucks', '2 Bucks'), ('600 Degrees', '600 Degrees'), ('77 Degrees', '77 Degrees'), ('ABGB', 'ABGB'),
+    site = SelectField('Site', choices = [('Reales', 'Reales'),('Austin Pos', 'Austin Pos'),('2 Bucks', '2 Bucks'), ('600 Degrees', '600 Degrees'), ('77 Degrees', '77 Degrees'), ('ABGB', 'ABGB'),
                             ('Backspin', 'Backspin'), ('Backspin 2', 'Backspin 2'), ('Bangers', 'Bangers'), ('Barcelona', 'Barcelona'), ('Barley Swine', 'Barley Swine'),
                             ("Beau's", "Beau's"),('Blind Pig', 'Blind Pig'), ("Bob's Blue Collar Tavern", "Bob's Blue Collar Tavern"), ('Booneville', 'Booneville'),
                             ('Boomerz', 'Boomerz'),('Brixton', 'Brixton'), ('Buckshot', 'Buckshot'), ('Bungalow', 'Bungalow'), ('BUP', 'BUP'), ("Burnside's Tavern", "Burnside's Tavern"),('Butterfly Bar', 'Butterfly Bar'), ('Buzzmill Austin', 'Buzzmill Austin'), ('Buzzmill San Marcos', 'Buzzmill San Marcos'), ('Cafe Crepe', 'Cafe Crepe'),('Casa Garcias - Kyle', 'Casa Garcias - Kyle'), ('Casa Garcias - NB', 'Casa Garcias - NB'), ('Casa Garcias - Pflugerville', 'Casa Garcias - Pflugerville'),('Casa Garcias - Round Rock', 'Casa-Garcias - Round Rock')])
@@ -57,7 +57,7 @@ class AddSiteForm(FlaskForm):
     sitename = StringField('Site Name', validators=[DataRequired()])
     contractstart = StringField('Contract Start Date', validators=[DataRequired()])
     contractend = StringField('Contract End Date', validators=[DataRequired()])
-    hwkey = StringField('Hardware Key #', validators=[Length(min=6), DataRequired()])
+    hwkey = StringField('Hardware Key #', validators=[DataRequired()])
     stations = SelectField('# of Stations', validators=[DataRequired()], choices=[('1', '1'), 
     ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'),
     ('11', '11'), ('12', '12'), ('13', '13'), ('14', '14'), ('15', '15'), ('16', '16'), ('17', '17'), ('18', '18'), ('19', '19'),
