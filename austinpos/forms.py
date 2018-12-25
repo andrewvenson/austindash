@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+# from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms import StringField, BooleanField, PasswordField, SubmitField, TextAreaField, SelectField, DateField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from austinpos.models import User, Sites
@@ -12,7 +13,10 @@ class RegistrationForm(FlaskForm):
     site = SelectField('Site', choices = [('Reales', 'Reales'),('Austin Pos', 'Austin Pos'),('2 Bucks', '2 Bucks'), ('600 Degrees', '600 Degrees'), ('77 Degrees', '77 Degrees'), ('ABGB', 'ABGB'),
                             ('Backspin', 'Backspin'), ('Backspin 2', 'Backspin 2'), ('Bangers', 'Bangers'), ('Barcelona', 'Barcelona'), ('Barley Swine', 'Barley Swine'),
                             ("Beau's", "Beau's"),('Blind Pig', 'Blind Pig'), ("Bob's Blue Collar Tavern", "Bob's Blue Collar Tavern"), ('Booneville', 'Booneville'),
-                            ('Boomerz', 'Boomerz'),('Brixton', 'Brixton'), ('Buckshot', 'Buckshot'), ('Bungalow', 'Bungalow'), ('BUP', 'BUP'), ("Burnside's Tavern", "Burnside's Tavern"),('Butterfly Bar', 'Butterfly Bar'), ('Buzzmill Austin', 'Buzzmill Austin'), ('Buzzmill San Marcos', 'Buzzmill San Marcos'), ('Cafe Crepe', 'Cafe Crepe'),('Casa Garcias - Kyle', 'Casa Garcias - Kyle'), ('Casa Garcias - NB', 'Casa Garcias - NB'), ('Casa Garcias - Pflugerville', 'Casa Garcias - Pflugerville'),('Casa Garcias - Round Rock', 'Casa-Garcias - Round Rock')])
+                            ('Boomerz', 'Boomerz'),('Brixton', 'Brixton'), ('Buckshot', 'Buckshot'), ('Bungalow', 'Bungalow'), ('BUP', 'BUP'), ("Burnside's Tavern", "Burnside's Tavern"),
+                            ('Butterfly Bar', 'Butterfly Bar'), ('Buzzmill Austin', 'Buzzmill Austin'), ('Buzzmill San Marcos', 'Buzzmill San Marcos'), ('Cafe Crepe', 'Cafe Crepe'),
+                            ('Casa Garcias - Kyle', 'Casa Garcias - Kyle'), ('Casa Garcias - NB', 'Casa Garcias - NB'), ('Casa Garcias - Pflugerville', 'Casa Garcias - Pflugerville'),
+                            ('Casa Garcias - Round Rock', 'Casa-Garcias - Round Rock')])
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -71,3 +75,5 @@ class AddSiteForm(FlaskForm):
     bof = BooleanField('Check for BOH License')
     processor = SelectField('Choose Processor', choices=[('Heartland', 'Heartland'), ('Sterling', 'Sterling'), ('Tsys', 'Tsys'), ('NetEPay', 'NetEPay')])
     giftopt = SelectField('Gift Options', choices=[('None', 'None'), ('MyFocus', 'MyFocus'), ('GiftEPay', 'GiftEPay')])
+
+

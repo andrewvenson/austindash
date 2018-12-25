@@ -28,7 +28,6 @@ class Rma(db.Model):
     Date_Received = db.Column(db.String(50))
     Rep = db.Column(db.String(50))
     Notes = db.Column(db.Text())
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class OrderCart(db.Model):
@@ -48,4 +47,4 @@ class Sites(db.Model):
     bof = db.Column(db.Boolean)
     processor = db.Column(db.String(), nullable = False)
     giftopt = db.Column(db.String(), nullable = False)
-    # site_user = db.relationship('User', backref='site_users', lazy='dynamic')
+    site_user = db.relationship('User', backref='site_users', lazy='dynamic')

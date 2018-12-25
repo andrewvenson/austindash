@@ -30,7 +30,7 @@ equipment = {
     'SSD 120GB': '99'
 }
 
-# SITE LOGIN
+# ------------------- SITE LOGIN -------------------------------------------------
 @app.route('/', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
@@ -40,26 +40,41 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            flash(f'Welcome {current_user.username}!')
             return redirect(url_for('dash'))
         else:
-            flash('Login unsuccesful. Please check email and password')
+            flash('Login unsucceSsful. Please check email and password')
     return render_template('login.html', name = 'login', form=form)
 
-# SITE'S DASHBOARD
+# ----------------------------- SITE'S DASHBOARD -----------------------------
 @app.route("/Dash")
 @login_required
 def dash():
+
+
+    # GET ALL EMAILS
+    # userEmails = User.query.all()
+    # for x in userEmails:
+    #     print(x.site, x.email)
+
+    # Specific sites email
+    # x = '2 Bucks'
+    # siteEmail = User.query.filter_by(site = x)
+
+    # for user in siteEmail:
+    #     print(x, user.email)
+
     return render_template('dash.html')
 
-# LOGOUT USER
+# --------------------- LOGOUT USER ----------------------
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
-# REGISTER NEW USER
+# --------------------- REGISTER NEW USER ------------------------------------------------------
 @app.route('/register', methods=['POST', 'GET'])
-# @login_required
+@login_required
 def register():
     db.create_all()
     form = RegistrationForm()
@@ -76,7 +91,7 @@ def register():
 
     return render_template('register.html', name = 'login', form=form)
 
-# CREATE AN RMA AFTER CLICKING RMA BUTTON ON RMA PAGE
+# ----------------------------------- CREATE AN RMA ---------------------------------------------- 
 @app.route('/rma/create-rma', methods=['POST', 'GET'])
 @login_required
 def createrma():
@@ -91,29 +106,28 @@ def createrma():
         print('Invalid submission')
     return render_template('create-rma.html', name = 'createrma_', form=form2)
 
-#VIEW SITE'S RMA'S
+# --------------------------------- VIEW SITE'S RMA'S ----------------------------------
 @app.route('/rma', methods=['GET', 'POST'])
 @login_required
 def rma():
     rmas = Rma.query.all()
     return render_template('rma.html', name = 'rma', info=rmas)
 
-# ADD ORDER TO PRICING
+# ------------------------------- PRICING --------------------------------
 @app.route('/pricing', methods=['POST', 'GET'])
 @login_required
 def pricing():
     orders = SubmitForm()
     price_info = equipment
-    x = OrderCart()
     return render_template('pricing.html', pricing = price_info, orders = orders)
 
-# PAYMENT PAGE
+# ----------------------------------- PAYMENT PAGE -----------------------------------
 @app.route('/pricing/orders')
 @login_required
 def Order():
     return render_template('Order.html', name='order')
 
-# USER CART API
+# ---------------------------------- USER CART API -----------------------------
 @app.route('/pricing/orders/<user_name>/api', methods=['POST', 'GET'])
 @login_required
 def api(user_name):
@@ -122,7 +136,7 @@ def api(user_name):
         cart.append(json.loads(request.form["javascript_data"]))
     return jsonify(cart)
 
-# DELETE ITEM IN CART ROUTE
+# ---------------------------- DELETE ITEM IN CART ROUTE ----------------------------------
 @app.route('/pricing/orders/delete', methods=['POST', 'GET'])
 @login_required
 def delete_item():
@@ -132,7 +146,13 @@ def delete_item():
         print(cart)
     return jsonify({"whoa": "there"})
 
-# ADD SITE ROUTE
+# ----------------------------- DISPLAY CART BADGE LENGTH---------------------------------
+@app.context_processor
+def inject_badge_length():
+    badge_length = len(cart)
+    return {'BADGE_LENGTH' : badge_length}
+
+# ------------------------------- ADD SITE -----------------------------------------
 @app.route('/sites/addsite', methods=['POST', 'GET'])
 # @login_required
 def addsites():
@@ -150,14 +170,19 @@ def addsites():
         print('Invalid submission')
     return render_template('addsites.html', form = form)
 
-#ADMIN VIEW SITES
-@app.route('/sites', methods=['POST','GET'])
+# -------------------------- ADMIN VIEW SITES ---------------------------------
+@app.route('/sites', methods=['POST','GET']) 
 @login_required
 def sites():
-    return render_template('sites.html')
+    sites = Sites.query.all()
+    return render_template('sites.html', sites=sites)
 
-#SITE INFO
+
+
+# ---------------------------------- SITE INFO -----------------------------------------
 @app.route('/siteinfo', methods=['POST', 'GET'])
 @login_required
 def siteinfo():
-    return render_template('siteinfo.html')
+    sites = Sites.query.all()
+    x = request.form.get('sitesss')
+    return render_template('/sites.html', x=x, sites=sites)

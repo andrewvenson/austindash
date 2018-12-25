@@ -2,7 +2,7 @@
 {% block title %} Sites {% endblock title %}
 {% block content %}
     <h1>Sites</h1>
-    <div class='row'>
+    <div class='row border'>
         <div class='col-sm-6 container'>
             <form action="{{url_for('addsites')}}">
                 <button type='submit' class='btn btn-primary' style='width:200px;'>Add Site</button>
@@ -11,24 +11,64 @@
             <button class='btn btn-success' style='width:200px;'>New Message</button><br><br>
 
             <div class='border' style='padding-bottom: 20px;'>
-                    <label for="site"><strong>View Site</strong></label> <br>
-                    <select id="site" style='width:200px;'>
-                        <option value="">Site Name</option>
-                        <option value="">Site Name</option>
-                        <option value="">Site Name</option>
+                <label for="site"><strong>View Site</strong></label> <br>
+                <form action="/siteinfo" method="POST">
+                    <select name='sitesss' style='width:200px;'>
+                        {% for site in sites %}
+                        <option>{{site.sitename}}</option>
+                        {% endfor %}
                     </select>
+                    <button type="submit" id="viewsite" class='btn btn-info'>View Site</button>
+                </form>
             </div>
          </div>
-         <div class='border col-sm-6' style='text-align:center; background-color:honeydew; padding:20px; border-left: solid 1px black !important;'>
-            <button class='btn btn-danger' style='width:300px;'><strong># of Ending Contracts </strong> <span class='float-right' style='background-color:white; color:black; padding-left:5px; padding-right:5px;'>5</span></button>
-            <br><br><div class='border-top'></div><br>
-            <button class='btn btn-warning'style='width:300px;'><strong># of Sites with Loaners </strong> <span class='float-right' style='background-color:white;color:black; padding-left:5px; padding-right:5px;'>5</span></button>
-            <br><br><div class='border-top'></div><br>
-            <button class='btn btn-info'style='width:300px;'><strong># of Unlimited Upgrades </strong> <span class='float-right' style='background-color:white; color:black; padding-left:5px; padding-right:5px;'>5</span></button>
-            <br><br><div class='border-top'></div><br>
-            <button class='btn btn-warning'style='width:300px;'><strong># of Limited upgrades </strong><span class='float-right' style='background-color:white;color:black; padding-left:5px; padding-right:5px;'>5</span></button>
+        <div class='col-sm-6' id="siteinfo">
+            <table>
+                {%for site in sites%}
+                    {%if x == site.sitename%}
+                        <tr>
+                            <th class="border">Site</th>
+                            <td>{{site.sitename}}</td>    
+                        </tr>
+                        <tr>
+                            <th class="border">Contract Start</th>
+                            <td>{{site.contractstart}}</td>
+                        </tr>
+                        <tr>
+                            <th class="border">Contract End</th>
+                            <td>{{site.contractend}}</td>
+                        </tr>
+                        <tr>
+                            <th class="border">HWKey</th>
+                            <td>{{site.hwkey}}</td>
+                        </tr>
+                        <tr>
+                            <th class="border">Stations</th>
+                            <td>{{site.stations}}</td>
+                        </tr>
+                        <tr>
+                            <th class="border">Printers</th>
+                            <td>{{site.printers}}</td>
+                        </tr>
+                        <tr>
+                            <th class="border">Remote Printers</th>
+                            <td>{{site.remprinters}}</td>
+                        </tr>
+                        <tr>
+                                <th class="border">BOF</th>
+                                <td>{{site.bof}}</td>
+                        </tr>
+                        <tr>
+                            <th class="border">Processor</th>
+                            <td>{{site.processor}}</td>
+                        </tr>
+                        <tr>
+                            <th class="border">GiftCards</th>
+                            <td>{{site.giftopt}}</td>
+                        </tr>
+                    {% endif %}
+                {%endfor%}
+            </table>
         </div>
     </div>
-    
-    
 {% endblock content %}

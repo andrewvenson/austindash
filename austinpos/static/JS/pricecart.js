@@ -3,8 +3,10 @@ var table = document.getElementById('table');
 var cart = document.getElementById('cart');
 var subtotal = document.getElementById('subtotal');
 var username = document.getElementById('username').innerHTML;
-var cartBadge = document.getElementById('cartbadge');
 var pricesub = document.getElementById('pricefooter');
+
+
+
 // On load cart
 window.onload = function wowzers(){
   var array = [];
@@ -14,8 +16,6 @@ window.onload = function wowzers(){
   xhr.open('GET', 'pricing/orders/' + username +'/api', true);
   xhr.onload = function(){
     var data = JSON.parse(this.response);
-
-    cartBadge.innerHTML = data.length
 
     if(xhr.status >= 200 && xhr.status < 400){
       for(x in data){
@@ -27,11 +27,11 @@ window.onload = function wowzers(){
           // Delete Data
           row.addEventListener('click', function deleterow(){
             index = this.rowIndex;
-            // subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
             $.post('pricing/orders/delete', {
               delete_item: index
             });
              cart.deleteRow(index);
+             subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
           });
           cell1 = row.insertCell(0);
           cell2 = row.insertCell(1);
@@ -70,7 +70,7 @@ function addCartItem(ev){
   // Delete Data
   cartrow.addEventListener('click', function deleterow(){
     index = this.rowIndex;
-    // subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
+    subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
     $.post('pricing/orders/delete', {
       delete_item: index
     });
@@ -87,7 +87,6 @@ function addCartItem(ev){
   xhr.open('GET', 'pricing/orders/' + username +'/api', true);
   xhr.onload = function(){
     var data = JSON.parse(this.response);
-    cartBadge.innerHTML = data.length
     if(xhr.status >= 200 && xhr.status < 400){
       for(x in data){  
         for(y in data[x]){
@@ -102,7 +101,6 @@ function addCartItem(ev){
   }
   xhr.send();
 }
-
 
 
 

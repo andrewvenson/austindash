@@ -39,7 +39,7 @@
                 <a class="nav-link" href="{{ url_for('register') }}">Register</a>
               </li>
             </ul>
-              <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'></span></strong></a>
+              <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'>{{ BADGE_LENGTH }}</span></strong></a>
               <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color:white;" href="{{url_for('logout')}}">Logout</a></button>
           </div>
         </nav>
@@ -66,7 +66,7 @@
                 <a class="nav-link" href="{{url_for('siteinfo')}}">{{current_user.site}} Info</a>
               </li>
             </ul>
-              <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'></span></strong></a>
+              <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'>{{ BADGE_LENGTH }}</span></strong></a>
               <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color:white;" href="{{url_for('logout')}}">Logout</a></button>
           </div>
         </nav>
@@ -87,6 +87,7 @@
       {% block content %}{% endblock content %}
     </div>
 
+    <script type="text/javascript" src="{{url_for('static', filename = 'JS/viewsite.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename = 'JS/pricecart.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename = 'JS/popform.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
