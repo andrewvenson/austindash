@@ -3,6 +3,7 @@ from austinpos import app, db, bcrypt
 from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm
 from austinpos.models import User, Rma, OrderCart, Sites
 from flask_login import login_user, current_user, logout_user, login_required
+import requests, json
 
 cart = []
 
@@ -50,20 +51,6 @@ def login():
 @app.route("/Dash")
 @login_required
 def dash():
-
-
-    # GET ALL EMAILS
-    # userEmails = User.query.all()
-    # for x in userEmails:
-    #     print(x.site, x.email)
-
-    # Specific sites email
-    # x = '2 Bucks'
-    # siteEmail = User.query.filter_by(site = x)
-
-    # for user in siteEmail:
-    #     print(x, user.email)
-
     return render_template('dash.html')
 
 # --------------------- LOGOUT USER ----------------------
@@ -80,6 +67,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        print(form.site.data)
         siteid = Sites.query.filter_by(sitename=form.site.data).first().id
         user = User(site = form.site.data, username = form.username.data, email = form.email.data, 
         password = hashed_pw, adminstatus= form.admin_status.data, sitelink=siteid)
@@ -141,7 +129,6 @@ def api(user_name):
 @login_required
 def delete_item():
     if request.method == 'POST':
-        print(cart[json.loads(request.form["delete_item"])])
         cart.pop(json.loads(request.form["delete_item"]))
         print(cart)
     return jsonify({"whoa": "there"})

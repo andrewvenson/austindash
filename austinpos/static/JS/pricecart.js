@@ -55,18 +55,47 @@ for(x = 0; x < tablerows; x++){
 }
 function addCartItem(ev){
   var array = [];
+  var priceData = {};
+
   var sum = 0;
   index = this.rowIndex;
   equipmentCell = table.rows[index].cells[0];
   priceCell = table.rows[index].cells[1];
   equipmentName = equipmentCell.innerHTML;
   equipmentPrice = priceCell.innerHTML;
+
+  
+
+  // var xhr1 = new XMLHttpRequest();
+  // xhr1.open('GET', 'pricing/orders/' + username +'/api', true);
+  // xhr1.onload = function(){
+  //   var data = JSON.parse(this.response);
+  //   if(xhr1.status >= 200 && xhr1.status < 400){
+  //     if(data.length == 0){
+  //       for(x in data){
+  //         for(y in data[x]){
+  //           priceData[y] = data[x][y];
+  //           console.log("wowowowowowowo");
+  //         }
+  //       }
+  //     }else{
+  //       console.log("There was no data");
+  //     }
+  //   }else{
+  //     console.log(error);
+  //   }
+  // }
+  // xhr1.send()
+
+  // priceData[equipmentName] = equipmentPrice;
+
+  // console.log("This is data to send to python ", priceData)
+
   // Post Data
   $.post('/pricing/orders/' + username + '/api', {
     javascript_data: JSON.stringify({[equipmentName]:equipmentPrice})
   });
   cartrow = cart.insertRow(-1);
-
   // Delete Data
   cartrow.addEventListener('click', function deleterow(){
     index = this.rowIndex;

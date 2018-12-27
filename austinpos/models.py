@@ -48,3 +48,6 @@ class Sites(db.Model):
     processor = db.Column(db.String(), nullable = False)
     giftopt = db.Column(db.String(), nullable = False)
     site_user = db.relationship('User', backref='site_users', lazy='dynamic')
+
+    def __repr__(self):
+        return self.sitename
