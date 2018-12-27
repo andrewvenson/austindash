@@ -4,6 +4,7 @@ from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, 
 from austinpos.models import User, Rma, OrderCart, Sites
 from flask_login import login_user, current_user, logout_user, login_required
 import requests, json
+from flask_mail import Message
 
 cart = []
 

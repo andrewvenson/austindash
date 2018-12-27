@@ -14,7 +14,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_pass = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     admin_status = BooleanField('Check for Admin Status')
-    site = QuerySelectField(query_factory=siteChoice, allow_blank=False, get_label='sitename')
+    site = SelectField("Site", choices=[("Austin Pos", "Austin Pos")])
     submit = SubmitField('Register')
 
     def validate_username(self, username):

@@ -5,8 +5,6 @@ var subtotal = document.getElementById('subtotal');
 var username = document.getElementById('username').innerHTML;
 var pricesub = document.getElementById('pricefooter');
 
-
-
 // On load cart
 window.onload = function wowzers(){
   var array = [];
@@ -63,33 +61,6 @@ function addCartItem(ev){
   priceCell = table.rows[index].cells[1];
   equipmentName = equipmentCell.innerHTML;
   equipmentPrice = priceCell.innerHTML;
-
-  
-
-  // var xhr1 = new XMLHttpRequest();
-  // xhr1.open('GET', 'pricing/orders/' + username +'/api', true);
-  // xhr1.onload = function(){
-  //   var data = JSON.parse(this.response);
-  //   if(xhr1.status >= 200 && xhr1.status < 400){
-  //     if(data.length == 0){
-  //       for(x in data){
-  //         for(y in data[x]){
-  //           priceData[y] = data[x][y];
-  //           console.log("wowowowowowowo");
-  //         }
-  //       }
-  //     }else{
-  //       console.log("There was no data");
-  //     }
-  //   }else{
-  //     console.log(error);
-  //   }
-  // }
-  // xhr1.send()
-
-  // priceData[equipmentName] = equipmentPrice;
-
-  // console.log("This is data to send to python ", priceData)
 
   // Post Data
   $.post('/pricing/orders/' + username + '/api', {
