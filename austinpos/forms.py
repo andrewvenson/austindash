@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms import StringField, BooleanField, PasswordField, SubmitField, TextAreaField, SelectField, DateField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from wtforms.widgets import TextArea
 from austinpos.models import User, Sites
 
 def siteChoice():
@@ -14,7 +15,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_pass = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     admin_status = BooleanField('Check for Admin Status')
-    site = SelectField("Site", choices=[("Austin Pos", "Austin Pos")])
+    site = QuerySelectField(query_factory=siteChoice, allow_blank=False, get_label="sitename")
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -74,4 +75,5 @@ class AddSiteForm(FlaskForm):
     processor = SelectField('Choose Processor', choices=[('Heartland', 'Heartland'), ('Sterling', 'Sterling'), ('Tsys', 'Tsys'), ('NetEPay', 'NetEPay')])
     giftopt = SelectField('Gift Options', choices=[('None', 'None'), ('MyFocus', 'MyFocus'), ('GiftEPay', 'GiftEPay')])
 
-
+class MessageForm(FlaskForm):
+    message = StringField('Body', widget=TextArea())

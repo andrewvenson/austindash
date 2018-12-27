@@ -1,11 +1,10 @@
-var quicklook = document.getElementById("quicklook");
 var viewsitebutt = document.getElementById("viewsite");
 var siteinfo = document.getElementById("siteinfo");
-var siteselectino = document.getElementById("")
+var messageBox = document.getElementById("message")
+var newmess = document.getElementById("buttmessage")
 
 
-viewsitebutt.addEventListener('click', function wow(){
-  quicklook.style.display = "none";
-  siteinfo.style.display = "block";
-  console.log("whoa");
+newmess.addEventListener('click', function wow(){
+  messageBox.style.display = "block";
+  console.log("Show Message");
 });

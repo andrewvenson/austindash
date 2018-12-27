@@ -1,6 +1,6 @@
 from flask import url_for, render_template, redirect, flash, jsonify, json, request
-from austinpos import app, db, bcrypt
-from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm
+from austinpos import app, db, bcrypt, mail
+from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm, MessageForm
 from austinpos.models import User, Rma, OrderCart, Sites
 from flask_login import login_user, current_user, logout_user, login_required
 import requests, json
@@ -69,8 +69,8 @@ def register():
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         print(form.site.data)
-        siteid = Sites.query.filter_by(sitename=form.site.data).first().id
-        user = User(site = form.site.data, username = form.username.data, email = form.email.data, 
+        siteid = Sites.query.filter_by(sitename=form.site.data.sitename).first().id
+        user = User(site = form.site.data.sitename, username = form.username.data, email = form.email.data, 
         password = hashed_pw, adminstatus= form.admin_status.data, sitelink=siteid)
         db.create_all()
         db.session.add(user)
@@ -162,8 +162,18 @@ def addsites():
 @app.route('/sites', methods=['POST','GET']) 
 @login_required
 def sites():
+    form = MessageForm()
     sites = Sites.query.all()
-    return render_template('sites.html', sites=sites)
+    if form.validate_on_submit():
+        msg = Message("Austin Dash Confirmation Message",
+                        sender="service@gmail.com")
+        msg.recipients = ["andrew@austintxpos.com"]
+        msg.body = form.message.data
+        mail.send(msg)
+        print("Message Sent")
+    else:
+        print("Message did not send")
+    return render_template('sites.html', sites=sites, form=form)
 
 
 
@@ -171,6 +181,16 @@ def sites():
 @app.route('/siteinfo', methods=['POST', 'GET'])
 @login_required
 def siteinfo():
+    form = MessageForm()
     sites = Sites.query.all()
     x = request.form.get('sitesss')
-    return render_template('/sites.html', x=x, sites=sites)
+    if form.validate_on_submit():
+        msg = Message("Austin Dash Confirmation Message",
+                        sender="service@gmail.com")
+        msg.recipients = ["andrew@austintxpos.com"]
+        msg.body = form.message.data
+        mail.send(msg)
+        print("Message Sent")
+    else:
+        print("Message did not send")
+    return render_template('/sites.html', x=x, sites=sites, form=form)

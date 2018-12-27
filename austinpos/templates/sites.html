@@ -5,11 +5,23 @@
     <div class='row border'>
         <div class='col-sm-6 container'>
             <form action="{{url_for('addsites')}}">
-                <button type='submit' class='btn btn-primary ' style='width:200px;'>Add Site</button>
+                <button type='submit' class='btn btn-primary' style='width:200px;'>Add Site</button>
             </form>
             <br>
-            <button class='btn btn-success' style='width:200px;'>New Message</button><br><br>
-            <input type="textarea">
+
+<!-- ClICK TO VIEW MESSAGE -->
+            <button class='btn btn-success' id="buttmessage" style='width:200px;'>New Message</button><br><br>
+
+<!-- MESSAGE BOX -->
+            <div id="message" style="display:none">
+                <form method="POST">
+                    {{form.hidden_tag()}}
+                    {{form.message(style="width:200px;")}}
+                    <button type="submit" class="btn btn-info" >Send</button>
+                </form>
+            </div>
+
+<!-- SITE INFO TABLE -->
             <div class='border' style='padding-bottom: 20px;'>
                 <label for="site"><strong>View Site</strong></label> <br>
                 <form action="/siteinfo" method="POST">
