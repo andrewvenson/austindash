@@ -69,13 +69,13 @@ html, body {
   padding: 3px;
   justify-content: center;
 }
-.col-sm-3 {
+.dashy {
   background-color: #e3e9f2;
   border-radius: 6px;
   margin: 5px;
   transition: transform .1s;
 }
-.col-sm-3:hover {
+.dashy:hover {
   -ms-transform: scale(1.5); /* IE 9 */
   -webkit-transform: scale(1.5); /* Safari 3-8 */
   transform: scale(1.05); 
