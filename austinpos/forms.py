@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms_sqlalchemy.fields import QuerySelectField
-from wtforms import StringField, BooleanField, PasswordField, SubmitField, TextAreaField, SelectField, DateField
+from wtforms import StringField, BooleanField, PasswordField, SubmitField, TextAreaField, SelectField
+from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from wtforms.widgets import TextArea
 from austinpos.models import User, Sites
@@ -33,8 +34,8 @@ class CrazyForm(FlaskForm):
     Vendor = SelectField(validators=[DataRequired()], choices = [('Touch Dynamic', 'Touch Dynamic'), ('CRS', 'CRS'), ('Posiflex', 'Posiflex')])
     Client = SelectField(validators=[DataRequired()], choices = [('Spire', 'Spire'), ('Highland Lounge', 'Highland Lounge'), ('Hardtails', 'Hardtails'), ('Dogpatch', 'Dogpatch')])
     Issue = TextAreaField('Issue', validators=[DataRequired(), Length(max=250)])
-    Date_Sent = StringField('Date Sent', validators=[DataRequired()])
-    Date_Received = StringField('Date Recieved', validators=[DataRequired()])
+    Date_Sent = DateField('Date Sent', format='%Y-%m-%d', validators=[DataRequired()])
+    Date_Received = DateField('Date Recieved', format='%Y-%m-%d', validators=[DataRequired()])
     Rep = SelectField('Rep', validators=[DataRequired()], choices = [('Sasha', 'Sasha'), ('Jon', 'Jon'), ('Eric','Eric'), ('Jeff','Jeff'), ('Andrew','Andrew')])
     Notes = TextAreaField('Notes', validators=[DataRequired(), Length(max=250)])
     submit = SubmitField('Submit Rma')
@@ -58,8 +59,8 @@ class DeleteOrder(FlaskForm):
 
 class AddSiteForm(FlaskForm):
     sitename = StringField('Site Name', validators=[DataRequired()])
-    contractstart = StringField('Contract Start Date', validators=[DataRequired()])
-    contractend = StringField('Contract End Date', validators=[DataRequired()])
+    contractstart = DateField('Contract Start Date',  format='%Y-%m-%d', validators=[DataRequired()])
+    contractend = DateField('Contract End Date',  format='%Y-%m-%d', validators=[DataRequired()])
     hwkey = StringField('Hardware Key #', validators=[DataRequired()])
     stations = SelectField('# of Stations', validators=[DataRequired()], choices=[('1', '1'), 
     ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10'),

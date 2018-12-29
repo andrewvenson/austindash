@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} Add Site {% endblock title %}
+{%block border%} style="padding-bottom:50px;" {%endblock%}
 {% block content %}
     <h1> Add Site </h1>
     <div class='form-group'>
@@ -8,9 +9,9 @@
             {{ form.sitename.label() }} <br>
             {{ form.sitename()}} <br><br>
             {{ form.contractstart.label() }} <br>
-            {{ form.contractstart() }} <br><br>
+            {{ form.contractstart(class='dtpck') }} <br><br>
             {{ form.contractend.label() }} <br>
-            {{ form.contractend() }} <br><br>
+            {{ form.contractend(class='dtpck') }} <br><br>
             {{ form.hwkey.label() }} <br>
             {{ form.hwkey() }} <br><br>
             {{ form.stations.label() }} <br>

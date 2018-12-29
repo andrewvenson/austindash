@@ -86,7 +86,9 @@ def register():
 def createrma():
     form2 = CrazyForm()
     if form2.validate_on_submit():
-        rma = Rma(rmanumber=form2.RmaNumber.data, Vendor=form2.Vendor.data, Customer=form2.Client.data, Issue=form2.Issue.data, Date_Sent=form2.Date_Sent.data, Date_Received=form2.Date_Received.data, Rep=form2.Rep.data, Notes=form2.Notes.data)
+        rma = Rma(rmanumber=form2.RmaNumber.data, Vendor=form2.Vendor.data, Customer=form2.Client.data,
+            Issue=form2.Issue.data, Date_Sent=form2.Date_Sent.data.strftime('%Y-%m-%d'), Date_Received=form2.Date_Received.data.strftime('%Y-%m-%d'),
+            Rep=form2.Rep.data, Notes=form2.Notes.data)
         db.create_all()
         db.session.add(rma)
         db.session.commit()
@@ -147,7 +149,7 @@ def addsites():
     form = AddSiteForm()
     print(form.sitename.data)
     if form.validate_on_submit():
-        newsite = Sites(sitename=form.sitename.data, contractstart=form.contractstart.data, contractend=form.contractend.data, 
+        newsite = Sites(sitename=form.sitename.data, contractstart=form.contractstart.data.strftime('%Y-%m-%d'), contractend=form.contractend.data.strftime('%Y-%m-%d'), 
         hwkey=form.hwkey.data, stations=str(form.stations.data), printers=str(form.printers.data), remprinters=str(form.remprinters.data), 
         bof=form.bof.data, processor=str(form.processor.data), giftopt=str(form.giftopt.data))
         db.session.add(newsite)
@@ -193,4 +195,4 @@ def siteinfo():
         print("Message Sent")
     else:
         print("Message did not send")
-    return render_template('/sites.html', x=x, sites=sites, form=form)
+    return render_template('sites.html', x=x, sites=sites, form=form)

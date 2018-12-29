@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url_for('static', filename='base.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet">   
     <title>{% block title %}{% endblock title %}</title>
   </head>
   
-  <body style="padding-bottom:70px;">
+  <body {%block border%} {%endblock%}>
     <span id='username' style='display:none;'>{{current_user.username}}</span>
     <div class="container"> <!--APOS Header srt-->
       {% if current_user.adminstatus == 1 %}
@@ -19,18 +20,18 @@
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent" {%block tabby%}{%endblock tabby%}>
             <ul class="navbar-nav mr-auto">
               {% if current_user.is_authenticated %}
                 <li class='nav-item'>
-                  <a class="nav-link" href="{{url_for('dash')}}" style="font-weight:600">{{ current_user.site }}</a>
+                  <a class="nav-link"href="{{url_for('dash')}}">{{ current_user.site }}</a>
                 </li>
               {% endif %}
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('pricing')}}">Pricing</a>
+                <a class="nav-link"href="{{ url_for('pricing')}}">Pricing</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('sites') }}">Sites</a>
+                <a class="nav-link"href="{{ url_for('sites') }}">Sites</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('rma')}}">Rma</a>
@@ -86,6 +87,12 @@
       {% endwith %}
       {% block content %}{% endblock content %}
     </div>
+
+    <script>
+      $(function(){
+        $('.dtpck').datepicker();
+      });
+    </script>
 
     <script type="text/javascript" src="{{url_for('static', filename = 'JS/viewsite.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename = 'JS/pricecart.js')}}"></script>

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Create Rma{% endblock title %}
+{%block border%} style="padding-bottom:50px;" {%endblock%}
 {% block content %}
   <h1>Create Rma</h1>
   <form class='border' method="post">
@@ -13,9 +14,9 @@
       {{ form.Issue.label() }}<br>
       {{ form.Issue(class='create') }}<br><br>
       {{ form.Date_Sent.label() }}<br>
-      {{ form.Date_Sent(class='create') }}<br><br>
+      {{ form.Date_Sent(class="dtpck") }}<br><br>
       {{ form.Date_Received.label() }}<br>
-      {{ form.Date_Received(class='create') }}<br><br>
+      {{ form.Date_Received(class='dtpck') }}<br><br>
       {{ form.Rep.label() }}<br>
       {{ form.Rep(class='create') }}<br><br>
       {{form.Notes.label()}}<br>

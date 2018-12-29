@@ -1,106 +1,133 @@
 {% extends 'base.html' %}
 {% block title %} Sites {% endblock title %}
+{% block border %}style="background-color:black; padding-bottom:50px;"{% endblock border %}
+{% block tabby %}style="color:#09c12e !important;"{% endblock %}
 {% block content %}
-    <h1>Sites</h1>
-    <div class='row border'>
+    <h1 style="color:#09c12e;">Sites</h1>
+    <div class='row' style="background-color:black; border:1px solid #09c12e;">
         <div class='col-sm-6 container'>
-            <form action="{{url_for('addsites')}}">
-                <button type='submit' class='btn btn-primary' style='width:200px;'>Add Site</button>
-            </form>
-            <br>
-
-<!-- ClICK TO VIEW MESSAGE -->
-            <button class='btn btn-success' id="buttmessage" style='width:200px;'>New Message</button><br><br>
-
-<!-- MESSAGE BOX -->
-            <div id="message" style="display:none">
-                <form method="POST">
-                    {{form.hidden_tag()}}
-                    {{form.message(style="width:200px;")}}
-                    <button type="submit" class="btn btn-info" >Send</button>
-                </form>
-            </div>
-
-<!-- SITE INFO TABLE -->
-            <div class='border' style='padding-bottom: 20px;'>
-                <label for="site"><strong>View Site</strong></label> <br>
-                <form action="/siteinfo" method="POST">
-                    <select name='sitesss' style='width:200px;'>
-                        {% for site in sites %}
-                        <option>{{site.sitename}}</option>
-                        {% endfor %}
-                    </select>
-                    <button type="submit" id="viewsite" class='btn btn-info'>View Site</button>
-                </form>
-            </div>
-         </div>
-
-        <div class='col-sm-6' id="siteinfo">
-            <div class='row'>
-
-                <div class='col-lg-3' style="margin-right:50px;">
-                    <table>
-                        {%for site in sites%}
-                            {%if x == site.sitename%}
-                                <tr>
-                                    <th class="border" style="border-right:1px solid black !important;">Site</th>
-                                    <td class="border" style="text-align:right;">{{site.sitename}}</td>    
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">Contract Start</th>
-                                    <td class="border" style="text-align:right;">{{site.contractstart}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">Contract End</th>
-                                    <td class="border" style="text-align:right;">{{site.contractend}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">HWKey</th>
-                                    <td class="border" style="text-align:right;">{{site.hwkey}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">Stations</th>
-                                    <td class="border" style="text-align:right;">{{site.stations}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">Printers</th>
-                                    <td class="border" style="text-align:right;">{{site.printers}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">Remote Printers</th>
-                                    <td class="border" style="text-align:right;">{{site.remprinters}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">BOF</th>
-                                    <td class="border" style="text-align:right;">{{site.bof}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">Processor</th>
-                                    <td class="border" style="text-align:right;">{{site.processor}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="border"  style="border-right:1px solid black !important;">GiftCards</th>
-                                    <td class="border" style="text-align:right;">{{site.giftopt}}</td>
-                                </tr>
-                            {% endif %}
-                        {%endfor%}
-                        <button class='btn btn-success' id='sitemessage' style='width:150px;'>Site Message</button><br><br>
-                    </table>
-                </div>
-
-                <div class='col-lg-3'>
-                    <div id="specificsitetextbox" style="display:none; background-color:#c1c1c1; width:250px; border-radius: 3%;">
-                        <p class="float-right" style="padding-right:10px;"><a id="exit" style="color:white;"href="#"><strong>X</strong></a> </p>
-                        <div style="padding-left:10px; padding-right:10px;padding-bottom:10px;padding-top:10px;">
-                            <form action="" method="POST">
-                                <textarea style="border-radius:2%;"cols="30" rows="10"></textarea>
-                                <button type="submit" style="width:235px;" class='btn btn-info'>Send</button>
-                            </form>
+            <div class="row">
+                <div class="col-lg-6">
+                    <form action="{{url_for('addsites')}}">
+                        <button type='submit' class='btn btn-success' style="width:200px;color:black;"> <strong>Add Site</strong></button>
+                    </form>
+                    <br>
+                <!-- ClICK TO VIEW MESSAGE -->
+                     <div class="btn-group">
+                        <button type="button" style="width:200px;" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        New Message
+                        </button>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" id="massmessage" style="width:200px;" href="#">Mass Message</a>
+                        <a class="dropdown-item"style="width:200px;" href="#">Multiple Sites</a>
+                        <a class="dropdown-item" id="sitemessage" style="width:200px;" href="#">Selected Site</a>
                         </div>
                     </div>
                 </div>
 
-            </div>   
+                <div class="col-lg-6">
+                    <div style="background-color:black; color:red; padding:25px; border-radius:3.4%; font-family: 'Major Mono Display', monospace;">
+                        {% if x %}
+                            <h1>{{x}}</h1>
+                        {% endif %}
+                        <h1></h1>
+                    </div>
+                </div>
+            </div>
+<!-- SITE INFO TABLE -->
+            <div  style='padding-bottom: 20px; border:1px solid #09c12e'>
+                <label for="site" style="color:#09c12e;color:black;"><strong>View Site</strong></label><br>
+                <form action="/siteinfo" method="POST">
+                    <select name='sitesss' style='width:200px; background-color: black; color:#09c12e;'>
+                        {% for site in sites %}
+                        <option style="background-color:black; color:#09c12e;">{{site.sitename}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" id="viewsite" class='btn btn-success' style="color:black"><strong>View Site</strong></button>
+                </form>
+            </div>
+            <br>
+            <div class="row">
+                <div id="specificsitetextbox" style="display:none; background-color:black; border-radius:2%; width:255px; border:1px solid #09c12e; margin-right:10px; margin-bottom:10px;">
+                    {% if x %}
+                        <p id="sitename" style="display:none;">{{x}}</p>
+                        <p class="float-right" style="padding-right:10px; padding-top:10px;color:#09c12e;"><a id="exit" style="color:red"href="#"><span id="exitinner"><strong></strong>X</strong></a></span></p>
+                        <p class="float-left" id="mess" style="padding-left:10px; padding-top:10px; color:red;"><strong>Message to {{x}}</strong></p>
+                        {% else %}
+                            <p class="float-right" style="padding-right:10px; padding-top:10px; color:#09c12e;"><a id="exit" style="color:red;"href="#"> <span id="exitinner"><strong>X</strong></span></a></p>
+                            <p class="float-left" id="mess" style="padding-left:10px; padding-top:10px; color:red"><strong>Message to ALL SITES</strong></p>
+                    {% endif %}
+                    <div style="padding-left:10px; padding-right:10px;padding-bottom:10px;padding-top:10px;">
+                        <form action="" method="POST">
+                            {{form.hidden_tag()}}
+                            {{form.message(style="background-color:black; border:1px solid #09c12e; color:#09c12e;", cols='30', rows='10')}}
+                            <div>
+                                <button type="submit" class="btn btn-success" style="width:235px;">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div style="float:left;">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-danger" style="color:red !important; border:1px solid red; width:270px; margin-left:0px;">Loaners <span class="float-right badge badge-light">5</span></li>
+                        <li class="list-group-item list-group-item-danger" style="color:red !important; border:1px solid red; width:270px; margin-left:0px;">Balance <span class="float-right badge badge-light">5</span></li>
+                        <li class="list-group-item list-group-item-danger" style="color:red !important; border:1px solid red; width:270px; margin-left:0px;">Messages <span class="float-right badge badge-light">5</span></li>
+                    </ul>
+                </div>
+            </div>
+         </div>
+         <!-- Split Rowwww -->
+        <div class='col-sm-6'  >
+            <div class='row'>
+                <div style="margin-right:50px;">
+                    <table>
+                        {%for site in sites%}
+                            {%if x == site.sitename%}
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">Site</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px;"><h3>{{site.sitename}}</h3></td>    
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">Contract Start</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.contractstart}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">Contract End</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.contractend}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">HW Key</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.hwkey}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">Stations</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.stations}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">Printers</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.printers}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">Remote Printers</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.remprinters}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">BOF</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.bof}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">Processor</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.processor}}</h3></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-right:1px solid black !important; border:1px solid red; color:red; width:500px; padding-left:10px;">Gift Cards</th>
+                                    <td style="text-align:right; border:1px solid red; color:red; width:500px; padding-right:10px"><h3>{{site.giftopt}}</h3></td>
+                                </tr>
+                            {% endif %}
+                        {%endfor%}
+                    </table><br>
+                </div>
+            </div>  
         </div>
     </div>
 {% endblock content %}
