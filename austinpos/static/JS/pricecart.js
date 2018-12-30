@@ -25,7 +25,7 @@ window.onload = function wowzers(){
           // Delete Data
           row.addEventListener('click', function deleterow(){
             index = this.rowIndex;
-            $.post('pricing/orders/delete', {
+            $.post('pricing/orders/' + username + '/' + 'delete', {
               delete_item: index
             });
              cart.deleteRow(index);
@@ -71,7 +71,7 @@ function addCartItem(ev){
   cartrow.addEventListener('click', function deleterow(){
     index = this.rowIndex;
     subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
-    $.post('pricing/orders/delete', {
+    $.post('pricing/orders/' + username + '/' + 'delete', {
       delete_item: index
     });
     cart.deleteRow(index);

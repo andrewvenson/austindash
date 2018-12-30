@@ -2,84 +2,83 @@
 {% block title %}Register User{% endblock title %}
 {%block border%} style="padding-bottom:50px;" {%endblock%}
 {% block content %}
-  <h1>Register User</h1>
+  <h1 style="font-family: 'Staatliches', cursive;">Register User</h1>
 
-  <div class="border">
+  <div class="border" style="border-radius:10px; box-shadow: 5px 10px 18px #888888;">
+    <div style="margin-left:10px; margin-bottom:10px;">
       <form method="post">
-          {{ form.hidden_tag() }}
-      
-          <div class="form-group">
-            {{form.site.label()}} <br>
-            {{form.site()}} <br>
-          </div>
-      
-          <div class="form-group">
-            {{form.username.label()}} <br>
-            {% if form.username.errors %}
-              {{ form.username(class='is-invalid') }}
-              <div class="invalid-feedback">
-                {% for error in form.username.errors %}
-                  <span>{{error}}</span>
-                {% endfor %}
-              </div>
-              {% else %}
-                {{ form.username(placeholder = "Enter Username") }}<br>
-            {% endif %}
-          </div>
-      
-      
-      
-          <div class="form-group">
-            {{form.email.label()}} <br>
-            {% if form.email.errors %}
-              {{ form.email(class='is-invalid') }}
-              <div class="invalid-feedback">
-                {% for error in form.email.errors %}
-                  <span>{{error}}</span>
-                {% endfor %}
-              </div>
-              {% else %}
-                {{ form.email(placeholder = "Enter Email") }}<br>
-            {% endif %}
-          </div>
-      
-      
-          <div class="form-group">
-            {{form.password.label()}} <br>
-            {% if form.password.errors %}
-              {{ form.password(class='is-invalid') }}
-              <div class="invalid-feedback">
-                {% for error in form.password.errors %}
-                  <span>{{error}}</span>
-                {% endfor %}
-              </div>
-              {% else %}
-                {{ form.password(placeholder = "Create Password") }}<br>
-            {% endif %}
-          </div>
-      
-      
-          <div class="form-group">
-            {{form.confirm_pass.label()}} <br>
-            {% if form.confirm_pass.errors %}
-              {{ form.confirm_pass(class='is-invalid') }}
-              <div class="invalid-feedback">
-                {% for error in form.confirm.errors %}
-                  <span>{{error}}</span>
-                {% endfor %}
-              </div>
+        {{ form.hidden_tag() }}
+    
+        <div class="form-group">
+          {{form.site.label()}} <br>
+          {{form.site()}} <br>
+        </div>
+    
+        <div class="form-group">
+          {{form.username.label()}} <br>
+          {% if form.username.errors %}
+            {{ form.username(class='is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form.username.errors %}
+                <span>{{error}}</span>
+              {% endfor %}
+            </div>
             {% else %}
-                {{ form.confirm_pass(placeholder = "Confirm Password") }}<br>
-            {% endif %}
-          </div>
-      
-          <div class='form-group'>
-            {{form.admin_status()}} 
-            {{form.admin_status.label()}} <br>
-          </div>
-      
-          {{ form.submit(class='btn btn-info') }}<br>
-        </form>
+              {{ form.username(placeholder = "Enter Username") }}<br>
+          {% endif %}
+        </div>
+    
+        <div class="form-group">
+          {{form.email.label()}} <br>
+          {% if form.email.errors %}
+            {{ form.email(class='is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form.email.errors %}
+                <span>{{error}}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+              {{ form.email(placeholder = "Enter Email") }}<br>
+          {% endif %}
+        </div>
+    
+    
+        <div class="form-group">
+          {{form.password.label()}} <br>
+          {% if form.password.errors %}
+            {{ form.password(class='is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form.password.errors %}
+                <span>{{error}}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+              {{ form.password(placeholder = "Create Password") }}<br>
+          {% endif %}
+        </div>
+    
+        <div class="form-group">
+          {{form.confirm_pass.label()}} <br>
+          {% if form.confirm_pass.errors %}
+            {{ form.confirm_pass(class='is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form.confirm.errors %}
+                <span>{{error}}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+              {{ form.confirm_pass(placeholder = "Confirm Password") }}<br>
+          {% endif %}
+        </div>
+    
+        <div class='form-group'>
+          {{form.admin_status()}} 
+          {{form.admin_status.label()}} <br>
+        </div>
+    
+        {{ form.submit(class='btn btn-info') }}<br>
+      </form>
+    </div>
   </div>
   
 {% endblock content %}

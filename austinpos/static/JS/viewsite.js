@@ -8,9 +8,16 @@ var exitbutton = document.getElementById("exit");
 var massmessage = document.getElementById("massmessage");
 var massmesscontent = document.getElementById("mess");
 var sitename = document.getElementById("sitename");
+var notfiy = document.getElementById("notifications")
 
 window.onload = function(){
   siteinfo.style.display="block";
+  if(siteinfo.style.display="none"){
+    notfiy.style.display="none";
+  }
+  else{
+    notify.style.display="block";
+  }
 };
 
 massmessage.addEventListener('click', function(){

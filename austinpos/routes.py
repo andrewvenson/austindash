@@ -6,7 +6,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 import requests, json
 from flask_mail import Message
 
-cart = []
+cart = {}
 
 equipment = {
     'Loaner Terminal': '150',
@@ -124,22 +124,32 @@ def Order():
 def api(user_name):
     user_name = current_user.username
     if request.method == 'POST':
-        cart.append(json.loads(request.form["javascript_data"]))
-    return jsonify(cart)
+        usersItem = json.loads(request.form["javascript_data"])
+        if user_name in cart:
+            cart[user_name].append(usersItem)
+        else:
+            cart[user_name] = [usersItem]
+        print(cart[user_name])
+    return jsonify(cart[user_name])
 
 # ---------------------------- DELETE ITEM IN CART ROUTE ----------------------------------
-@app.route('/pricing/orders/delete', methods=['POST', 'GET'])
+@app.route('/pricing/orders/<user_name>/delete', methods=['POST', 'GET'])
 @login_required
-def delete_item():
+def delete_item(user_name):
+    user_name = current_user.username
+    print(user_name)
     if request.method == 'POST':
-        cart.pop(json.loads(request.form["delete_item"]))
-        print(cart)
+        if user_name in cart:
+            deleteItem = json.loads(request.form["delete_item"])
+            cart[user_name].pop(deleteItem)
+            print(cart[user_name])
     return jsonify({"whoa": "there"})
 
 # ----------------------------- DISPLAY CART BADGE LENGTH---------------------------------
 @app.context_processor
 def inject_badge_length():
-    badge_length = len(cart)
+    # user_name = current_user.username
+    badge_length = 3
     return {'BADGE_LENGTH' : badge_length}
 
 # ------------------------------- ADD SITE -----------------------------------------
@@ -176,8 +186,6 @@ def sites():
     else:
         print("Message did not send")
     return render_template('sites.html', sites=sites, form=form)
-
-
 
 # ---------------------------------- SITE INFO -----------------------------------------
 @app.route('/siteinfo', methods=['POST', 'GET'])
