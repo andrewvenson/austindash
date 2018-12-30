@@ -8,11 +8,12 @@
         <div class='col-sm-6 container'>
             <div class="row" style="margin-top:10px;">
                 <div class="col-lg-6">
+                <!-- ADD SITE BUTTON -->
                     <form action="{{url_for('addsites')}}">
                         <button type='submit' class='btn btn-info' style="width:200px;">Add Site</button>
                     </form>
                     <br>
-                <!-- ClICK TO VIEW MESSAGE -->
+                <!-- NEW MESSAGE BUTTON -->
                      <div class="btn-group" style="margin-bottom:20px;">
                         <button type="button" style="width:200px;" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         New Message
@@ -33,12 +34,12 @@
                     </div>
                 </div>
             </div>
-<!-- SITE INFO TABLE -->
-            <div style='padding-bottom: 10px; padding-top:10px; border-radius:5px; box-shadow: 5px 10px 18px #888888'>
-                <form action="/siteinfo" method="POST" style="padding-left:10px;">
+<!-- VIEW SITE SELECT FIELD -->
+            <div style='padding-bottom: 10px; padding-top:10px; border-radius:5px;'>
+                <form action="/siteinfo" method="POST">
                     <select name='sitesss' style='width:200px; border-radius:5px;'>
                         {% for site in sites %}
-                        <option style="background-color:black; color:#09c12e;">{{site.sitename}}</option>
+                        <option >{{site.sitename}}</option>
                         {% endfor %}
                     </select>
                     <button type="submit" style="padding-left:10px;" id="viewsite" class='btn btn-info'>View Site</button>
@@ -51,15 +52,15 @@
                         {% if x %}
                             <p id="sitename" style="display:none;">{{x}}</p>
                             <p class="float-right" style="padding-right:10px; padding-top:10px;"><a id="exit" style="color:red"href="#"><span id="exitinner"><strong>X</strong></a></span></p>
-                            <p class="float-left" id="mess" style="padding-left:10px; padding-top:10px; color:red;"><strong>Message to {{x}}</strong></p>
+                            <p class="float-left" id="mess" style="padding-left:10px; padding-top:10px; color:red;font-family: 'Staatliches', cursive;"><strong>Message to {{x}}</strong></p>
                             {% else %}
-                                <p class="float-right" style="padding-right:10px; padding-top:10px;"><a id="exit" style="color:red;"href="#"> <span id="exitinner"><strong>X</strong></span></a></p>
-                                <p class="float-left" id="mess" style="padding-left:10px; padding-top:10px; color:red"><strong>Message to ALL SITES</strong></p>
+                                <p class="float-right" style="padding-right:10px; padding-top:10px;"><a id="exit" style="color:red;"href="#"><span id="exitinner"><strong>X</strong></span></a></p>
+                                <p class="float-left" id="mess" style="padding-left:10px; padding-top:10px; color:red; font-family: 'Staatliches', cursive">Message to ALL SITES</p>
                         {% endif %}
                         <div style="padding-left:10px; padding-right:10px;padding-bottom:10px;padding-top:10px;">
                             <form action="" method="POST">
                                 {{form.hidden_tag()}}
-                                {{form.message( cols='27', rows='10')}}
+                                {{form.message( style="width:100%;", rows=5)}}
                                 <div>
                                     <button type="submit" class="btn btn-success" style="width:100%;">Send</button>
                                 </div>
@@ -70,60 +71,61 @@
                 <div class="col-xl-6">
                     <div id="notifications" style="width:100%; box-shadow: 5px 10px 18px #888888; margin-bottom:20px; margin-top:10px; display:'none'; border-radius:5px;">
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;">Loaners <span class="float-right badge badge-light">5</span></li>
-                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;">Balance <span class="float-right badge badge-light">5</span></li>
-                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;">Messages <span class="float-right badge badge-light">5</span></li>
+                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Loaners</strong><span class="float-right badge badge-light">5</span></li>
+                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Balance</strong> <span class="float-right badge badge-light">5</span></li>
+                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Messages</strong> <span class="float-right badge badge-light">5</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
          </div>
+
          <!-- Split Rowwww -->
         <div class='col-sm-6'  >
             <div class='row'>
                 <div style="margin-left:10px; margin-right:10px; margin-top:10px; box-shadow: 5px 10px 18px #888888; border-radius:5px;">
-                    <table>
+                    <table style="width:100%">
                         {%for site in sites%}
                             {%if x == site.sitename%}
                                 <tr>
-                                    <th style="width:50%; padding-left:10px; border:1px solid #6cd8d6; color:red;">Site</th>
-                                    <td style="text-align:right; width:50%; padding-right:10px;"><h3>{{site.sitename}}</h3></td>    
+                                    <th style="width:500px; padding-left:10px; border:1px solid #6cd8d6; color: red;">Site</th>
+                                    <td style="text-align:right; width:500px; padding-right:10px;"><h3>{{site.sitename}}</h3></td>    
                                 </tr>
                                 <tr>
-                                    <th style=" border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">Contract Start</th>
-                                    <td style="text-align:right;  padding-right:10px"><h3>{{site.contractstart}}</h3></td>
+                                    <th style=" border:1px solid #6cd8d6; color:red; ; padding-left:10px;">Contract Start</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.contractstart}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <th style="border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">Contract End</th>
-                                    <td style="text-align:right; width:500px; padding-right:10px"><h3>{{site.contractend}}</h3></td>
+                                    <th style="border:1px solid #6cd8d6; color:red; padding-left:10px;">Contract End</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.contractend}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <th style="border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">HW Key</th>
-                                    <td style="text-align:right; width:500px; padding-right:10px"><h3>{{site.hwkey}}</h3></td>
+                                    <th style="border:1px solid #6cd8d6; color:red; padding-left:10px;">HW Key</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.hwkey}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <th style="border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">Stations</th>
-                                    <td style="text-align:right;  width:500px; padding-right:10px"><h3>{{site.stations}}</h3></td>
+                                    <th style="border:1px solid #6cd8d6; color:red; padding-left:10px;">Stations</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.stations}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <th style="border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">Printers</th>
-                                    <td style="text-align:right;  width:500px; padding-right:10px"><h3>{{site.printers}}</h3></td>
+                                    <th style="border:1px solid #6cd8d6; color:red;; padding-left:10px;">Printers</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.printers}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <th style="border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">Remote Printers</th>
-                                    <td style="text-align:right;  width:500px; padding-right:10px"><h3>{{site.remprinters}}</h3></td>
+                                    <th style="border:1px solid #6cd8d6; color:red; padding-left:10px;">Remote Printers</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.remprinters}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <th style="border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">BOF</th>
-                                    <td style="text-align:right;  width:500px; padding-right:10px"><h3>{{site.bof}}</h3></td>
+                                    <th style="border:1px solid #6cd8d6; color:red; padding-left:10px;">BOF</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.bof}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <th style="border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">Processor</th>
-                                    <td style="text-align:right;  width:500px; padding-right:10px"><h3>{{site.processor}}</h3></td>
+                                    <th style="border:1px solid #6cd8d6; color:red; padding-left:10px;">Processor</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.processor}}</h3></td>
                                 </tr>
                                 <tr>
-                                    <th style="border:1px solid #6cd8d6; color:red; width:500px; padding-left:10px;">Gift Cards</th>
-                                    <td style="text-align:right;  width:500px; padding-right:10px"><h3>{{site.giftopt}}</h3></td>
+                                    <th style="border:1px solid #6cd8d6; color:red; padding-left:10px;">Gift Cards</th>
+                                    <td style="text-align:right; border-top:1px solid #6cd8d6; padding-right:10px"><h3>{{site.giftopt}}</h3></td>
                                 </tr>
                             {% endif %}
                         {%endfor%}

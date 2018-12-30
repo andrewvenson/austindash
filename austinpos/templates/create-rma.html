@@ -2,10 +2,13 @@
 {% block title %}Create Rma{% endblock title %}
 {%block border%} style="padding-bottom:50px;" {%endblock%}
 {% block content %}
-  <h1>Create Rma</h1>
+  <h1 style="font-family: 'Staatliches', cursive;">Create Rma</h1>
   <form class='border' method="post" style="box-shadow: 5px 10px 18px #888888 !important; border-radius:10px;">
     <div class="container form">
       {{ form.hidden_tag() }}
+      {{form.Site.label()}} <br>
+      {{form.Site(class='create')}} <br><br>
+      {{form.RmaNumber.label()}} <br>
       {{ form.RmaNumber(placeholder='Enter Rma Number', class='create') }}<br><br>
       {{ form.Vendor.label() }}<br>
       {{ form.Vendor(class='create') }}<br><br>

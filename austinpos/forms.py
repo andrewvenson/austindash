@@ -4,11 +4,13 @@ from wtforms import StringField, BooleanField, PasswordField, SubmitField, TextA
 from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from wtforms.widgets import TextArea
-from austinpos.models import User, Sites
+from austinpos.models import User, Sites, Rma
 
 def siteChoice():
     sites = Sites.query
     return sites
+
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
@@ -30,7 +32,8 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Email is taken. Please choose a different one.')
 
 class CrazyForm(FlaskForm):
-    RmaNumber = StringField(validators=[DataRequired(), Length(max=20)])
+    Site = QuerySelectField("Site", query_factory=siteChoice, allow_blank=True, get_label="sitename")
+    RmaNumber = StringField("Rma #", validators=[DataRequired(), Length(max=20)])
     Vendor = SelectField(validators=[DataRequired()], choices = [('Touch Dynamic', 'Touch Dynamic'), ('CRS', 'CRS'), ('Posiflex', 'Posiflex')])
     Client = SelectField(validators=[DataRequired()], choices = [('Spire', 'Spire'), ('Highland Lounge', 'Highland Lounge'), ('Hardtails', 'Hardtails'), ('Dogpatch', 'Dogpatch')])
     Issue = TextAreaField('Issue', validators=[DataRequired(), Length(max=250)])

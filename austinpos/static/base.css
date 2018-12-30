@@ -53,6 +53,13 @@ html, body {
 .carty-btn {
   margin: 13px;
 }
+
+.siterma:hover{
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.01); 
+  background-color: #c9d8ef;
+}
 /* end */
 
 /* Dashboard styling =========================================================================================================================================================*/
