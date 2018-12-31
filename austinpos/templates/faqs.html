@@ -1,15 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}FAQs{% endblock %}
+{% block faqstab%}
+style="font-family: 'Ubuntu', sans-serif;
+color: #44659b !important;
+background-color:white !important;
+border-top-left-radius:3px;
+border-bottom-left-radius: 3px;"
+{%endblock%}
 {% block border%}style="padding-bottom:50px;"{%endblock%}
 {% block content %}
     <div class="row" style="margin-top:0px;">
        <div class="border col-lg-6" style="float:left; border-left : none !important; border-right: none !important; border-left: none !important; border-top: none !important;">
-            <h1 style="font-family: 'Staatliches', cursive;">Frenquenly Asked Questions</h1>
+            <h1 id="titlecolor" style="font-family: 'Staatliches', cursive;">Frenquenly Asked Questions</h1>
        </div>
        <div class=" col-lg-6" style=" margin-top:50px;">
             <div style="float:right">
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle"  style="width:150px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle"  style="width:150px; box-shadow: 5px 5px 14px #888888" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filter Issues
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -47,14 +54,14 @@
                         
                         <div id="questionpop">
                             <div class="border" id="Questions">
-                                <a href="#">What should I do if my printer is not printing?</a><br><br>
+                                <a href="#">My printer is not printing?</a><br><br>
                             </div>
                             
                         </div>
                         <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important ; margin-left:20px; margin-right:20px"></div>
                         <div id="questionpop">
                             <div class="border" id="Questions">
-                                <a href="#">My Credit Cards aren't authorizing.</a><br><br>
+                                <a href="#">My credit cards aren't authorizing?</a><br><br>
                             </div>
                             
                         </div>
@@ -62,7 +69,7 @@
 
                         <div id="questionpop">
                             <div class="border" id="Questions">
-                                <a href="#">My Terminal isn't turning on.</a><br><br>
+                                <a href="#">Why isn't my terminal isn't turning on?</a><br><br>
                             </div>
                         </div>
                         <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
@@ -71,13 +78,60 @@
                             <div  class="border" id="Questions">
                                 <a href="#">How do I go about setting up gift cards?</a><br><br>
                             </div>
-                            
                         </div>
                         <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
 
                         <div  id="questionpop">
                             <div class="border" id="Questions">
                                 <a href="#">How do I get logmein access?</a><br><br>
+                            </div>
+                        </div>
+
+                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
+
+                        <div  id="questionpop">
+                            <div class="border" id="Questions">
+                                <a href="#">My Terminal has blue screen screen of death.</a><br><br>
+                            </div>
+                        </div>
+                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
+
+                        <div  id="questionpop">
+                            <div class="border" id="Questions">
+                                <a href="#">The backup path '\\BACKUP\C\FOCUS\' could not be found.</a><br><br>
+                            </div>
+                        </div>
+                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
+
+                        <div  id="questionpop">
+                            <div class="border" id="Questions">
+                                <a href="#">The primary path '\\FOCUS\C\FOCUS\' could not be found.
+                                    Do you want to switch to the backup path?
+                                </a><br><br>
+                            </div>
+                        </div>
+                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
+
+                        <div  id="questionpop">
+                            <div class="border" id="Questions">
+                                <a href="#">How to add a button to the screen?
+                                </a><br><br>
+                            </div>
+                        </div>
+                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
+
+                        <div  id="questionpop">
+                            <div class="border" id="Questions">
+                                <a href="#">How to add a canvas to the screen?
+                                </a><br><br>
+                            </div>
+                        </div>
+                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
+
+                        <div  id="questionpop">
+                            <div class="border" id="Questions">
+                                <a href="#">How do I go in offline mode?
+                                </a><br><br>
                             </div>
                         </div>
                     </div>

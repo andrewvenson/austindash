@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Dash{% endblock title %}
+
+{% block dashtab%}
+style="font-family: 'Ubuntu', sans-serif;
+color: #44659b !important;
+background-color:white !important;
+border-top-left-radius:3px;
+border-bottom-left-radius: 3px;"
+{%endblock%}
+
 {% block content %}
-  <h1 style="font-weight:600; font-family: 'Staatliches', cursive;">{{ current_user.site }} Dash</h1> 
+  <h1 id="titlecolor" style="font-weight:600; font-family: 'Staatliches', cursive;">{{ current_user.site }} Dash</h1> 
   </br>
 <!-- Dashboard structure...================================================================================================================================================== -->
 <div class="container">

@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Rma's{% endblock title %}
+{% block rmatab%}
+style="font-family: 'Ubuntu', sans-serif;
+color: #44659b !important;
+background-color:white !important;
+border-top-left-radius:3px;
+border-bottom-left-radius: 3px;"
+{%endblock%}
 {% block content %}
 <form class="" action="{{ url_for('createrma') }}">
   <button class="btn btn-primary" type="submit" name="button">New Rma</button>

@@ -36,7 +36,6 @@ class CrazyForm(FlaskForm):
     serialnumber = StringField("Serial #", validators=[DataRequired(), Length(max=20)])
     RmaNumber = StringField("Rma #", validators=[DataRequired(), Length(max=20)])
     Vendor = SelectField(validators=[DataRequired()], choices = [('Touch Dynamic', 'Touch Dynamic'), ('CRS', 'CRS'), ('Posiflex', 'Posiflex')])
-    Client = SelectField(validators=[DataRequired()], choices = [('Spire', 'Spire'), ('Highland Lounge', 'Highland Lounge'), ('Hardtails', 'Hardtails'), ('Dogpatch', 'Dogpatch')])
     Issue = TextAreaField('Issue', validators=[DataRequired(), Length(max=250)])
     Date_Sent = DateField('Date Sent', format='%Y-%m-%d', validators=[DataRequired()])
     Date_Received = DateField('Date Recieved', format='%Y-%m-%d', validators=[DataRequired()])

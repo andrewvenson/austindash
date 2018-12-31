@@ -45,7 +45,7 @@ html, body {
   text-align: center;
 }
 .create{
-  width: 25%;
+  width: 38%;
 }
 .border{
   padding-top: 25px;
@@ -277,7 +277,6 @@ html, body {
   border-bottom-left-radius: 5px;
   border-right: none !important;
   border-top: none !important;
-  
 }
 
 #Questions a{
@@ -290,14 +289,42 @@ html, body {
   text-decoration: none !important;
   padding:10px 5px 30px 5px;
   border-radius:5px;
+  border:none !important;
   background-color: #c9d8ef;
   font-size:30px;
   font-weight:600;
+  box-shadow: -10px 0px 10px 1px #aaaaaa;
+  color:darkgray;
 }
 
 #questionpop{
   width:60%;
   margin-bottom:15px;
   margin-left:10px;
+}
+
+#contactinfo{
+  color:Gray;
+  border-radius: 5px;
+}
+
+#reguser{
+  border-radius: 5px;
+  padding-left:2px;
+}
+
+#titlecolor{
+  color:gray;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.blur-filter {
+  -webkit-filter: blur(2px);
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
 }
 /* end */

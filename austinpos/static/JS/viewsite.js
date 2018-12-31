@@ -23,15 +23,31 @@ window.onload = function(){
 massmessage.addEventListener('click', function(){
   specificsitetext.style.display = "block";
   massmesscontent.innerHTML = "Message to ALL SITES"
+    //we add the css class blur to the elements that we would like to blur on focus
+    $("#blurblur").addClass("blur-filter");
+    $("#blurblur2").addClass("blur-filter");
+    $("#blurblur3").addClass("blur-filter");
+    $("#blurblur4").addClass("blur-filter");
+    $("#blurblur5").addClass("blur-filter");
 });
 
 exitbutton.addEventListener('click', function(){
   specificsitetext.style.display = "none";
+  $("#blurblur").removeClass("blur-filter");
+  $("#blurblur2").removeClass("blur-filter");
+  $("#blurblur3").removeClass("blur-filter");
+  $("#blurblur4").removeClass("blur-filter");
+  $("#blurblur5").removeClass("blur-filter");
 });
 
 specificsite.addEventListener('click', function(){
   specificsitetext.style.display = "block";
   massmesscontent.innerHTML = " Message to " + sitename.innerHTML;
+  $("#blurblur").addClass("blur-filter");
+    $("#blurblur2").addClass("blur-filter");
+    $("#blurblur3").addClass("blur-filter");
+    $("#blurblur4").addClass("blur-filter");
+    $("#blurblur5").addClass("blur-filter");
 });
 
 newmess.addEventListener('click', function wow(){

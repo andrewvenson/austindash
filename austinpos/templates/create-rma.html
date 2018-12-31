@@ -2,7 +2,7 @@
 {% block title %}Create Rma{% endblock title %}
 {%block border%} style="padding-bottom:50px;" {%endblock%}
 {% block content %}
-  <h1 style="font-family: 'Staatliches', cursive;">Create Rma</h1>
+  <h1 id="titlecolor" style="font-family: 'Staatliches', cursive;">Create Rma</h1>
   <form class='border' method="post" style="box-shadow: 5px 10px 18px #888888 !important; border-radius:10px;">
     <div class="container form">
       {{ form.hidden_tag() }}
@@ -14,10 +14,8 @@
       {{ form.RmaNumber(placeholder='Enter Rma Number', class='create') }}<br><br>
       {{ form.Vendor.label() }}<br>
       {{ form.Vendor(class='create') }}<br><br>
-      {{ form.Client.label() }}<br>
-      {{ form.Client(class='create') }}<br><br>
       {{ form.Issue.label() }}<br>
-      {{ form.Issue(class='create', style="box-shadow: 5px 10px 18px #888888") }}<br><br>
+      {{ form.Issue(class='create', style="box-shadow: 5px 10px 18px #888888", rows=6) }}<br><br>
       {{ form.Date_Sent.label() }}<br>
       {{ form.Date_Sent(class="dtpck") }}<br><br>
       {{ form.Date_Received.label() }}<br>
@@ -25,7 +23,7 @@
       {{ form.Rep.label() }}<br>
       {{ form.Rep(class='create') }}<br><br>
       {{form.Notes.label()}}<br>
-      {{form.Notes(class='create', style="box-shadow: 5px 10px 18px #888888")}}<br><br>
+      {{form.Notes(class='create', style="box-shadow: 5px 10px 18px #888888", rows=6)}}<br><br>
       {{ form.submit(class="btn btn-primary") }}
     </div>
   </form>

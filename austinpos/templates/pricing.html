@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block title %} Pricing {% endblock title %}
+{% block pricingtab%}
+style="font-family: 'Ubuntu', sans-serif;
+color: #44659b !important;
+background-color:white !important;
+border-top-left-radius:3px;
+border-bottom-left-radius: 3px;"
+{%endblock%}
 {% block content %}
-  <h1 style="font-family: 'Staatliches', cursive;">Pricing</h1>
+  <h1 id="titlecolor" style="font-family: 'Staatliches', cursive;">Pricing</h1>
   <div class="row">
     <div class="container col-sm-6">
       <div class="container border" style="border-radius:10px; padding-bottom:10px; box-shadow: 5px 10px 18px #888888; margin-bottom:25px;">
