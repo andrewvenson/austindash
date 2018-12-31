@@ -204,3 +204,15 @@ def siteinfo():
     else:
         print("Message did not send")
     return render_template('sites.html', x=x, sites=sites, form=form)
+
+# ---------------------------FAQS----------------------------------------
+@app.route('/AustinPos/Resources/Faqs', methods=['POST', 'GET'])
+@login_required
+def faqs():
+    return render_template('faqs.html')
+
+
+@app.route('/AustinPos/contact', methods=['POST', 'GET'])
+@login_required
+def contact():
+    return render_template('contact.html')

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block title %}Dash{% endblock title %}
-{%block border%} style="padding-bottom:50px;" {%endblock%}
 {% block content %}
   <h1 style="font-weight:600; font-family: 'Staatliches', cursive;">{{ current_user.site }} Dash</h1> 
   </br>
@@ -146,12 +145,8 @@
         </div>
     </div>
 </div>
-<!-- end==================================================================================================================================================================== -->
-</br>
 
-  <!-- {% if current_user.user_data %}
-    {% for users in current_user.user_data %}
-      {{ users.rmanumber }}<br><br>
-    {% endfor %}
-  {% endif %}
-{% endblock content %} -->
+{% endblock content %}
+<!-- end==================================================================================================================================================================== -->
+
+

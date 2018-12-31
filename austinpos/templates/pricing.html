@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block title %} Pricing {% endblock title %}
-{%block border%} style="padding-bottom:50px;" {%endblock%}
 {% block content %}
   <h1 style="font-family: 'Staatliches', cursive;">Pricing</h1>
   <div class="row">
@@ -30,10 +29,6 @@
           <form action="{{url_for('Order')}}"><button type="submit" name="button" class='btn btn-warning'>Checkout</button></form>
         </div>
       </div>
-        
     </div>
-    <!-- <div class="container col-sm-6" id='siteview'>
-
-    </div> -->
   </div>
 {% endblock content %}

@@ -238,4 +238,34 @@ html, body {
   color:white;
   padding: 0px 5px 0px 5px;
 }
+
+#faqnav:hover{
+  color:black !important;
+  border-radius: 3px;
+  background-color:white;
+  padding-right: 4px;
+  padding-left:4px;
+}
+
+#Questions{
+  text-decoration: none;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 1000 !important;
+  color:#046fa0;
+}
+
+#Questions:hover{
+  text-decoration: none;
+  padding:10px;
+  border-radius:5px;
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.05); 
+  background-color: lightgray;
+  font-size:30px;
+  font-weight:800;
+}
+
+
 /* end */

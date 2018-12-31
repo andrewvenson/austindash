@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
     <title>{% block title %}{% endblock title %}</title>
   </head>
   
@@ -40,6 +41,12 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('register') }}">Register</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('faqs')}}">FAQS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('contact')}}">Contact</a>
+              </li>
             </ul>
               <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'>{{ BADGE_LENGTH }}</span></strong></a>
               <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color:white;" href="{{url_for('logout')}}">Logout</a></button>
@@ -67,6 +74,12 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{url_for('siteinfo')}}">{{current_user.site}} Info</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('faqs')}}">FAQS</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('contact')}}">Contact</a>
+              </li>
             </ul>
               <a class = "carty-btn" href="#"><img src="{{url_for('static',filename = 'images/carty.png')}}"alt="cart_logo" style="width: 30px"><strong><span style="color:Red; background-color:white;"class='badge' id='cartbadge'>{{ BADGE_LENGTH }}</span></strong></a>
               <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a style="color:white;" href="{{url_for('logout')}}">Logout</a></button>
@@ -88,6 +101,7 @@
       {% endwith %}
       {% block content %}{% endblock content %}
     </div>
+    
 
     <script>
       $(function(){
