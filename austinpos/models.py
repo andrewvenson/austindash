@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
 class Rma(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     site = db.Column(db.String(60), nullable=False)
+    serialnumber = db.Column(db.String(25), unique=True, nullable=False)
     rmanumber = db.Column(db.String(50), unique=True, nullable=False)
     Vendor = db.Column(db.String(50), nullable=False)
     Customer = db.Column(db.String(100), nullable = False)

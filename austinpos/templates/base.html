@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <title>{% block title %}{% endblock title %}</title>
   </head>
   
@@ -25,26 +27,26 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent" {%block tabby%}{%endblock tabby%}>
             <ul class="navbar-nav mr-auto">
               {% if current_user.is_authenticated %}
-                <li class='nav-item'>
+                <li class='nav-item' id="navvy2">
                   <a class="nav-link"href="{{url_for('dash')}}">{{ current_user.site }}</a>
                 </li>
               {% endif %}
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link"href="{{ url_for('pricing')}}">Pricing</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link"href="{{ url_for('sites') }}">Sites</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link" href="{{ url_for('rma')}}">Rma</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link" href="{{ url_for('register') }}">Register</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{url_for('faqs')}}">FAQS</a>
+              <li class="nav-item" id='navvy'>
+                <a class="nav-link" href="{{url_for('faqs')}}">FAQs</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link" href="{{url_for('contact')}}">Contact</a>
               </li>
             </ul>
@@ -61,23 +63,23 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               {% if current_user.is_authenticated %}
-                <li class='nav-item'>
+                <li class='nav-item' id='navvy2'>
                   <a class="nav-link" href="{{url_for('dash')}}" style="font-weight:600">{{ current_user.site }}</a>
                 </li>
               {% endif %}
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link" href="{{ url_for('pricing')}}">Pricing</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link" href="{{ url_for('rma')}}">Rma</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link" href="{{url_for('siteinfo')}}">{{current_user.site}} Info</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link" href="{{url_for('faqs')}}">FAQS</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id='navvy'>
                 <a class="nav-link" href="{{url_for('contact')}}">Contact</a>
               </li>
             </ul>

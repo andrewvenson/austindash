@@ -33,6 +33,7 @@ class RegistrationForm(FlaskForm):
 
 class CrazyForm(FlaskForm):
     Site = QuerySelectField("Site", query_factory=siteChoice, allow_blank=True, get_label="sitename")
+    serialnumber = StringField("Serial #", validators=[DataRequired(), Length(max=20)])
     RmaNumber = StringField("Rma #", validators=[DataRequired(), Length(max=20)])
     Vendor = SelectField(validators=[DataRequired()], choices = [('Touch Dynamic', 'Touch Dynamic'), ('CRS', 'CRS'), ('Posiflex', 'Posiflex')])
     Client = SelectField(validators=[DataRequired()], choices = [('Spire', 'Spire'), ('Highland Lounge', 'Highland Lounge'), ('Hardtails', 'Hardtails'), ('Dogpatch', 'Dogpatch')])

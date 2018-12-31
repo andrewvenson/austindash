@@ -7,7 +7,9 @@
     <div class="container form">
       {{ form.hidden_tag() }}
       {{form.Site.label()}} <br>
-      {{form.Site(class='create')}} <br><br>
+      {{form.Site(class='create')}}<br><br>
+      {{form.serialnumber.label()}} <br>
+      {{form.serialnumber(placeholder="Serial number", class='create')}} <br><br>
       {{form.RmaNumber.label()}} <br>
       {{ form.RmaNumber(placeholder='Enter Rma Number', class='create') }}<br><br>
       {{ form.Vendor.label() }}<br>

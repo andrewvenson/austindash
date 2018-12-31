@@ -87,7 +87,7 @@ def register():
 def createrma():
     form2 = CrazyForm()
     if form2.validate_on_submit():
-        rma = Rma(site=form2.Site.data.sitename, rmanumber=form2.RmaNumber.data, Vendor=form2.Vendor.data, Customer=form2.Client.data,
+        rma = Rma(site=form2.Site.data.sitename, serialnumber=form2.serialnumber.data, rmanumber=form2.RmaNumber.data, Vendor=form2.Vendor.data, Customer=form2.Client.data,
             Issue=form2.Issue.data, Date_Sent=form2.Date_Sent.data.strftime('%Y-%m-%d'), Date_Received=form2.Date_Received.data.strftime('%Y-%m-%d'),
             Rep=form2.Rep.data, Notes=form2.Notes.data)
         db.session.add(rma)

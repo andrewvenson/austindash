@@ -4,15 +4,37 @@ html, body {
 }
 
 /* nav bar styling =========================================================================================================================================================== */
-.nav-link:hover{
+#navvy a:hover{
+  font-family: 'Ubuntu', sans-serif;
   color: #44659b !important;
   background-color:white !important;
-  border-radius: 3px;
+  border-top-left-radius:3px;
+  border-bottom-left-radius: 3px; 
 }
-.nav-link{
+#navvy a{
+  padding-top: 2px;
+  padding-bottom:2px;
+  text-align:center;
+  border-left: 1px solid white;
+  font-family: 'Ubuntu', sans-serif;
   color: white !important;
-  margin: 3px;
 }
+
+#navvy2 a:hover{
+  font-family: 'Ubuntu', sans-serif;
+  color: #44659b !important;
+  background-color:white !important;
+  border-top-left-radius:3px;
+  border-bottom-left-radius: 3px; 
+}
+#navvy2 a{
+  padding-top: 2px;
+  padding-bottom:2px;
+  text-align:center;
+  font-family: 'Ubuntu', sans-serif;
+  color: white !important;
+}
+
 .rma{
   margin-top: 25px;
 }
@@ -58,7 +80,7 @@ html, body {
   -ms-transform: scale(1.1); /* IE 9 */
   -webkit-transform: scale(1.1); /* Safari 3-8 */
   transform: scale(1.01); 
-  background-color: #c9d8ef;
+  background-color: #c9d8ef !important;
 }
 /* end */
 
@@ -183,9 +205,6 @@ html, body {
   border-width: medium;
   border-color: lightblue;
 }
-.select-selected {
-  /* background-color: lightgrey; */
-}
 /* New ticket Issue selector */
 /*style the arrow inside the select element:*/
 .select-selected:after {
@@ -248,24 +267,35 @@ html, body {
 }
 
 #Questions{
-  text-decoration: none;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 20px;
-  font-weight: 1000 !important;
-  color:#046fa0;
+  text-decoration: none !important;
+  font-family: 'Roboto Slab', serif;
+  font-size: 25px;
+  color:black;
+  padding:10px 5px 50px 5px;
+  border-radius:5px;
+  margin-left:20px;
+  font-weight: 500px !important;
+  
+}
+
+#Questions a{
+  text-decoration:none;
+  color:#2200CC;
+  
 }
 
 #Questions:hover{
-  text-decoration: none;
-  padding:10px;
+  text-decoration: none !important;
+  padding:10px 5px 50px 5px;
   border-radius:5px;
-  -ms-transform: scale(1.5); /* IE 9 */
-  -webkit-transform: scale(1.5); /* Safari 3-8 */
-  transform: scale(1.05); 
-  background-color: lightgray;
+  background-color: #c9d8ef;
   font-size:30px;
   font-weight:800;
 }
 
-
+#questionpop{
+  width:60%;
+  margin-bottom:15px;
+  margin-left:10px;
+}
 /* end */
