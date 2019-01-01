@@ -3,10 +3,10 @@ from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return Users.query.get(int(user_id))
 
 
-class User(db.Model, UserMixin):
+class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     site = db.Column(db.String())
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -49,7 +49,7 @@ class Sites(db.Model):
     bof = db.Column(db.Boolean)
     processor = db.Column(db.String(), nullable = False)
     giftopt = db.Column(db.String(), nullable = False)
-    site_user = db.relationship('User', backref='site_users', lazy='dynamic')
+    site_user = db.relationship('Users', backref='site_users', lazy='dynamic')
 
     def __repr__(self):
         return self.sitename

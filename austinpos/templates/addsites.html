@@ -6,25 +6,25 @@
         <form method="POST">
             {{ form.hidden_tag() }}
             {{ form.sitename.label() }} <br>
-            {{ form.sitename()}} <br><br>
+            {{ form.sitename(style="border-radius:5px;")}} <br><br>
             {{ form.contractstart.label() }} <br>
-            {{ form.contractstart(class='dtpck') }} <br><br>
+            {{ form.contractstart(class='dtpck', style="border-radius:5px;") }} <br><br>
             {{ form.contractend.label() }} <br>
-            {{ form.contractend(class='dtpck') }} <br><br>
+            {{ form.contractend(class='dtpck', style="border-radius:5px;") }} <br><br>
             {{ form.hwkey.label() }} <br>
-            {{ form.hwkey() }} <br><br>
+            {{ form.hwkey(style="border-radius:5px;") }} <br><br>
             {{ form.stations.label() }} <br>
-            {{ form.stations() }} <br><br>
+            {{ form.stations(style="border-radius:5px;") }} <br><br>
             {{ form.printers.label() }} <br>
-            {{ form.printers() }} <br><br>
+            {{ form.printers(style="border-radius:5px;") }} <br><br>
             {{ form.remprinters.label() }} <br>
-            {{ form.remprinters() }} <br><br>
+            {{ form.remprinters(style="border-radius:5px;") }} <br><br>
             {{ form.bof() }}
             {{ form.bof.label() }} <br>
             {{ form.processor.label() }} <br>
-            {{ form.processor() }} <br><br>
+            {{ form.processor(style="border-radius:5px;") }} <br><br>
             {{ form.giftopt.label() }} <br>
-            {{ form.giftopt() }} <br><br>
+            {{ form.giftopt(style="border-radius:5px;") }} <br><br>
             <button type='submit' class='btn btn-primary'>Add Site</button>
         </form>
     </div>

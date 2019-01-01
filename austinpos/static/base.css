@@ -327,4 +327,17 @@ html, body {
   -ms-filter: blur(2px);
   filter: blur(2px);
 }
+
+
+.sitedata{
+  color:gray;
+}
+
+#mess{
+  padding: 5px;
+  border-radius: 3px;
+  margin-left:10px;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+  font-size:20px;
+}
 /* end */

@@ -1,7 +1,7 @@
 from flask import url_for, render_template, redirect, flash, jsonify, json, request
 from austinpos import app, db, bcrypt, mail
 from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm, MessageForm
-from austinpos.models import User, Rma, OrderCart, Sites
+from austinpos.models import Users, Rma, OrderCart, Sites
 from flask_login import login_user, current_user, logout_user, login_required
 import requests, json
 from flask_mail import Message
@@ -40,7 +40,7 @@ def login():
         return redirect(url_for('dash'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
+        user = Users.query.filter_by(username=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             flash(f'Welcome {current_user.username}!')
@@ -71,7 +71,7 @@ def register():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         print(form.site.data)
         siteid = Sites.query.filter_by(sitename=form.site.data.sitename).first().id
-        user = User(site = form.site.data.sitename, username = form.username.data, email = form.email.data, 
+        user = Users(site = form.site.data.sitename, username = form.username.data, email = form.email.data, 
         password = hashed_pw, adminstatus= form.admin_status.data, sitelink=siteid)
         db.create_all()
         db.session.add(user)
@@ -195,12 +195,28 @@ def siteinfo():
     sites = Sites.query.all()
     x = request.form.get('sitesss')
     if form.validate_on_submit():
-        msg = Message("Austin Dash Confirmation Message",
-                        sender="service@gmail.com")
-        msg.recipients = ["andrew@austintxpos.com"]
-        msg.body = form.message.data
-        mail.send(msg)
-        print("Message Sent")
+        if form.emailtype.data=="Mass Message":
+            massmail = Users.query.all()
+            msg = Message("Austin Pos Alert",
+                            sender="service@gmail.com")
+            msg.bcc = []
+            #Get all users emails
+            for user in massmail:
+                msg.bcc.append(user.email)
+            msg.body = form.message.data
+            mail.send(msg)
+            print("Mass message sent")
+        else:
+            sitemail = Users.query.filter_by(site=form.sitename.data)
+            msg = Message("Austin Pos Message",
+                            sender="service@gmail.com")
+            msg.recipients = []
+            #Get Specified sites user emails
+            for user in sitemail:
+                msg.recipients.append(user.email)
+                print("Message sent to", user.username)
+            msg.body = form.message.data
+            mail.send(msg)
     else:
         print("Message did not send")
     return render_template('sites.html', x=x, sites=sites, form=form)

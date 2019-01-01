@@ -76,7 +76,7 @@ border-bottom-left-radius: 3px;"
             </div>
         </div>
         <!-- Pending Tickets box ------------------------------------------------------------------->
-        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
+        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important; z-index:999;">
             <div class="hero-widget well well-sm">
                 <div class="icon">
                     <i class="glyphicon glyphicon-user"></i>
@@ -95,29 +95,27 @@ border-bottom-left-radius: 3px;"
                           
                                 <label for="issue"><b>Issue Type</b></label>
 
-                                    <div class="custom-select" style="width:250px;">
-                                    <select>
-                                        <option value="0">Select:</option>
-                                        <option value="1">Billing</option>
-                                        <option value="2">Gift Card</option>
-                                        <option value="3">CC Processing</option>
-                                        <option value="4">Internet</option>
-                                        <option value="5">LogMein</option>
-                                        <option value="6">New Parts</option>
-                                        <option value="7">Install</option>
-                                        <option value="8">MyFocus</option>
-                                        <option value="9">Term Down</option>
-                                        <option value="10">System Down</option>
-                                        <option value="11">Training</option>
-                                        <option value="12">Other</option>
-                                    </select>
+                                    <div class="custom-select" style="width:250px; z-index:999;">
+                                        <select>
+                                            <option value="0">Select:</option>
+                                            <option value="1">Billing</option>
+                                            <option value="2">Gift Card</option>
+                                            <option value="3">CC Processing</option>
+                                            <option value="4">Internet</option>
+                                            <option value="5">LogMein</option>
+                                            <option value="6">New Parts</option>
+                                            <option value="7">Install</option>
+                                            <option value="8">MyFocus</option>
+                                            <option value="9">Term Down</option>
+                                            <option value="10">System Down</option>
+                                            <option value="11">Training</option>
+                                            <option value="12">Other</option>
+                                        </select>
                                     </div>
                             </br>
-                            <label for="desc"><span class="descrippy">Description</span></label>
-                            <textarea class="desc-box" rows="4" cols="50" style="width: 250px">
-                                
-                            </textarea>
 
+                            <label for="desc"><span class="descrippy">Description</span></label>
+                            <textarea class="desc-box" rows="4" cols="50" style="width: 250px"></textarea>
                             <button type="button" class="btn cancel" onclick="closeForm()">Submit</button> <!--Change event-->
                             </form>
                         </div>

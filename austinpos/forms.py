@@ -4,7 +4,7 @@ from wtforms import StringField, BooleanField, PasswordField, SubmitField, TextA
 from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from wtforms.widgets import TextArea
-from austinpos.models import User, Sites, Rma
+from austinpos.models import Users, Sites, Rma
 
 def siteChoice():
     sites = Sites.query
@@ -22,12 +22,12 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        user = Users.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('Username is taken. Please choose a different one.')
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
+        user = Users.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Email is taken. Please choose a different one.')
 
@@ -81,3 +81,5 @@ class AddSiteForm(FlaskForm):
 
 class MessageForm(FlaskForm):
     message = StringField('Body', widget=TextArea())
+    emailtype = StringField()
+    sitename = StringField()
