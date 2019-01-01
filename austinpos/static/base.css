@@ -6,8 +6,8 @@ html, body {
 /* nav bar styling =========================================================================================================================================================== */
 #navvy a:hover{
   font-family: 'Ubuntu', sans-serif;
-  color: #44659b !important;
-  background-color:white !important;
+  color: white !important;
+  background-color:black !important;
   border-top-left-radius:3px;
   border-bottom-left-radius: 3px; 
 }
@@ -22,8 +22,8 @@ html, body {
 
 #navvy2 a:hover{
   font-family: 'Ubuntu', sans-serif;
-  color: #44659b !important;
-  background-color:white !important;
+  color: white !important;
+  background-color:black !important;
   border-top-left-radius:3px;
   border-bottom-left-radius: 3px; 
 }
@@ -329,9 +329,19 @@ html, body {
 }
 
 
-.sitedata{
-  color:gray;
+/* .sitedata{
+  color:black;
+  text-align:right; 
+  border-top:1px solid #6cd8d6; 
+  padding-right:10px;
 }
+
+.header{
+  text-align:right; 
+  width:500px; 
+  padding-right:10px;
+  color:gray;
+} */
 
 #mess{
   padding: 5px;

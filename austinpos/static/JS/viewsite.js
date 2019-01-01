@@ -1,7 +1,6 @@
 var viewsitebutt = document.getElementById("viewsite");
 var siteinfo = document.getElementById("siteinfo");
 var messageBox = document.getElementById("message");
-var newmess = document.getElementById("buttmessage");
 var specificsite = document.getElementById("sitemessage");
 var specificsitetext = document.getElementById("specificsitetextbox");
 var exitbutton = document.getElementById("exit");
@@ -11,6 +10,9 @@ var sitename = document.getElementById("sitename");
 var notfiy = document.getElementById("notifications")
 var gonadsite = document.getElementById("gonadsite");
 var gonademail = document.getElementById("gonademail");
+var usertoggle = document.getElementById("usertogg");
+var sitedata = document.getElementById("sitedata");
+var userdata = document.getElementById("userdata");
 
 window.onload = function(){
   siteinfo.style.display="block";
@@ -21,6 +23,11 @@ window.onload = function(){
     notify.style.display="block";
   }
 };
+
+usertoggle.addEventListener('click', function(){
+  sitedata.style.display = "none";
+  userdata.style.display = "block";
+});
 
 massmessage.addEventListener('click', function(){
   console.log(massmessage.innerHTML)
@@ -58,9 +65,4 @@ specificsite.addEventListener('click', function(){
   $("#blurblur4").addClass("blur-filter");
   $("#blurblur5").addClass("blur-filter");
   console.log(gonademail.value, gonadsite.value);
-});
-
-newmess.addEventListener('click', function wow(){
-  messageBox.style.display = "block";
-  console.log("Show Message");
-});
+}); 

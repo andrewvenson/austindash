@@ -32,9 +32,9 @@ border-bottom-left-radius: 3px;"
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="float-left" style="padding:25px; font-family: 'ZCOOL QingKe HuangYou', cursive;">
+                    <div class="float-left" style="padding-bottom:25px; font-family: 'ZCOOL QingKe HuangYou', cursive;">
                         {% if x %}
-                            <h1 class="border" style="text-align:center; padding:10px; border-radius: 5px; color:gray;"><strong>{{x}}</strong></h1>
+                            <h1 class="border" style="text-align:center; padding:25px 10px 25px 10px; border-radius: 5px; color:gray;"><strong>{{x}}</strong></h1>
                         {% endif %}
                         <h1></h1>
                     </div>
@@ -48,19 +48,21 @@ border-bottom-left-radius: 3px;"
                         <option >{{site.sitename}}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" style="padding-left:10px;" id="viewsite" class='btn btn-info'>View Site</button>
+                    <button type="submit" style="padding:2px 5px 2px 5px" id="viewsite" class='btn btn-dark'>View Site</button>
                 </form>
             </div>
             <br>
             <div class="row">
                 <div id="blurblur3" class="col-xl-12">
-                    <div id="notifications" style="width:100%; box-shadow: 5px 10px 18px #888888; margin-bottom:20px; margin-top:10px; display:'none'; border-radius:5px;">
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Loaners</strong><span class="float-right badge badge-light">5</span></li>
-                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Balance</strong> <span class="float-right badge badge-light">5</span></li>
-                            <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Messages</strong> <span class="float-right badge badge-light">5</span></li>
-                        </ul>
-                    </div>
+                    {% if x %}
+                        <div id="notifications" style="width:100%; box-shadow: 5px 10px 18px #888888; margin-bottom:20px; margin-top:10px; display:'none'; border-radius:5px;">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Loaners</strong><span class="float-right badge badge-light">5</span></li>
+                                <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Balance</strong> <span class="float-right badge badge-light">5</span></li>
+                                <li class="list-group-item list-group-item-danger" style="color:red !important; border:.5px solid red; margin-left:0px;"><strong>Messages</strong> <span class="float-right badge badge-light">5</span></li>
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
          </div>
@@ -68,7 +70,7 @@ border-bottom-left-radius: 3px;"
          <!-- Split Rowwww -->
         <div id="blurblur4" class='col-sm-6'>
             <div class='row'>
-                <div style="margin-left:10px; margin-right:10px; margin-top:10px; box-shadow: 5px 10px 18px #888888; border-radius:5px;">
+                <div id="sitedata" style="margin-left:10px; margin-right:10px; margin-top:10px; box-shadow: 5px 10px 18px #888888; border-radius:5px;">
                     <table style="width:100%">
                         {%for site in sites%}
                             {%if x == site.sitename%}
@@ -116,7 +118,15 @@ border-bottom-left-radius: 3px;"
                         {%endfor%}
                     </table>
                 </div>
+                <div id="userdata" style="margin-left:10px; margin-right:10px; margin-top:10px; box-shadow: 5px 10px 18px #888888; border-radius:5px; display:none;">
+                    <p>POOPIEEEEEE</p>
+                </div>
             </div>  
+            <!-- TOGGLE BETWEEN VIEWING SITE AND VIEWING USERS -->
+            {% if x %}
+                <button class="btn btn-dark" id="usertogg" style="margin-top:10px; float:right;">Users</button>
+            {% endif %}
+        
         </div>
     </div>
     <div class="container">
