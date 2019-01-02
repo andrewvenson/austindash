@@ -194,6 +194,7 @@ def siteinfo():
     form = MessageForm()
     sites = Sites.query.all()
     x = request.form.get('sitesss')
+    userinfo = Users.query.filter_by(site=x).all()
     if form.validate_on_submit():
         if form.emailtype.data=="Mass Message":
             massmail = Users.query.all()
@@ -219,7 +220,7 @@ def siteinfo():
             mail.send(msg)
     else:
         print("Message did not send")
-    return render_template('sites.html', x=x, sites=sites, form=form)
+    return render_template('sites.html', x=x, sites=sites, form=form, userinfo=userinfo)
 
 # ---------------------------FAQS----------------------------------------
 @app.route('/AustinPos/Resources/Faqs', methods=['POST', 'GET'])

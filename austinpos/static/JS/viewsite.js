@@ -11,6 +11,7 @@ var notfiy = document.getElementById("notifications")
 var gonadsite = document.getElementById("gonadsite");
 var gonademail = document.getElementById("gonademail");
 var usertoggle = document.getElementById("usertogg");
+var sitetoggle = document.getElementById("sitetogg");
 var sitedata = document.getElementById("sitedata");
 var userdata = document.getElementById("userdata");
 
@@ -25,8 +26,19 @@ window.onload = function(){
 };
 
 usertoggle.addEventListener('click', function(){
-  sitedata.style.display = "none";
-  userdata.style.display = "block";
+    userdata.style.display = "block";
+    sitedata.style.display = "none";
+    usertoggle.style.display = "none";
+    sitetoggle.style.display = "block";
+    console.log("view users should work");
+});
+
+sitetoggle.addEventListener('click', function(){
+  userdata.style.display = "none";
+  sitedata.style.display = "block";
+  usertoggle.style.display = "block";
+  sitetoggle.style.display = "none";
+  console.log("view users should work");
 });
 
 massmessage.addEventListener('click', function(){
