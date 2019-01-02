@@ -5,6 +5,8 @@ var subtotal = document.getElementById('subtotal');
 var username = document.getElementById('username').innerHTML;
 var pricesub = document.getElementById('pricefooter');
 var badgecart = document.getElementById('cartbadge');
+var badgecart2 = document.getElementById('itemsdisplay');
+
 var quickview = document.getElementById('quickview');
 var tax = document.getElementById('tax');
 var total = document.getElementById('total');
@@ -15,7 +17,8 @@ window.onload = function wowzers(){
   var sum = 0;
   
   if(Number(badgecart.innerHTML)>0){
-    quickview.style.display = 'block'
+    quickview.style.display = 'block';
+    // badgecart2.style.display = 'block';
   }
   // Get Data
   var xhr = new XMLHttpRequest();
@@ -55,6 +58,7 @@ window.onload = function wowzers(){
             }
             if(Number(badgecart.innerHTML) == 0){
               quickview.style.display = 'none';
+              // badgecart2.style.display = 'none'; 
             }
           });
           cell1 = row.insertCell(0);
@@ -115,6 +119,7 @@ function addCartItem(ev){
     }
     if(Number(badgecart.innerHTML) == 0){
       quickview.style.display = 'none';
+      // badgecart2.style.display = 'none';
     }
     cart.deleteRow(index);
   });
@@ -142,6 +147,7 @@ function addCartItem(ev){
           taxsum = taxy+sum;
           total.innerHTML=taxsum.toFixed(2);
           quickview.style.display = "block";
+          // badgecart2.style.display = "block";
         }
       }
     }else{
