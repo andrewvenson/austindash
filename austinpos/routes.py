@@ -314,6 +314,20 @@ def faqsNetworking():
         return redirect(url_for("faqs"))
     return render_template('networkingquestions.html',form=form, questions = questions)
 
+@app.route('/AustinPos/Resources/FAQs/Emv', methods=['GET', 'POST'])
+@login_required
+def faqsEmv():
+    form=QuestionForm()
+    questions=FaQuestion.query.all()
+    if form.validate_on_submit():
+        print("why is this running")
+        question = FaQuestion(Type=form.Type.data, Question=form.Question.data)
+        db.session.add(question)
+        db.session.commit()
+        flash("Question added.")
+        return redirect(url_for("faqs"))
+    return render_template('emvquestions.html',form=form, questions = questions)
+
 @app.route('/AustinPos/contact', methods=['POST', 'GET'])
 @login_required
 def contact():

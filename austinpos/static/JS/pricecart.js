@@ -6,11 +6,17 @@ var username = document.getElementById('username').innerHTML;
 var pricesub = document.getElementById('pricefooter');
 var badgecart = document.getElementById('cartbadge');
 var quickview = document.getElementById('quickview');
+var tax = document.getElementById('tax');
+var total = document.getElementById('total');
 
 // On Load Cart
 window.onload = function wowzers(){
   var array = [];
   var sum = 0;
+  
+  if(Number(badgecart.innerHTML)>0){
+    quickview.style.display = 'block'
+  }
   // Get Data
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'pricing/orders/' + username +'/api', true);
@@ -23,6 +29,10 @@ window.onload = function wowzers(){
           array.push(Number(data[x][key]));
           sum+=Number(data[x][key]);
           subtotal.innerHTML = sum.toFixed(2);
+          taxy=Number(subtotal.innerHTML)*.0825;
+          tax.innerHTML = taxy.toFixed(2); 
+          taxsum = taxy+sum;
+          total.innerHTML=taxsum.toFixed(2);
           row = cart.insertRow(-1);
 
           // Delete Data
@@ -34,7 +44,12 @@ window.onload = function wowzers(){
             console.log(sum-=Number(cart.rows[index].cells[1].innerHTML))
             subnum = Number(subtotal.innerHTML)-Number(cart.rows[index].cells[1].innerHTML);
             subtotal.innerHTML = subnum.toFixed(2);
-             cart.deleteRow(index);
+            taxy=Number(subtotal.innerHTML)*.0825;
+            tax.innerHTML = taxy.toFixed(2);
+            taxsum = taxy+subnum;
+            total.innerHTML=taxsum.toFixed(2);
+            
+            cart.deleteRow(index);
             if(Number(badgecart.innerHTML) > 0){
               badgecart.innerHTML=Number(badgecart.innerHTML)-1;
             }
@@ -55,7 +70,6 @@ window.onload = function wowzers(){
       console.log(error)
     }
   }
-  
   xhr.send()
 }
 
@@ -92,7 +106,10 @@ function addCartItem(ev){
 
     subnum = Number(subtotal.innerHTML)-Number(cart.rows[index].cells[1].innerHTML);
     subtotal.innerHTML = subnum.toFixed(2);
-
+    taxy=Number(subtotal.innerHTML)*.0825;
+    tax.innerHTML = taxy.toFixed(2);
+    taxsum = taxy+subnum;
+    total.innerHTML=taxsum.toFixed(2);
     if(Number(badgecart.innerHTML) > 0){
       badgecart.innerHTML=Number(badgecart.innerHTML)-1;
     }
@@ -120,6 +137,10 @@ function addCartItem(ev){
           sum+=Number(data[x][y]);
         
           subtotal.innerHTML = sum.toFixed(2);
+          taxy=Number(subtotal.innerHTML)*.0825;
+          tax.innerHTML = taxy.toFixed(2);
+          taxsum = taxy+sum;
+          total.innerHTML=taxsum.toFixed(2);
           quickview.style.display = "block";
         }
       }
@@ -130,19 +151,5 @@ function addCartItem(ev){
   badgecart.innerHTML=Number(badgecart.innerHTML)+1;
   xhr.send();
 }
-
-
-// cartrow.addEventListener('click', function deleterow(){
-//   index = this.rowIndex;
-  
-//   $.post('pricing/orders/' + username + '/' + 'delete', {
-//     delete_item: index
-//   });
-//   subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
-//   if(Number(badgecart.innerHTML) > 0){
-//     badgecart.innerHTML=Number(badgecart.innerHTML)-1;
-//   }
-//   cart.deleteRow(index);
-// });
 
 

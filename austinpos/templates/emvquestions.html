@@ -1,0 +1,22 @@
+{% extends 'faqs.html' %}
+{% block faqcontent %}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLongTitle">Emv</h1>
+            <a href="{{url_for('faqs')}}"><button class="btn btn-secondary"><span aria-hidden="true">&times;</span></button></a>
+        </div>
+        <div class="modal-body"> 
+            </div>
+                <div>
+                    <a style="float:right;padding:5px;" href="{{url_for('faqs')}}"><button class="btn btn-secondary">Close</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+{% endblock%}
