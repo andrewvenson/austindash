@@ -12,6 +12,7 @@ var gonadsite = document.getElementById("gonadsite");
 var gonademail = document.getElementById("gonademail");
 var usertoggle = document.getElementById("usertogg");
 var sitetoggle = document.getElementById("sitetogg");
+var sitetoggle2 = document.getElementById("sitetogg2");
 var sitedata = document.getElementById("sitedata");
 var userdata = document.getElementById("userdata");
 
@@ -22,6 +23,7 @@ usertoggle.addEventListener('click', function(){
     sitedata.style.display = "none";
     usertoggle.style.display = "none";
     sitetoggle.style.display = "block";
+    sitetoggle2.style.display = "block";
     console.log("view users should work");
 });
 
@@ -30,6 +32,7 @@ sitetoggle.addEventListener('click', function(){
   sitedata.style.display = "block";
   usertoggle.style.display = "block";
   sitetoggle.style.display = "none";
+  sitetoggle2.style.display = "none";
   console.log("view users should work");
 });
 

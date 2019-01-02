@@ -4,8 +4,10 @@ var cart = document.getElementById('cart');
 var subtotal = document.getElementById('subtotal');
 var username = document.getElementById('username').innerHTML;
 var pricesub = document.getElementById('pricefooter');
+var badgecart = document.getElementById('cartbadge');
+var quickview = document.getElementById('quickview');
 
-// On load cart
+// On Load Cart
 window.onload = function wowzers(){
   var array = [];
   var sum = 0;
@@ -20,16 +22,25 @@ window.onload = function wowzers(){
         for(key in data[x]){
           array.push(Number(data[x][key]));
           sum+=Number(data[x][key]);
-          subtotal.innerHTML = sum;
+          subtotal.innerHTML = sum.toFixed(2);
           row = cart.insertRow(-1);
+
           // Delete Data
           row.addEventListener('click', function deleterow(){
             index = this.rowIndex;
             $.post('pricing/orders/' + username + '/' + 'delete', {
               delete_item: index
             });
+            console.log(sum-=Number(cart.rows[index].cells[1].innerHTML))
+            subnum = Number(subtotal.innerHTML)-Number(cart.rows[index].cells[1].innerHTML);
+            subtotal.innerHTML = subnum.toFixed(2);
              cart.deleteRow(index);
-             subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
+            if(Number(badgecart.innerHTML) > 0){
+              badgecart.innerHTML=Number(badgecart.innerHTML)-1;
+            }
+            if(Number(badgecart.innerHTML) == 0){
+              quickview.style.display = 'none';
+            }
           });
           cell1 = row.insertCell(0);
           cell2 = row.insertCell(1);
@@ -39,11 +50,12 @@ window.onload = function wowzers(){
           cell3. innerHTML = "<button class='btn btn-danger'>Delete</button>"
         }
       }
-      console.log(sum);
+      // console.log(sum);
     }else{
       console.log(error)
     }
   }
+  
   xhr.send()
 }
 
@@ -62,20 +74,34 @@ function addCartItem(ev){
   equipmentName = equipmentCell.innerHTML;
   equipmentPrice = priceCell.innerHTML;
 
+  
   // Post Data
   $.post('/pricing/orders/' + username + '/api', {
     javascript_data: JSON.stringify({[equipmentName]:equipmentPrice})
+    
   });
+  
   cartrow = cart.insertRow(-1);
-  // Delete Data
+  //Delete Data
   cartrow.addEventListener('click', function deleterow(){
     index = this.rowIndex;
-    subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
+    
     $.post('pricing/orders/' + username + '/' + 'delete', {
       delete_item: index
     });
+
+    subnum = Number(subtotal.innerHTML)-Number(cart.rows[index].cells[1].innerHTML);
+    subtotal.innerHTML = subnum.toFixed(2);
+
+    if(Number(badgecart.innerHTML) > 0){
+      badgecart.innerHTML=Number(badgecart.innerHTML)-1;
+    }
+    if(Number(badgecart.innerHTML) == 0){
+      quickview.style.display = 'none';
+    }
     cart.deleteRow(index);
   });
+
   cell1 = cartrow.insertCell(0);
   cell2 = cartrow.insertCell(1);
   cell3 = cartrow.insertCell(2);
@@ -92,15 +118,31 @@ function addCartItem(ev){
         for(y in data[x]){
           array.push(Number(data[x][y]));
           sum+=Number(data[x][y]);
-          subtotal.innerHTML = sum;
+        
+          subtotal.innerHTML = sum.toFixed(2);
+          quickview.style.display = "block";
         }
       }
     }else{
       console.log(error);
     }
   }
+  badgecart.innerHTML=Number(badgecart.innerHTML)+1;
   xhr.send();
 }
 
+
+// cartrow.addEventListener('click', function deleterow(){
+//   index = this.rowIndex;
+  
+//   $.post('pricing/orders/' + username + '/' + 'delete', {
+//     delete_item: index
+//   });
+//   subtotal.innerHTML = sum-Number(cart.rows[index].cells[1].innerHTML);
+//   if(Number(badgecart.innerHTML) > 0){
+//     badgecart.innerHTML=Number(badgecart.innerHTML)-1;
+//   }
+//   cart.deleteRow(index);
+// });
 
 

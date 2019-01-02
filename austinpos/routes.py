@@ -144,14 +144,19 @@ def delete_item(user_name):
         if user_name in cart:
             deleteItem = json.loads(request.form["delete_item"])
             cart[user_name].pop(deleteItem)
-            print(cart[user_name])
+            print(cart[str(user_name)])
     return jsonify({"whoa": "there"})
 
 # ----------------------------- DISPLAY CART BADGE LENGTH---------------------------------
 @app.context_processor
 def inject_badge_length():
-    # user_name = current_user.username
-    badge_length = 3
+    badge_length=0
+    for x,y in cart.items():
+        for z in cart.keys():
+            if z == current_user.username:
+                print(z)
+                badge_length=len(y)
+                print(len(y))
     return {'BADGE_LENGTH' : badge_length}
 
 # ------------------------------- ADD SITE -----------------------------------------
