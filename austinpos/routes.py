@@ -1,7 +1,7 @@
 from flask import url_for, render_template, redirect, flash, jsonify, json, request
 from austinpos import app, db, bcrypt, mail
-from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm, MessageForm
-from austinpos.models import Users, Rma, OrderCart, Sites
+from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm, MessageForm, QuestionForm
+from austinpos.models import Users, Rma, OrderCart, Sites, FaQuestion
 from flask_login import login_user, current_user, logout_user, login_required
 import requests, json
 from flask_mail import Message
@@ -32,6 +32,7 @@ equipment = {
     'SSD 120GB': '99'
 }
 
+
 # ------------------- SITE LOGIN -------------------------------------------------
 @app.route('/', methods=['POST', 'GET'])
 def login():
@@ -53,6 +54,7 @@ def login():
 @app.route("/Dash")
 @login_required
 def dash():
+    db.create_all()
     return render_template('dash.html')
 
 # --------------------- LOGOUT USER ----------------------
@@ -87,7 +89,7 @@ def register():
 def createrma():
     form2 = CrazyForm()
     if form2.validate_on_submit():
-        rma = Rma(site=form2.Site.data.sitename, serialnumber=form2.serialnumber.data, rmanumber=form2.RmaNumber.data, Vendor=form2.Vendor.data, Customer=form2.Client.data,
+        rma = Rma(site=form2.Site.data.sitename, serialnumber=form2.serialnumber.data, rmanumber=form2.RmaNumber.data, Vendor=form2.Vendor.data,
             Issue=form2.Issue.data, Date_Sent=form2.Date_Sent.data.strftime('%Y-%m-%d'), Date_Received=form2.Date_Received.data.strftime('%Y-%m-%d'),
             Rep=form2.Rep.data, Notes=form2.Notes.data)
         db.session.add(rma)
@@ -223,11 +225,89 @@ def siteinfo():
     return render_template('sites.html', x=x, sites=sites, form=form, userinfo=userinfo)
 
 # ---------------------------FAQS----------------------------------------
-@app.route('/AustinPos/Resources/Faqs', methods=['POST', 'GET'])
+@app.route('/AustinPos/Resources/FAQs', methods=['POST', 'GET'])
 @login_required
 def faqs():
-    return render_template('faqs.html')
+    form = QuestionForm()
+    questions = FaQuestion.query.all()
+    if form.validate_on_submit():
+        print("why is this running")
+        question = FaQuestion(Type=form.Type.data, Question=form.Question.data)
+        db.session.add(question)
+        db.session.commit()
+        flash("Question added.")
+        return redirect(url_for("faqs"))
+    return render_template('faqs.html', form=form, questions = questions)
 
+@app.route('/AustinPos/Resources/FAQs/Printers', methods=['GET', 'POST'])
+@login_required
+def faqsPrinters():
+    form=QuestionForm()
+    questions=FaQuestion.query.all()
+    if form.validate_on_submit():
+        print("why is this running")
+        question = FaQuestion(Type=form.Type.data, Question=form.Question.data)
+        db.session.add(question)
+        db.session.commit()
+        flash("Question added.")
+        return redirect(url_for("faqs"))
+    return render_template('printersquestions.html',form=form, questions = questions)
+
+@app.route('/AustinPos/Resources/FAQs/Terminals', methods=['GET', 'POST'])
+@login_required
+def faqsTerminals():
+    form=QuestionForm()
+    questions=FaQuestion.query.all()
+    if form.validate_on_submit():
+        print("why is this running")
+        question = FaQuestion(Type=form.Type.data, Question=form.Question.data)
+        db.session.add(question)
+        db.session.commit()
+        flash("Question added.")
+        return redirect(url_for("faqs"))
+    return render_template('terminalsquestions.html',form=form, questions = questions)
+
+@app.route('/AustinPos/Resources/FAQs/Logmein', methods=['GET', 'POST'])
+@login_required
+def faqsLogmein():
+    form=QuestionForm()
+    questions=FaQuestion.query.all()
+    if form.validate_on_submit():
+        print("why is this running")
+        question = FaQuestion(Type=form.Type.data, Question=form.Question.data)
+        db.session.add(question)
+        db.session.commit()
+        flash("Question added.")
+        return redirect(url_for("faqs"))
+    return render_template('logmeinquestions.html',form=form, questions = questions)
+
+@app.route('/AustinPos/Resources/FAQs/Giftcards', methods=['GET', 'POST'])
+@login_required
+def faqsGiftcards():
+    form=QuestionForm()
+    questions=FaQuestion.query.all()
+    if form.validate_on_submit():
+        print("why is this running")
+        question = FaQuestion(Type=form.Type.data, Question=form.Question.data)
+        db.session.add(question)
+        db.session.commit()
+        flash("Question added.")
+        return redirect(url_for("faqs"))
+    return render_template('giftcardsquestions.html',form=form, questions = questions)
+
+@app.route('/AustinPos/Resources/FAQs/Networking', methods=['GET', 'POST'])
+@login_required
+def faqsNetworking():
+    form=QuestionForm()
+    questions=FaQuestion.query.all()
+    if form.validate_on_submit():
+        print("why is this running")
+        question = FaQuestion(Type=form.Type.data, Question=form.Question.data)
+        db.session.add(question)
+        db.session.commit()
+        flash("Question added.")
+        return redirect(url_for("faqs"))
+    return render_template('networkingquestions.html',form=form, questions = questions)
 
 @app.route('/AustinPos/contact', methods=['POST', 'GET'])
 @login_required

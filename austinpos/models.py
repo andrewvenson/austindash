@@ -24,7 +24,6 @@ class Rma(db.Model):
     serialnumber = db.Column(db.String(25), unique=True, nullable=False)
     rmanumber = db.Column(db.String(50), unique=True, nullable=False)
     Vendor = db.Column(db.String(50), nullable=False)
-    Customer = db.Column(db.String(100), nullable = False)
     Issue = db.Column(db.Text())
     Date_Sent = db.Column(db.String(50), nullable=False)
     Date_Received = db.Column(db.String(50))
@@ -53,3 +52,8 @@ class Sites(db.Model):
 
     def __repr__(self):
         return self.sitename
+
+class FaQuestion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    Type = db.Column(db.String(), nullable=False)
+    Question = db.Column(db.String(), nullable=False)

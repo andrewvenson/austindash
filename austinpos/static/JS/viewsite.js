@@ -15,15 +15,7 @@ var sitetoggle = document.getElementById("sitetogg");
 var sitedata = document.getElementById("sitedata");
 var userdata = document.getElementById("userdata");
 
-window.onload = function(){
-  siteinfo.style.display="block";
-  if(siteinfo.style.display="none"){
-    notfiy.style.display="none";
-  }
-  else{
-    notify.style.display="block";
-  }
-};
+
 
 usertoggle.addEventListener('click', function(){
     userdata.style.display = "block";
@@ -47,22 +39,11 @@ massmessage.addEventListener('click', function(){
   massmesscontent.innerHTML = "Message to ALL SITES"
   gonademail.value = massmessage.innerHTML
   gonadsite.value = "All sites"
-    //we add the css class blur to the elements that we would like to blur on focus
-    $("#blurblur").addClass("blur-filter");
-    $("#blurblur2").addClass("blur-filter");
-    $("#blurblur3").addClass("blur-filter");
-    $("#blurblur4").addClass("blur-filter");
-    $("#blurblur5").addClass("blur-filter");
     console.log(gonademail.value)
 });
 
 exitbutton.addEventListener('click', function(){
   specificsitetext.style.display = "none";
-  $("#blurblur").removeClass("blur-filter");
-  $("#blurblur2").removeClass("blur-filter");
-  $("#blurblur3").removeClass("blur-filter");
-  $("#blurblur4").removeClass("blur-filter");
-  $("#blurblur5").removeClass("blur-filter");
 });
 
 specificsite.addEventListener('click', function(){
@@ -70,11 +51,5 @@ specificsite.addEventListener('click', function(){
   massmesscontent.innerHTML = " Message to " + sitename.innerHTML;
   gonademail.value = specificsite.innerHTML;
   gonadsite.value = sitename.innerHTML;
-
-  $("#blurblur").addClass("blur-filter");
-  $("#blurblur2").addClass("blur-filter");
-  $("#blurblur3").addClass("blur-filter");
-  $("#blurblur4").addClass("blur-filter");
-  $("#blurblur5").addClass("blur-filter");
   console.log(gonademail.value, gonadsite.value);
 }); 

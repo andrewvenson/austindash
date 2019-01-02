@@ -10,8 +10,6 @@ def siteChoice():
     sites = Sites.query
     return sites
 
-
-
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -83,3 +81,9 @@ class MessageForm(FlaskForm):
     message = StringField('Body', widget=TextArea())
     emailtype = StringField()
     sitename = StringField()
+
+class QuestionForm(FlaskForm):
+    Question = StringField(widget=TextArea(), validators=[DataRequired()])
+    Type = SelectField("Type", choices=[("Printers", "Printers"),
+     ("Terminals", "Terminals"), ("Creditcards", "Creditcards"),("Emv", "Emv"),
+     ("Networking", "Networking"),("Giftcards", "Giftcards"), ("Logmein", "Logmein")])

@@ -25,9 +25,9 @@ border-bottom-left-radius: 3px;"
                         New Message
                         </button>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" id="massmessage" style="width:200px;" href="#">Mass Message</a>
-                        <a class="dropdown-item"style="width:200px;" href="#">Multiple Sites</a>
-                        <a class="dropdown-item" id="sitemessage" style="width:200px;" href="#">Selected Site</a>
+                            <a class="dropdown-item" id="massmessage" style="width:200px;" data-toggle="modal" data-target="#exampleModalCenter2">Mass Message</a>
+                            <a class="dropdown-item"style="width:200px;" data-toggle="modal" data-target="#exampleModalCenter2">Multiple Sites</a>
+                            <a class="dropdown-item" id="sitemessage" style="width:200px;" data-toggle="modal" data-target="#exampleModalCenter2">Selected Site</a>
                         </div>
                     </div>
                 </div>
@@ -142,30 +142,34 @@ border-bottom-left-radius: 3px;"
             <button class="btn btn-dark" id="sitetogg" style="margin-top:10px; float:right; display:none;">View Site</button>
         </div>
     </div>
-    <div class="container">
-        <div class="text-align" style="position:absolute; top:100px; width:300px; margin-left: 20%;margin-top:100px;">
-            <div id="specificsitetextbox" class="border" style="display:none; border-radius:5px; margin-right:10px; margin-bottom:10px;box-shadow: 10px 10px 10px #888888; background-color:white;">
-                {% if x %}
-                    <p id="sitename" style="display:none;">{{x}}</p>
-                    <p class="float-right" style="padding-right:10px;"><a id="exit" style="color:red"href="#"><span id="exitinner"><strong>X</strong></a></span></p>
-                    <p class="float-left border" id="mess">Message to {{x}}</p>
-                    {% else %}
-                        <p class="float-right" style="padding-right:10px;"><a id="exit" style="color:red;"href="#"><span id="exitinner"><strong>X</strong></span></a></p>
-                        <p class="float-left border" id="mess">Message to All Sites</p>
-                {% endif %}
-                <div style="padding-left:10px; padding-right:10px;padding-bottom:10px;padding-top:10px;">
-                    <form action="" method="POST">
-                        {{form.csrf_token()}}
-                        {{form.message( style="width:100%; border-radius:5px;", rows=5)}}
-                        {{form.emailtype(style="display:none;", id="gonademail")}}
-                        {{form.sitename(style="display:none;", id="gonadsite")}}
-                        <div>
-                            <button type="submit" class="btn btn-success" style="width:100%;">Send</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+               <div class="modal-content">
+                   <div class="modal-header">
+                        {% if x %}
+                            <p id="sitename" style="display:none;">{{x}}</p>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Message to {{x}}</h5>
+                        {% else %}
+                            <h5 class="modal-title" id="exampleModalLongTitle">Message to ALL SITES</h5>
+                        {% endif %}
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
+                   <div class="modal-body">
+                       <form method="POST">
+                            {{form.csrf_token()}}
+                            {{form.message( style="width:100%; border-radius:5px;", rows=5)}}
+                            {{form.emailtype(style="display:none;", id="gonademail")}}
+                            {{form.sitename(style="display:none;", id="gonadsite")}}
+                            <div>
+                                <button type="submit" class="btn btn-success" style="width:100%;">Send</button>
+                            </div>
+                       </form>
+                   </div>
+               </div>
+           </div>
+       </div>
     
 {% endblock content %}

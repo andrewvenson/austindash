@@ -68,7 +68,7 @@ border-bottom-left-radius: 3px;"
           {% if form.confirm_pass.errors %}
             {{ form.confirm_pass(class='is-invalid', id="reguser") }}
             <div class="invalid-feedback">
-              {% for error in form.confirm.errors %}
+              {% for error in form.confirm_pass.errors %}
                 <span>{{error}}</span>
               {% endfor %}
             </div>

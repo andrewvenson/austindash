@@ -1,0 +1,68 @@
+{% extends 'faqs.html' %}
+{% block faqcontent %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLongTitle">Printers</h1>
+            <a href="{{url_for('faqs')}}"><button class='btn btn-secondary'><span aria-hidden="true">&times;</span></button></a>
+        </div>
+        <div class="modal-body">
+                <p>Oh snap we hate printers not printing or better yet printing giberish. Let's take the proper troubleshooting steps to get this resolved.</p> 
+                <div>
+                    <div>
+                        <h3 class="border">Printer not printing paper.</h3>
+                        <li>Lets make sure the printer is turned on</li>
+                        <ul>
+                            <li>Trace power cable from the printer to the wall and make sure printer is recieving power.</li>
+                            <li>Let's also make sure the printer is turned on by pressing the power button.</li>
+                            <li>If there is a green light by power button and no other light proceed to the next steps.</li>
+                            <li>If there are any error lights. Repeat process. If issue persists send it in for rma, and look for a <a href="{{url_for('pricing')}}">loaner
+                                    or printer </a>to buy while it's getting fixed.
+                            </li>
+                        </ul>
+                        <li>Confirm all cable are plugged in securely</li>
+                        <ul>
+                            <li>Trace the white 9 pin serial cable with black pigtail end or usb cable from the back of the printer to the terminal. Pictures below. </li>
+                            <li>Make sure cables are plugged in securely by reseating the cable (Unplugging the cable and plugging them back in on both ends)</li>
+                            <li>Confirm what comport the cable from the printer is plugged into. (Flip the head of the terminal back like this so you can see the comports.</li>
+                            <li>These are what the comports look like. Remember the comport number that is circled in red for later troubleshooting.</li>
+                            <li>Try doing a test print. If printer is still not printing proceed to the next</li>
+                        </ul>
+                        <li>Lets navigate to Focus.</li>
+                        <ul>
+                            <li>Note the name of the computer by viewing the name next to station in bottom right hand corner on login screen.</li>
+                            <li>Press the wrench, and then press setup in the right bottom hand corner. Displayed below</li>
+                            <li>Navigate to locations at the top navigation bar and select.</li>
+                            <li>Press the option 'stations' from the dropdown. View diagram below</li>
+                            <li>Select your station on the right hand side under stations.</li>
+                            <li>Make sure the comport number that we noted earlier is corresponding to each of these numbers highlighted in red.</li>
+                            <li>If so move cable to different comport, note the number, and then change comport number to correspond with cable that's plugged in.</li>
+                            <li>Let's do a test print.</li>
+                            <li>If everything printed you are good to go, if not please call in to support for further troubleshooting.</li>
+                        </ul>
+                        <h3 class="border">Printer is printing giberish</h3>
+                        <li>Let's start by turning off the printer</li>
+                        <ul>
+                            <li>While printer is turned of press and hold the feed button.</li>
+                            <li>While holding the feed button turn the printer back on and hold feed button till paper prints out.</li>
+                            <li>Press and hold the feed button again for longer than a second. The printer should print paper</li>
+                            <li>Find the option on the receipt paper saying <strong>Customize Value Settings</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a style="float:right;padding:5px;" href="{{url_for('faqs')}}"><button class="btn btn-secondary">Close</button></a>
+            </div>
+            
+        </div>
+        
+        </div>
+    </div>
+    </div>
+    
+{% endblock%}

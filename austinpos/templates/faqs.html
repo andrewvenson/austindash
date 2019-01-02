@@ -15,8 +15,13 @@ border-bottom-left-radius: 3px;"
        </div>
        <div class=" col-lg-6" style=" margin-top:50px;">
             <div style="float:right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style=" margin-top:5px; width:125px; box-shadow: 5px 5px 14px #888888;margin-left:10px;">
+                    Create Question
+                </button>
+            </div>
+            <div style="float:right">
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle"  style="width:150px; box-shadow: 5px 5px 14px #888888" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle"  style="width:125px; box-shadow: 5px 5px 14px #888888; margin-left:10px; margin-top:5px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filter Issues
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -28,115 +33,81 @@ border-bottom-left-radius: 3px;"
                     </div>
                 </div>
             </div>
+            <div style="float:right">
+                <button class="btn btn-info" style="width:125px;box-shadow: 5px 5px 14px #888888; margin-top:5px;">Docs</button>
+            </div>
        </div>
     </div>
     
     <div class='row'>
-        <div class="col-3">
-            <div style="box-shadow: 5px 5px 14px #888888 !important; width:100px; background-color: #3a414c; border-radius: 5px;"  >
-                <h3 style="padding-top:2px;  padding-left:5px; font-weight:600; color:lightgray">Help</h3>
-                    <div style="padding-left:5px; padding-bottom:10px; padding-top:10px; border-top: 1px solid lightgray; margin-top:0px;">
-                        <a id="faqnav" style="text-decoration:none; color: white;" href="#">Networking</a><br><br>
-                        <a id="faqnav" style="text-decoration:none; color: white;" href="#">Printers</a></p>
-                        <a id="faqnav" style="text-decoration:none; color: white;" href="#">Terminal</a></p>
-                        <a id="faqnav" style="text-decoration:none; color: white;" href="#">Offline</a></p>
-                        <a id="faqnav" style="text-decoration:none; color: white;" href="#">Gift Cards</a></p>
-                        <a id="faqnav" style="text-decoration:none; color: white;" href="#">Logmein</a></p>
-                    </div>
-                </p>
-            </div>
-            
-        </div>
-        <div class="col-9" >
+        <div class="col-12" >
             <div>
                 <div>
                     <div class="border" style="margin-left:20px; padding-top:10px; padding-bottom:50px; border-top:none !important; border-bottom-left-radius: 10px !important; border-bottom-right-radius: 10px !important;">
-                        
-                        <div id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">My printer is not printing?</a><br><br>
-                            </div>
-                            
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important ; margin-left:20px; margin-right:20px"></div>
-                        <div id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">My credit cards aren't authorizing?</a><br><br>
-                            </div>
-                            
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">Why isn't my terminal isn't turning on?</a><br><br>
-                            </div>
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div  id="questionpop">
-                            <div  class="border" id="Questions">
-                                <a href="#">How do I go about setting up gift cards?</a><br><br>
-                            </div>
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div  id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">How do I get logmein access?</a><br><br>
-                            </div>
-                        </div>
-
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div  id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">My Terminal has blue screen screen of death.</a><br><br>
-                            </div>
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div  id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">The backup path '\\BACKUP\C\FOCUS\' could not be found.</a><br><br>
-                            </div>
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div  id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">The primary path '\\FOCUS\C\FOCUS\' could not be found.
-                                    Do you want to switch to the backup path?
-                                </a><br><br>
-                            </div>
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div  id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">How to add a button to the screen?
-                                </a><br><br>
-                            </div>
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div  id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">How to add a canvas to the screen?
-                                </a><br><br>
-                            </div>
-                        </div>
-                        <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important; margin-left:20px; margin-right:20px"></div>
-
-                        <div  id="questionpop">
-                            <div class="border" id="Questions">
-                                <a href="#">How do I go in offline mode?
-                                </a><br><br>
-                            </div>
-                        </div>
+                        <p style="display:none;"></p>
+                        {% if questions %}
+                            {% for x in questions %}
+                                    <div class="border" style="border-left : none !important; border-bottom: none !important; border-right: none !important; border-left: none !important ; margin-left:20px; margin-right:20px"></div>
+                                    <div id="questionpop">
+                                        <div class="border" id="Questions">
+                                            <a id="questioncategory" href="{{ url_for('faqs' + x.Type) }}">{{x.Question}}</a><br><br>
+                                            <p style="font-size:15px; float:right;color:gray;">{{x.Type}}</p>
+                                        </div>
+                                    </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+ 
+    <!-- ASK QUESTION FORM -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create Question</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        {{form.hidden_tag()}}
+                        {% if form.Type.errors %}
+                            {% for field in form.Type.errors %}
+                                {% for error in form.Type.errors[field] %}
+                                    <div class="alert alert-error">
+                                        <strong>Error!</strong> {{error}}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {%else%}
+                            {{form.Type(style="margin-bottom:10px;")}}
+                        {% endif %}
+        
+                        {% if form.Question.errors %}
+                            {% for field in form.Question.errors %}
+                                {% for error in form.Question.errors[field] %}
+                                    <div class="alert alert-error">
+                                        <strong>Error!</strong> {{error}}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {%else%}
+                        {{form.Question(style="width:100%", rows=5)}}
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary">Create Question</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block faqcontent %}{% endblock faqcontent %}
+  
+
+  
 {% endblock content %}
