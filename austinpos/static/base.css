@@ -328,35 +328,47 @@ html, body {
   filter: blur(2px);
 }
 
-
-/* .sitedata{
-  color:black;
-  text-align:right; 
-  border-top:1px solid #6cd8d6; 
-  padding-right:10px;
-}
-
-.header{
-  text-align:right; 
-  width:500px; 
-  padding-right:10px;
-  color:gray;
-} */
-
 #mess{
   padding: 5px;
   border-radius: 3px;
   margin-left:10px;
   font-family: 'ZCOOL QingKe HuangYou', cursive;
   font-size:20px;
-
-  
 }
+
+/*************************************** Modal pop up for FAQS  ****************************************/
 
 @media (min-width: 768px) {
   .modal-xl {
-    width: 90%;
-   max-width:1200px;
+    width: 75%;
+   max-width:1000px;
   }
 }
+
+.modal-xl li{
+  list-style-type: Hebrew;
+  margin-bottom:10px;
+}
+
+.modal-body{
+  font-family: 'Karla', sans-serif;
+}
+
+.modal-body h5{
+  color: red;
+}
+
+.modal-body h3{
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: 800 !important;
+}
+
+#cartbadge{
+  position: relative;
+  top: -15px;
+  left: -13px;
+}
+
+
 /* end */

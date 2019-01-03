@@ -8,7 +8,7 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7f6e3fb01f5c3cda023160b552c84180'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Hooper33@localhost/TESTDB3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Hooper33@localhost/TESTDB'
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True

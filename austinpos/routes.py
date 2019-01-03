@@ -47,7 +47,7 @@ def login():
             flash(f'Welcome {current_user.username}!')
             return redirect(url_for('dash'))
         else:
-            flash('Login unsucceSsful. Please check email and password')
+            flash('Login unsuccessful. Please check email and password.')
     return render_template('login.html', name = 'login', form=form)
 
 # ----------------------------- SITE'S DASHBOARD -----------------------------
@@ -152,11 +152,12 @@ def delete_item(user_name):
 def inject_badge_length():
     badge_length=0
     for x,y in cart.items():
-        for z in cart.keys():
-            if z == current_user.username:
-                print(z)
-                badge_length=len(y)
-                print(len(y))
+        if current_user.is_authenticated:
+            for z in cart.keys():
+                if z == current_user.username:
+                    print(z)
+                    badge_length=len(y)
+                    print(len(y))
     return {'BADGE_LENGTH' : badge_length}
 
 # ------------------------------- ADD SITE -----------------------------------------

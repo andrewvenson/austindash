@@ -65,8 +65,8 @@ window.onload = function wowzers(){
           cell2 = row.insertCell(1);
           cell3 = row.insertCell(2);
           cell1.innerHTML = key;
-          cell2. innerHTML = data[x][key];
-          cell3. innerHTML = "<button class='btn btn-danger'>Delete</button>"
+          cell2.innerHTML = data[x][key];
+          cell3.innerHTML = "<button class='btn btn-danger' id='deletebutton'>Delete</button>"
         }
       }
       // console.log(sum);
@@ -119,7 +119,6 @@ function addCartItem(ev){
     }
     if(Number(badgecart.innerHTML) == 0){
       quickview.style.display = 'none';
-      // badgecart2.style.display = 'none';
     }
     cart.deleteRow(index);
   });
@@ -129,7 +128,7 @@ function addCartItem(ev){
   cell3 = cartrow.insertCell(2);
   cell1.innerHTML= equipmentName;
   cell2.innerHTML = equipmentPrice;
-  cell3.innerHTML = "<button class='btn btn-danger'>Delete</button>";
+  cell3.innerHTML = "<button class='btn btn-danger' id='deletebutton'>Delete</button>"
   // Open Api information
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'pricing/orders/' + username +'/api', true);
