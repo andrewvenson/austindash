@@ -43,3 +43,7 @@ border-bottom-left-radius: 3px;"
     </div>
   </div>
 {% endblock content %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{url_for('static', filename = 'JS/pricecart.js')}}"></script>
+{% endblock %}

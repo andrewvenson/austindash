@@ -8,39 +8,45 @@ border-top-left-radius:3px;
 border-bottom-left-radius: 3px;"
 {%endblock%}
 {% block content %}
-<form class="" action="{{ url_for('createrma') }}">
-  <button class="btn btn-primary" type="submit" name="button">New Rma</button>
-</form>
-<div class="container" >
-  <div class="col-sm-12" style="padding-bottom:50px;padding-bottom:50px;">
-    <table class='rma' style="border-top-left-radius:5px; border-top-right-radius:5px; box-shadow: 5px 10px 18px #888888 !important;">
-      <thead>
-        <th>Site</th>
-        <th>Serial Number</th>
-        <th>Rma Number</th>
-        <th>Vendor</th>
-        <th>Issue</th>
-        <th style="background-color:yellow; border: solid black 2px !important;">Sent</th>
-        <th>Recieved</th>
-        <th>Rep</th>
-        <th>Notes</th>
-      </thead>
-      {% for data in info %}
-        <tr class="siterma">
-          <td class='border'style='width:150px;'>{{data.site}}</td>
-          <td class='border'style='width:150px;'>{{data.serialnumber}}</td>
-          <td class='border'style='width:150px;'>{{data.rmanumber}}</td>
-          <td class='border'style='width:150px;'>{{data.Vendor}}</td>
-          <td class='border'style='width:150px;'>{{data.Issue}}</td>
-          <td class='border' style='background-color:yellow; border:solid black 2px !important; width:150px;'>{{data.Date_Sent}}</td>
-          <td class='border'style='width:150px;'>{{data.Date_Received}}</td>
-          <td class='border'style='width:150px;'>{{data.Rep}}</td>
-          <td class='border'style='width:150px;'>{{data.Notes}}</td>
-        </tr>
-      {% endfor %}
-    </table>
+  <div>
+    <form action="{{ url_for('createrma') }}">
+      <button class="btn btn-primary" type="submit" name="button">New Rma</button>
+    </form>
   </div>
-</div>
+  <div style="float:right;">
+    
+  </div>
+
+  <div class="container">
+    <div class="col-sm-12" style="padding-bottom:50px;padding-bottom:50px;">
+      <table class='rma' style="border-top-left-radius:5px; border-top-right-radius:5px; box-shadow: 5px 10px 18px #888888 !important;">
+        <thead>
+          <th>Site</th>
+          <th>Serial Number</th>
+          <th>Rma Number</th>
+          <th>Vendor</th>
+          <th>Issue</th>
+          <th style="background-color:yellow; border: solid black 2px !important;">Sent</th>
+          <th>Recieved</th>
+          <th>Rep</th>
+          <th>Notes</th>
+        </thead>
+        {% for data in info %}
+          <tr class="siterma">
+            <td class='border'style='width:150px;'>{{data.site}}</td>
+            <td class='border'style='width:150px;'>{{data.serialnumber}}</td>
+            <td class='border'style='width:150px;'>{{data.rmanumber}}</td>
+            <td class='border'style='width:150px;'>{{data.Vendor}}</td>
+            <td class='border'style='width:150px;'>{{data.Issue}}</td>
+            <td class='border' style='background-color:yellow; border:solid black 2px !important; width:150px;'>{{data.Date_Sent}}</td>
+            <td class='border'style='width:150px;'>{{data.Date_Received}}</td>
+            <td class='border'style='width:150px;'>{{data.Rep}}</td>
+            <td class='border'style='width:150px;'>{{data.Notes}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
 
 
 {% endblock content %}

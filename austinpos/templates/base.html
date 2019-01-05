@@ -13,8 +13,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    
-    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet">
     <title>{% block title %}{% endblock title %}</title>
   </head>
   
@@ -105,21 +105,92 @@
         {% endif %}
       {% endwith %}
       {% block content %}{% endblock content %}
+
+      <!-- APOS MESSAGE BOX -->
+    <div id="maxbox" style="width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
+        <p style="border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;"><span style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="minimize" style="margin-right:5px;">_</span> <span id="messageexit" >x</span></span></p>
+        <div class="border" id="messages" style="margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;">
+            <h1 id="nomess">No Messages</h1>
+        </div>
+        <div style="padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;">
+          <form id="form2" method='POST'>
+              <textarea id="messageinput" cols="30" placeholder="Message"style="width:100%; min-height:25px; max-height:275px; border-radius: 5px;"></textarea>
+              <button class="btn btn-success" type="submit" style="width:100%;">Send</button>
+          </form>
+        </div>
+      </div>
     </div>
+
+    <p id="minbox" style="margin:0px; padding:0px; display:none; width:250px; position:fixed; bottom:0; right: 100px; border-top-left-radius: 5px; border-top-right-radius: 5px; color:white; background-color: #3a414c; height:35px;z-index:9999"><span style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="maximize" style="margin-right:5px;">_</span> <span id="messageexitmin">x</span></span></p>
     
-
-    <script>
-      $(function(){
-        $('.dtpck').datepicker();
-      });
+    <script>window.onload = function(){
+        $('#exampleModalLong').modal('show');}
     </script>
+    
     <script type="text/javascript" src="{{url_for('static', filename = 'JS/newmessage.js')}}"></script>
-
-    <script type="text/javascript" src="{{url_for('static', filename = 'JS/viewsite.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static', filename = 'JS/pricecart.js')}}"></script>
     <script type="text/javascript" src="{{url_for('static', filename = 'JS/popform.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type = "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    {% block scripts%}{%endblock%}
+    
+    
+  
+
+    <script type="text/javascript">
+
+      var minimize = document.getElementById('minimize');
+      var maximize = document.getElementById('maximize');
+      var exit = document.getElementById('messageexit');
+      var exitmin = document.getElementById('messageexitmin');
+      var maximum = document.getElementById('maxbox');
+      var minimum = document.getElementById('minbox');
+
+      minimize.addEventListener('click', function(){
+        maximum.style.display = 'none';
+        minimum.style.display = 'block';
+      });
+
+      exit.addEventListener('click', function(){
+        maximum.style.display = 'none';
+        minimum.style.display = 'none';
+      })
+
+      exitmin.addEventListener('click', function(){
+        maximum.style.display = 'none';
+        minimum.style.display = 'none';
+      })
+
+      maximize.addEventListener('click', function(){
+        maximum.style.display = 'block';
+        minimum.style.display = 'none';
+      })
+
+      var socket = io.connect('http://' + document.domain + ':' + location.port );
+      socket.on('connect', function(){
+          socket.emit('my event', {data: 'User is connected'});
+      })
+
+      var form = document.getElementById("form2");
+      form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var user_input = $('#messageinput').val();
+          socket.emit('my event', {
+              msg : user_input
+          })
+          $('#messageinput').val('').focus()
+      });
+
+      socket.on('my response', function(msg){
+          var un = document.getElementById('username').innerHTML;
+          if(typeof msg.msg !== 'undefined'){
+              $('#nomess').remove()
+              $('#messages').append("<div style='border-bottom: .2px solid lightgray'>"+"<span style='color:black'>"+un+": "+"</span>"+msg.msg+"<div>")
+          }
+          var objDiv = document.getElementById("messages");
+          objDiv.scrollTop = objDiv.scrollHeight;
+      })
+  </script>
   </body>
 </html>

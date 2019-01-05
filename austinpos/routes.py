@@ -1,5 +1,5 @@
 from flask import url_for, render_template, redirect, flash, jsonify, json, request
-from austinpos import app, db, bcrypt, mail
+from austinpos import app, db, bcrypt, mail, socketio, emit
 from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm, MessageForm, QuestionForm
 from austinpos.models import Users, Rma, OrderCart, Sites, FaQuestion
 from flask_login import login_user, current_user, logout_user, login_required
@@ -51,11 +51,15 @@ def login():
     return render_template('login.html', name = 'login', form=form)
 
 # ----------------------------- SITE'S DASHBOARD -----------------------------
-@app.route("/Dash")
+@app.route("/Dash", methods=['POST', 'GET'])
 @login_required
 def dash():
-    db.create_all()
     return render_template('dash.html')
+
+@socketio.on('my event')
+def handle_my_custom_event(json):
+    print('Received something: ' + str(json))
+    socketio.emit('my response', json)
 
 # --------------------- LOGOUT USER ----------------------
 @app.route("/logout")
@@ -329,7 +333,9 @@ def faqsEmv():
         return redirect(url_for("faqs"))
     return render_template('emvquestions.html',form=form, questions = questions)
 
+#---------------------CONTACT PAGE---------------------------------------------------
 @app.route('/AustinPos/contact', methods=['POST', 'GET'])
 @login_required
 def contact():
     return render_template('contact.html')
+
