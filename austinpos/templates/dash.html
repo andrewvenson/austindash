@@ -13,166 +13,192 @@ border-bottom-left-radius: 3px;"
   <h1 id="titlecolor" style="font-weight:600; font-family: 'Staatliches', cursive;">{{ current_user.site }} Dash</h1> 
   </br>
   <div id="un" >{{current_user.username}}</div>
+  <div id="sitename" style='display:none'>{{current_user.site}}</div>
 <!-- Dashboard structure...================================================================================================================================================== -->
-<div class="container">
-    <div class="row">
-        <!-- Shopping cart box ------------------------------------------------------------------>
-        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
+{% if current_user.adminstatus == False %}
+    <div class="container">
+        <div class="row">
+            <!-- Shopping cart box ------------------------------------------------------------------>
+            <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
+                    <div class="hero-widget well well-sm">
+                        <div class="icon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </div>
+                        <div class="text">
+                            <var>{{BADGE_LENGTH}}</var>
+                            <label class="text-muted" style="font-weight:700">Shopping Cart</label>
+                        </div>
+                        <div class="options">
+                            <a href="javascript:;" class="btn btn-primary btn-lg" style="font-weight: 600"><i class="glyphicon glyphicon-plus"></i>Checkout</a>
+                        </div>
+                    </div>
+            </div>
+            <!-- Notifications box ------------------------------------------------------------------->
+            <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
+                <div class="hero-widget well well-sm">
+                    <div class="icon">
+                        <i class="glyphicon glyphicon-star"></i>
+                    </div>
+                    <div class="text">
+                        <var>5</var>
+                        <label class="text-muted" style="font-weight:700">Notifications</label>
+                    </div>
+                    <div class="box">
+                        <a href="javacsript:;" class="btn btn-default btn-lg"> View notifications</a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- Total Orders box --------------------------------------------------------------------->
+            <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
+                <div class="hero-widget well well-sm">
+                    <div class="icon">
+                        <i class="glyphicon glyphicon-tags"></i>
+                    </div>
+                    <div class="text">
+                        <var>00</var>
+                        <label class="text-muted" style="font-weight:700">Total orders</label>
+                    </div>
+                    <div class="options">
+                        <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View orders</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Quotes box --------------------------------------------------------------------------->
+            <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
+                <div class="hero-widget well well-sm">
+                    <div class="icon">
+                        <i class="glyphicon glyphicon-cog"></i>
+                    </div>
+                    <div class="text">
+                        <label class="text-muted" style="font-weight:700">Quotes</label>
+                    </div>
+                    <div class="options">
+                        <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-wrench"></i> View</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Pending Tickets box ------------------------------------------------------------------->
+            <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important; z-index:999;">
                 <div class="hero-widget well well-sm">
                     <div class="icon">
                         <i class="glyphicon glyphicon-user"></i>
                     </div>
                     <div class="text">
-                        <var>{{BADGE_LENGTH}}</var>
-                        <label class="text-muted" style="font-weight:700">Shopping Cart</label>
+                        <var>3</var>
+                        <label class="text-muted" style="font-weight:700">Pending Tickets</label>
                     </div>
                     <div class="options">
-                        <a href="javascript:;" class="btn btn-primary btn-lg" style="font-weight: 600"><i class="glyphicon glyphicon-plus"></i>Checkout</a>
+                        <a href="javascript:;" class="btn btn-primary btn-lg" style="font-weight: 600" onclick="openForm()"><i class="glyphicon glyphicon-plus"></i> New Ticket</a>
+                        <div class="form-popup" id="myForm">
+                                <form id='submitform' method='POST' class="form-container">
+                            
+                                    <label for="issue"><b>Issue Type</b></label>
+
+                                    <div id="issue" class="custom-select" style="width:250px; z-index:999;">
+                                        <select>
+                                            <option value="0">Select:</option>
+                                            <option value="1">Billing</option>
+                                            <option value="2">Gift Card</option>
+                                            <option value="3">CC Processing</option>
+                                            <option value="4">Internet</option>
+                                            <option value="5">LogMein</option>
+                                            <option value="6">New Parts</option>
+                                            <option value="7">Install</option>
+                                            <option value="8">MyFocus</option>
+                                            <option value="9">Term Down</option>
+                                            <option value="10">System Down</option>
+                                            <option value="11">Training</option>
+                                            <option value="12">Other</option>
+                                        </select>
+                                    </div>
+                                    </br>
+                                    <label for="desc"><span class="descrippy">Description</span></label>
+                                    <textarea class="desc-box" id="userticket" rows="4" cols="50" style="width: 250px"></textarea>
+                                    <button type="submit" class="btn cancel" onclick="closeForm()">Submit</button> <!--Change event-->
+                                </form>
+                            </div>
                     </div>
                 </div>
-        </div>
-        <!-- Notifications box ------------------------------------------------------------------->
-        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
-            <div class="hero-widget well well-sm">
-                <div class="icon">
-                    <i class="glyphicon glyphicon-star"></i>
-                </div>
-                <div class="text">
-                    <var>5</var>
-                    <label class="text-muted" style="font-weight:700">Notifications</label>
-                </div>
-                <div class="box">
-                    <a href="javacsript:;" class="btn btn-default btn-lg"> View notifications</a>
-                </div>
-                  
             </div>
-        </div>
-        <!-- Total Orders box --------------------------------------------------------------------->
-        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
-            <div class="hero-widget well well-sm">
-                <div class="icon">
+            <!-- Contract info box ------------------------------------------------------->
+            <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
+                <div class="hero-widget well well-sm">
+                    <div class="icon">
+                        <i class="glyphicon glyphicon-star"></i>
+                    </div>
+                    <div class="text">
+                        <label class="text-muted" style="font-weight:700">Contract Info</label>
+                    </div>
+                    <div class="options">
+                        <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Settings box ------------------------------------------------------------>
+            <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
+                <div class="hero-widget well well-sm">
+                    <div class="icon">
                     <i class="glyphicon glyphicon-tags"></i>
-                </div>
-                <div class="text">
-                    <var>00</var>
-                    <label class="text-muted" style="font-weight:700">Total orders</label>
-                </div>
-                <div class="options">
-                    <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View orders</a>
-                </div>
-            </div>
-        </div>
-        <!-- Quotes box --------------------------------------------------------------------------->
-        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
-            <div class="hero-widget well well-sm">
-                <div class="icon">
-                    <i class="glyphicon glyphicon-cog"></i>
-                </div>
-                <div class="text">
-                    <label class="text-muted" style="font-weight:700">Quotes</label>
-                </div>
-                  <div class="options">
-                      <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-wrench"></i> View</a>
-                  </div>
-            </div>
-        </div>
-        <!-- Pending Tickets box ------------------------------------------------------------------->
-        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important; z-index:999;">
-            <div class="hero-widget well well-sm">
-                <div class="icon">
-                    <i class="glyphicon glyphicon-user"></i>
-                </div>
-                  <div class="text">
-                    <var>3</var>
-                    <label class="text-muted" style="font-weight:700">Pending Tickets</label>
-                  </div>
-                  <div class="options">
-                      <a href="javascript:;" class="btn btn-primary btn-lg" style="font-weight: 600" onclick="openForm()"><i class="glyphicon glyphicon-plus"></i> New Ticket</a>
-                      <div class="form-popup" id="myForm">
-                            <form action="/action_page.php" class="form-container">
-                          
-                                <label for="account"><b>Account</b></label>
-                                <input id="account-input" type="text" placeholder="Enter Account Name" name="acccount" required>
-                          
-                                <label for="issue"><b>Issue Type</b></label>
-
-                                <div class="custom-select" style="width:250px; z-index:999;">
-                                    <select>
-                                        <option value="0">Select:</option>
-                                        <option value="1">Billing</option>
-                                        <option value="2">Gift Card</option>
-                                        <option value="3">CC Processing</option>
-                                        <option value="4">Internet</option>
-                                        <option value="5">LogMein</option>
-                                        <option value="6">New Parts</option>
-                                        <option value="7">Install</option>
-                                        <option value="8">MyFocus</option>
-                                        <option value="9">Term Down</option>
-                                        <option value="10">System Down</option>
-                                        <option value="11">Training</option>
-                                        <option value="12">Other</option>
-                                    </select>
-                                </div>
-                                </br>
-                                <label for="desc"><span class="descrippy">Description</span></label>
-                                <textarea class="desc-box" id="userticket" rows="4" cols="50" style="width: 250px"></textarea>
-                                <button type="submit" class="btn cancel" onclick="closeForm()">Submit</button> <!--Change event-->
-                            </form>
-                        </div>
-                  </div>
-              </div>
-        </div>
-        <!-- Contract info box ------------------------------------------------------->
-        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
-            <div class="hero-widget well well-sm">
-                <div class="icon">
-                    <i class="glyphicon glyphicon-star"></i>
-                </div>
-                <div class="text">
-                    <label class="text-muted" style="font-weight:700">Contract Info</label>
-                </div>
-                <div class="options">
-                    <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i> View</a>
-                </div>
-            </div>
-        </div>
-        <!-- Settings box ------------------------------------------------------------>
-        <div class="col-sm-3 dashy" style="box-shadow: 5px 10px 18px #888888 !important;">
-            <div class="hero-widget well well-sm">
-                <div class="icon">
-                   <i class="glyphicon glyphicon-tags"></i>
-                </div>
-                <div class="text">
-                    <label class="text-muted" style="font-weight:700">Settings</label>
-                </div>
-                <div class="options">
-                  <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i>Edit</a>
+                    </div>
+                    <div class="text">
+                        <label class="text-muted" style="font-weight:700">Settings</label>
+                    </div>
+                    <div class="options">
+                    <a href="javascript:;" class="btn btn-default btn-lg"><i class="glyphicon glyphicon-search"></i>Edit</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+{% else %}
+    <h1>Queue</h1>
+    <div class='row' id="queue"></div>
+{% endif %}
 
 {% endblock content %}
 {% block messages %}
     <!-- APOS MESSAGE BOX -->
-    <div id='adminstatus' style='display:none;'>{{current_user.adminstatus}}</div>
-    <div id="maxbox" style="width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
-        <p style="border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="minimize" style="margin-right:5px;">_</span> <span id="messageexit" >x</span></span></p>
-        <div class="border" id="messages" style="margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;">
-            <h1 id="nomess">No Messages</h1>
+    {% if current_user.adminstatus == True %}
+        <div id='adminstatus' style='display:none;'>{{current_user.adminstatus}}</div>
+        <div id="maxbox" style="display:none; width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
+            <p style="border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="minimize" style="margin-right:5px;">_</span> <span id="messageexit" >x</span></span></p>
+            <div class="border" id="messages" style="margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;">
+                <input id="recipient" type="text">
+                <h1 id="nomess">No Messages</h1>
+            </div>
+            <div style="padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;">
+            <form id="form2" method='POST'>
+                <textarea id="messageinput" cols="30" placeholder="Message"style="width:100%; min-height:25px; max-height:275px; border-radius: 5px;"></textarea>
+                <button id='sendbutton' class="btn btn-success" type="submit" style="width:100%;">Send</button>
+            </form>
+            </div>
         </div>
-        <div style="padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;">
-          <form id="form2" method='POST'>
-              <textarea id="messageinput" cols="30" placeholder="Message"style="width:100%; min-height:25px; max-height:275px; border-radius: 5px;"></textarea>
-              <button class="btn btn-success" type="submit" style="width:100%;">Send</button>
-          </form>
         </div>
-      </div>
-    </div>
 
-    <p id="minbox" style="margin:0px; padding:0px; display:none; width:250px; position:fixed; bottom:0; right: 100px; border-top-left-radius: 5px; border-top-right-radius: 5px; color:white; background-color: #3a414c; height:35px;z-index:9999"><span style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="maximize" style="margin-right:5px;">_</span> <span id="messageexitmin">x</span></span></p>
+        <p id="minbox" style="margin:0px; padding:0px; display:none; width:250px; position:fixed; bottom:0; right: 100px; border-top-left-radius: 5px; border-top-right-radius: 5px; color:white; background-color: #3a414c; height:35px;z-index:9999"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="maximize" style="margin-right:5px;">_</span> <span id="messageexitmin">x</span></span></p>
+
+    {% else %}
+        <div id='adminstatus' style='display:none;'>{{current_user.adminstatus}}</div>
+        <div id="maxbox" style="display:none; width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
+            <p style="border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="minimize" style="margin-right:5px;">_</span> <span id="messageexit" >x</span></span></p>
+            <div class="border" id="messages" style="margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;">
+                <!-- <input id="recipient" type="text"> -->
+                <h1 id="nomess">No Messages</h1>
+            </div>
+            <div style="padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;">
+            <form id="form2" method='POST'>
+                <textarea id="messageinput" cols="30" placeholder="Message"style="width:100%; min-height:25px; max-height:275px; border-radius: 5px;"></textarea>
+                <button id='sendbutton' class="btn btn-success" type="submit" style="width:100%;">Send</button>
+            </form>
+            </div>
+        </div>
+        </div>
+
+        <p id="minbox" style="margin:0px; padding:0px; display:none; width:250px; position:fixed; bottom:0; right: 100px; border-top-left-radius: 5px; border-top-right-radius: 5px; color:white; background-color: #3a414c; height:35px;z-index:9999"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="maximize" style="margin-right:5px;">_</span> <span id="messageexitmin">x</span></span></p>
+
+    {% endif %}
 {% endblock messages %}
 
 

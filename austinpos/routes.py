@@ -58,26 +58,38 @@ def dash():
 
 @socketio.on('connected')
 def handle_my_custom_event(json):
-    username = Users.query.filter_by(username=current_user.username).first()
-    # username2 = Users.query.filter_by(username=current_user.username).first()
-    username.sid = request.sid
-    # username2.sid = request.sid
+    endusers = Users.query.filter_by(username = current_user.username).first()
+    endusers.sid = request.sid
+
     db.session.commit()
     print(str(json))
 
+@socketio.on('ticket')
+def site_ticket(message):
+    if current_user.adminstatus != True:
+        adminsid = Users.query.filter_by(adminstatus=True).all()
+        
+        for id in adminsid:
+            socketio.emit('privateticket', message, room=id.sid)
 
-@socketio.on('private',)
+
+@socketio.on('private')
 def private_messages(message):
-    username = Users.query.filter_by(username='programmerprod').first()
-    username2 = Users.query.filter_by(username='test').first()
-    
-    if current_user.adminstatus == True:
-        socketio.emit('privatemessages', message, room = username2.sid)
-        print(message['user'])
-    elif current_user.adminstatus != True:
-        print(message['user'])
-        socketio.emit('privatemessages', message, room = username.sid)
-    
+
+    if current_user.adminstatus != True:
+        adminsid = Users.query.filter_by(adminstatus=True).all()
+        print(message['msg'])
+        for id in adminsid:
+            socketio.emit('privatemessages', message, room=id.sid)
+
+    elif current_user.adminstatus == True:
+        print(message['recipient'])
+        username2 = Users.query.filter_by(username=message['recipient']).first()
+        print(username2.sid)
+        if username2.sid == None:
+            print('This aint going to work')
+        else:
+            socketio.emit('privatemessages', message, room = username2.sid)
 
 
 # --------------------- LOGOUT USER ----------------------
