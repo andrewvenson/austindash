@@ -14,6 +14,7 @@ class Users(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     adminstatus = db.Column(db.Boolean)
     sitelink = db.Column(db.Integer, db.ForeignKey('sites.id'))
+    sid = db.Column(db.String())
 
     def __repr__(self):
         return f"User('{self.username}, '{self.email}')"
@@ -57,3 +58,10 @@ class FaQuestion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     Type = db.Column(db.String(), nullable=False)
     Question = db.Column(db.String(), nullable=False)
+
+
+class Messages(db.Model):
+    id= db.Column(db.Integer, primary_key=True)
+    user=db.Column(db.String(), nullable=False)
+    user_msg=db.Column(db.String(), nullable=False)
+    user_sid=db.Column(db.String(), nullable=False)

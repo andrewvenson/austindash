@@ -1,7 +1,7 @@
 from flask import url_for, render_template, redirect, flash, jsonify, json, request
 from austinpos import app, db, bcrypt, mail, socketio, emit
 from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm, MessageForm, QuestionForm
-from austinpos.models import Users, Rma, OrderCart, Sites, FaQuestion
+from austinpos.models import Users, Rma, OrderCart, Sites, FaQuestion, Messages
 from flask_login import login_user, current_user, logout_user, login_required
 import requests, json
 from flask_mail import Message
@@ -51,15 +51,34 @@ def login():
     return render_template('login.html', name = 'login', form=form)
 
 # ----------------------------- SITE'S DASHBOARD -----------------------------
-@app.route("/Dash", methods=['POST', 'GET'])
+@app.route("/Dash", methods=['GET', 'POST'])
 @login_required
 def dash():
     return render_template('dash.html')
 
-@socketio.on('my event')
+@socketio.on('connected')
 def handle_my_custom_event(json):
-    print('Received something: ' + str(json))
-    socketio.emit('my response', json)
+    username = Users.query.filter_by(username=current_user.username).first()
+    # username2 = Users.query.filter_by(username=current_user.username).first()
+    username.sid = request.sid
+    # username2.sid = request.sid
+    db.session.commit()
+    print(str(json))
+
+
+@socketio.on('private',)
+def private_messages(message):
+    username = Users.query.filter_by(username='programmerprod').first()
+    username2 = Users.query.filter_by(username='test').first()
+    
+    if current_user.adminstatus == True:
+        socketio.emit('privatemessages', message, room = username2.sid)
+        print(message['user'])
+    elif current_user.adminstatus != True:
+        print(message['user'])
+        socketio.emit('privatemessages', message, room = username.sid)
+    
+
 
 # --------------------- LOGOUT USER ----------------------
 @app.route("/logout")
