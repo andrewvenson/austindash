@@ -16,7 +16,7 @@ border-bottom-left-radius: 3px;"
   <div id="sitename" style='display:none'>{{current_user.site}}</div>
 <!-- Dashboard structure...================================================================================================================================================== -->
 {% if current_user.adminstatus == False %}
-<div id="un" >{{current_user.username}}</div>
+<div id="un" style='display:none;' >{{current_user.username}}</div>
     <div class="container">
         <div class="row">
             <!-- Shopping cart box ------------------------------------------------------------------>
@@ -154,7 +154,7 @@ border-bottom-left-radius: 3px;"
     </div>
 
 {% else %}
-    <div id="adminun" >{{current_user.username}}</div>
+    <div id="adminun" style='display:none;'>{{current_user.username}}</div>
     <h1>Queue</h1>
     <div class='row' id="queue"></div>
 {% endif %}
@@ -164,11 +164,11 @@ border-bottom-left-radius: 3px;"
     <!-- APOS MESSAGE BOX -->
     {% if current_user.adminstatus == True %}
         <div id='adminstatus' style='display:none;'>{{current_user.adminstatus}}</div>
-        <div id="maxbox" style=" width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
+        <div id="maxbox" style="display:none; width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
             <p style="border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="minimize" style="margin-right:5px;">_</span> <span id="messageexit" >x</span></span></p>
             <div class="border" id="messages" style="margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;">
-                <input id="recipient" type="text">
-                <h1 id="nomess">No Messages</h1>
+                
+                
             </div>
             <div style="padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;">
             <form id="form2" method='POST'>
@@ -180,14 +180,14 @@ border-bottom-left-radius: 3px;"
         </div>
 
         <p id="minbox" style="margin:0px; padding:0px; display:none; width:250px; position:fixed; bottom:0; right: 100px; border-top-left-radius: 5px; border-top-right-radius: 5px; color:white; background-color: #3a414c; height:35px;z-index:9999"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="maximize" style="margin-right:5px;">_</span> <span id="messageexitmin">x</span></span></p>
-
+    <!-- USER MESSAGE BOX -->
     {% else %}
         <div id='adminstatus' style='display:none;'>{{current_user.adminstatus}}</div>
         <div id="maxbox" style="display:none; width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
             <p style="border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="minimize" style="margin-right:5px;">_</span> <span id="messageexit" >x</span></span></p>
             <div class="border" id="messages" style="margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;">
-                <!-- <input id="recipient" type="text"> -->
-                <h1 id="nomess">No Messages</h1>
+                
+                
             </div>
             <div style="padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;">
             <form id="form2" method='POST'>

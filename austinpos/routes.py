@@ -61,35 +61,47 @@ def dash():
 @socketio.on('connected')
 def handle_my_custom_event(json):
     endusers = Users.query.filter_by(username = current_user.username).first()
+    print('this user ', endusers)
     endusers.sid = request.sid
+    db.session.commit()
 
 @socketio.on('adminticketblast')
 def adminticketblast(data):
-    # print(data)
-    # ticket = 1
-    # ticketcounter = ticket.query.filter_by()
-    # ticketcounter = 
     
     db.session.add(Ticket())
     db.session.commit()
 
-    
-
-    
     ticket = str(Ticket.query.order_by(Ticket.id.desc()).first().id)
     data_ = (
         ticket,
         data
     )
     print(data_)
-    socketio.emit('privateadmintickets', (data, ticket) ,  broadcast=True)
-
-
+    socketio.emit('privateadmintickets', (data, ticket) , broadcast=True)
 
 @socketio.on('adminselected')
 def adminselected(data):
     print(data)
     socketio.emit('selected_confirmed', data, broadcast=True)
+
+@socketio.on('displaymessage')
+def displaymessage(data):
+    
+    if data['admin'] == current_user.username:
+        print(data['adminsmess']['message'])
+        print(current_user.username, current_user.sid)
+        print(Users.query.filter_by(username=data['admin']).first().sid)
+        socketio.emit('showadminmessage', data, room=Users.query.filter_by(username=data['admin']).first().sid)
+    else:
+        print('Not your message')
+
+
+@socketio.on('messagestream')
+def messagestream(data):
+    roomid = Users.query.filter_by(username = data['recipient']).first().sid
+    print('messagestream', data)
+    socketio.emit('playerroom', data, room=roomid)
+    
 
 # --------------------- LOGOUT USER ----------------------
 @app.route("/logout")
