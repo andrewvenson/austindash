@@ -156,7 +156,10 @@ border-bottom-left-radius: 3px;"
 {% else %}
     <div id="adminun" style='display:none;'>{{current_user.username}}</div>
     <h1>Queue</h1>
-    <div class='row' id="queue"></div>
+    <div class='border'>
+        <div class='row' id="queue"></div>
+    </div>
+    
 {% endif %}
 
 {% endblock content %}

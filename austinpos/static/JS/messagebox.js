@@ -54,7 +54,7 @@ $('#submitform').on('submit', function(e){
 
 // SEND TICK TO ALL ADMINS
 socket.on('privateadmintickets', function(data, ticket){
-  var $divvyadmin = $("<div></div>")
+  var $divvyadmin = $("<div style='margin-bottom:10px;'></div>")
   $divvyadmin.attr('id', 'admin'+ticket)
 
   var $divvy = $("<div class='col-sm-3 border' style='min-width:225px;height:200px;background-color:lightgray; margin-left:5px;border-radius:5px !important;'>" + '<h1>' + data['site'] + '</h1>' + '<h4>' + data['type'] + '</h4>' + '<p>' + data['username'] + '</p>' + '</div>')
@@ -85,7 +85,7 @@ socket.on('selected_confirmed', function(data){
       console.log('The ticket has been selected by: ' + data['username']);
       console.log('Selected tickets id: #ticket' + data['ticketid']);
       document.getElementById('ticket' + data['ticketid']).style.boxShadow = "0px -5px 20px -5px #888888";
-      var $divvy = $("<span style='color:red'>" + data['username'] + "'s ticket" + '</span>');
+      var $divvy = $("<span style='color:red; border: 1px solid red; margin-left:7px; border-radius:3px; padding-left:2px;padding-right:2px;'>" + data['username'] + "'s ticket" + '</span>');
       $divvy.attr('id', 'spanid' + data['ticketid']);
       $('#admin' + data['ticketid']).append($divvy);
       
