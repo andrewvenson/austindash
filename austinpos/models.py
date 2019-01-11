@@ -65,3 +65,6 @@ class Messages(db.Model):
     user=db.Column(db.String(), nullable=False)
     user_msg=db.Column(db.String(), nullable=False)
     user_sid=db.Column(db.String(), nullable=False)
+
+class Ticket(db.Model):
+    id = db.Column(db.Integer, primary_key=True)

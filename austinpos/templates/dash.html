@@ -12,10 +12,11 @@ border-bottom-left-radius: 3px;"
 {% block content %}
   <h1 id="titlecolor" style="font-weight:600; font-family: 'Staatliches', cursive;">{{ current_user.site }} Dash</h1> 
   </br>
-  <div id="un" >{{current_user.username}}</div>
+  
   <div id="sitename" style='display:none'>{{current_user.site}}</div>
 <!-- Dashboard structure...================================================================================================================================================== -->
 {% if current_user.adminstatus == False %}
+<div id="un" >{{current_user.username}}</div>
     <div class="container">
         <div class="row">
             <!-- Shopping cart box ------------------------------------------------------------------>
@@ -96,7 +97,7 @@ border-bottom-left-radius: 3px;"
                                     <label for="issue"><b>Issue Type</b></label>
 
                                     <div id="issue" class="custom-select" style="width:250px; z-index:999;">
-                                        <select>
+                                        <select id='tickettype'>
                                             <option value="0">Select:</option>
                                             <option value="1">Billing</option>
                                             <option value="2">Gift Card</option>
@@ -153,6 +154,7 @@ border-bottom-left-radius: 3px;"
     </div>
 
 {% else %}
+    <div id="adminun" >{{current_user.username}}</div>
     <h1>Queue</h1>
     <div class='row' id="queue"></div>
 {% endif %}
@@ -181,7 +183,7 @@ border-bottom-left-radius: 3px;"
 
     {% else %}
         <div id='adminstatus' style='display:none;'>{{current_user.adminstatus}}</div>
-        <div id="maxbox" style="width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
+        <div id="maxbox" style="display:none; width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;">
             <p style="border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;"><span id="user" style="margin-left:5px;">Message</span> <span style="float:right; margin-right:5px;"> <span id="minimize" style="margin-right:5px;">_</span> <span id="messageexit" >x</span></span></p>
             <div class="border" id="messages" style="margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;">
                 <!-- <input id="recipient" type="text"> -->

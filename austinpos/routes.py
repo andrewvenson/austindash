@@ -1,7 +1,8 @@
 from flask import url_for, render_template, redirect, flash, jsonify, json, request
+from sqlalchemy import desc
 from austinpos import app, db, bcrypt, mail, socketio, emit
 from austinpos.forms import LoginForm, RegistrationForm, CrazyForm, SubmitForm, AddSiteForm, MessageForm, QuestionForm
-from austinpos.models import Users, Rma, OrderCart, Sites, FaQuestion, Messages
+from austinpos.models import Users, Rma, OrderCart, Sites, FaQuestion, Messages, Ticket
 from flask_login import login_user, current_user, logout_user, login_required
 import requests, json
 from flask_mail import Message
@@ -54,6 +55,7 @@ def login():
 @app.route("/Dash", methods=['GET', 'POST'])
 @login_required
 def dash():
+    db.create_all()
     return render_template('dash.html')
 
 @socketio.on('connected')
@@ -61,36 +63,33 @@ def handle_my_custom_event(json):
     endusers = Users.query.filter_by(username = current_user.username).first()
     endusers.sid = request.sid
 
+@socketio.on('adminticketblast')
+def adminticketblast(data):
+    # print(data)
+    # ticket = 1
+    # ticketcounter = ticket.query.filter_by()
+    # ticketcounter = 
+    
+    db.session.add(Ticket())
     db.session.commit()
-    print(str(json))
 
-@socketio.on('ticket')
-def site_ticket(message):
-    if current_user.adminstatus != True:
-        adminsid = Users.query.filter_by(adminstatus=True).all()
-        
-        for id in adminsid:
-            socketio.emit('privateticket', message, room=id.sid)
+    
+
+    
+    ticket = str(Ticket.query.order_by(Ticket.id.desc()).first().id)
+    data_ = (
+        ticket,
+        data
+    )
+    print(data_)
+    socketio.emit('privateadmintickets', (data, ticket) ,  broadcast=True)
 
 
-@socketio.on('private')
-def private_messages(message):
 
-    if current_user.adminstatus != True:
-        adminsid = Users.query.filter_by(adminstatus=True).all()
-        print(message['msg'])
-        for id in adminsid:
-            socketio.emit('privatemessages', message, room=id.sid)
-
-    elif current_user.adminstatus == True:
-        print(message['recipient'])
-        username2 = Users.query.filter_by(username=message['recipient']).first()
-        print(username2.sid)
-        if username2.sid == None:
-            print('This aint going to work')
-        else:
-            socketio.emit('privatemessages', message, room = username2.sid)
-
+@socketio.on('adminselected')
+def adminselected(data):
+    print(data)
+    socketio.emit('selected_confirmed', data, broadcast=True)
 
 # --------------------- LOGOUT USER ----------------------
 @app.route("/logout")
