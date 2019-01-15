@@ -58,6 +58,8 @@ def dash():
     db.create_all()
     return render_template('dash.html')
 
+
+# ADD REQUEST SID TO USER IN DB
 @socketio.on('connected')
 def handle_my_custom_event(json):
     endusers = Users.query.filter_by(username = current_user.username).first()
@@ -65,18 +67,14 @@ def handle_my_custom_event(json):
     endusers.sid = request.sid
     db.session.commit()
 
+
+# SUBMITTED TICKET FROM USER ADD TICKET ID TO DB, NEED TO ADD MORE INFO ON TICKET SUCH AS USER, AND MESSAGE FOR HISTORY
+# SEND TO PRIVATE ADMIN TICKETS IN MESSAGEBOX.JS
 @socketio.on('adminticketblast')
 def adminticketblast(data):
-    
     db.session.add(Ticket())
     db.session.commit()
-
     ticket = str(Ticket.query.order_by(Ticket.id.desc()).first().id)
-    data_ = (
-        ticket,
-        data
-    )
-    print(data_)
     socketio.emit('privateadmintickets', (data, ticket) , broadcast=True)
 
 @socketio.on('adminselected')
@@ -245,36 +243,39 @@ def sites():
 @app.route('/siteinfo', methods=['POST', 'GET'])
 @login_required
 def siteinfo():
-    form = MessageForm()
-    sites = Sites.query.all()
-    x = request.form.get('sitesss')
-    userinfo = Users.query.filter_by(site=x).all()
-    if form.validate_on_submit():
-        if form.emailtype.data=="Mass Message":
-            massmail = Users.query.all()
-            msg = Message("Austin Pos Alert",
-                            sender="service@gmail.com")
-            msg.bcc = []
-            #Get all users emails
-            for user in massmail:
-                msg.bcc.append(user.email)
-            msg.body = form.message.data
-            mail.send(msg)
-            print("Mass message sent")
+    if current_user.adminstatus == True:
+        form = MessageForm()
+        sites = Sites.query.all()
+        x = request.form.get('sitesss')
+        userinfo = Users.query.filter_by(site=x).all()
+        if form.validate_on_submit():
+            if form.emailtype.data=="Mass Message":
+                massmail = Users.query.all()
+                msg = Message("Austin Pos Alert",
+                                sender="service@gmail.com")
+                msg.bcc = []
+                #Get all users emails
+                for user in massmail:
+                    msg.bcc.append(user.email)
+                msg.body = form.message.data
+                mail.send(msg)
+                print("Mass message sent")
+            else:
+                sitemail = Users.query.filter_by(site=form.sitename.data)
+                msg = Message("Austin Pos Message",
+                                sender="service@gmail.com")
+                msg.recipients = []
+                #Get Specified sites user emails
+                for user in sitemail:
+                    msg.recipients.append(user.email)
+                    print("Message sent to", user.username)
+                msg.body = form.message.data
+                mail.send(msg)
         else:
-            sitemail = Users.query.filter_by(site=form.sitename.data)
-            msg = Message("Austin Pos Message",
-                            sender="service@gmail.com")
-            msg.recipients = []
-            #Get Specified sites user emails
-            for user in sitemail:
-                msg.recipients.append(user.email)
-                print("Message sent to", user.username)
-            msg.body = form.message.data
-            mail.send(msg)
+            print("Message did not send")
+        return render_template('sites.html', x=x, sites=sites, form=form, userinfo=userinfo)
     else:
-        print("Message did not send")
-    return render_template('sites.html', x=x, sites=sites, form=form, userinfo=userinfo)
+        return 'Invalid Request'
 
 # ---------------------------FAQS----------------------------------------
 @app.route('/AustinPos/Resources/FAQs', methods=['POST', 'GET'])

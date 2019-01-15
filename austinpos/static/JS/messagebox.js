@@ -50,17 +50,23 @@ $('#submitform').on('submit', function(e){
   document.getElementById('maxbox').style.display = 'block';
   $('#messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('un').innerHTML + ': ' + "</span>" + $('#userticket').val() + '</div>')
   $('#userticket').val('')
+
+  // IF THERE IS A MESSAGE BOX ALREADY ON PAGE CREATE A NEW MESSAGE BOX WITH MESSAGE INFO
 });
 
-// SEND TICK TO ALL ADMINS
+// APPEND USERS TICKETS AS NOTIFICATION BLOCK ON ADMIN DASH BOARD
 socket.on('privateadmintickets', function(data, ticket){
   var $divvyadmin = $("<div style='margin-bottom:10px;'></div>")
   $divvyadmin.attr('id', 'admin'+ticket)
-
   var $divvy = $("<div class='col-sm-3 border' style='min-width:225px;height:200px;background-color:lightgray; margin-left:5px;border-radius:5px !important;'>" + '<h1>' + data['site'] + '</h1>' + '<h4>' + data['type'] + '</h4>' + '<p>' + data['username'] + '</p>' + '</div>')
   $divvy.attr('id', 'ticket'+ ticket);
+
+  
   $('#queue').append($divvyadmin);
   $('#admin' + ticket).append($divvy)
+
+
+  // ADD JQUERY CLICK EVENT LISTENER ON TICKET BLOCK
   $('#ticket'+ticket).on('click', test)
   function test(){
     console.log($(this).attr('id') + ' was selected');
@@ -68,22 +74,26 @@ socket.on('privateadmintickets', function(data, ticket){
       username : document.getElementById('adminun').innerHTML,
       ticketid : ticket,
       data_ : data
-    })
+    });
   }
-})
+});
 
 socket.on('selected_confirmed', function(data){
   if(document.getElementById('adminstatus').innerHTML == 'True'){
     var spanny = document.getElementById('spanid'+ data['ticketid'])
+    // DIV'S TAKEN 
     var div = document.getElementById('admin' + data['ticketid']).contains(spanny);
     console.log(data['data_'])
     console.log(div);
 
+    // CHECK IF TICKET IS TAKEN BY ANOTHER ADMIN OR EVEN YOURSELF
     if(div == true){
       console.log('Ticket already taken')
     }else{
       console.log('The ticket has been selected by: ' + data['username']);
       console.log('Selected tickets id: #ticket' + data['ticketid']);
+      
+      // ADD POP OUT EFFECT ON ALL ADMIN USERS
       document.getElementById('ticket' + data['ticketid']).style.boxShadow = "0px -5px 20px -5px #888888";
       var $divvy = $("<span style='color:red; border: 1px solid red; margin-left:7px; border-radius:3px; padding-left:2px;padding-right:2px;'>" + data['username'] + "'s ticket" + '</span>');
       $divvy.attr('id', 'spanid' + data['ticketid']);
@@ -91,18 +101,40 @@ socket.on('selected_confirmed', function(data){
       
       socket.emit('displaymessage', {
         adminsmess : data['data_'],
-        admin : data['username']
+        admin : data['username'],
+        ticket : data['ticketid']
       });
     }
   }
 });
 
+//NEED TO WORK ON THIS HEAVY. SHOULD I CREATE A MESSAGE BOX POPUP OR JUST PUT IT IN INBOX
 socket.on('showadminmessage', function(data){
   console.log(data['adminsmess'])
-  document.getElementById('maxbox').style.display = 'block';
+  var ticket = data['ticket']
+  console.log(ticket)
+
   document.getElementById('user').innerHTML = data['adminsmess']['username'];
-  $('#messages').append('<div>' + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + data['adminsmess']['message'] + '</div>')
+  $admin_inbox_div = $("<div class='border' style='height:75px;margin-left:5px;margin-right:5px;border-top:none !important;border-right:none !important;border-left:none !important;'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + "<span style='color:gray'>" + data['adminsmess']['message'] + "</span>" + '</div>')
+  $admin_inbox_div.attr('id', 'inbox-message' + ticket);
+  
+  $('#admin-inbox').append($admin_inbox_div);
+  $('#inbox-message' + ticket).on('click', openmessagestream)
+
+  function openmessagestream(){
+    var whoadie = document.getElementById('whoa');
+
+    document.getElementById('maxbox').style.display = 'block';
+    
+    if(document.getElementById('messages').contains(whoadie)){
+      console.log('We already have a message shawty');
+    }else{
+      $('#messages').append("<div id='whoa'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + data['adminsmess']['message'] + '</div>')
+    }
+  }
 });
+
+
 
 
 $('#form2').on('submit', function(e){
