@@ -6,28 +6,28 @@ var maximum = document.getElementById('maxbox');
 var minimum = document.getElementById('minbox');
 
 // Minimize message box
-minimize.addEventListener('click', function(){
-  maximum.style.display = 'none';
-  minimum.style.display = 'block';
-});
+// minimize.addEventListener('click', function(){
+//   maximum.style.display = 'none';
+//   minimum.style.display = 'block';
+// });
 
-//EXIT MESSAGE BOX
-exit.addEventListener('click', function(){
-  maximum.style.display = 'none';
-  minimum.style.display = 'none';
-})
+// //EXIT MESSAGE BOX
+// exit.addEventListener('click', function(){
+//   maximum.style.display = 'none';
+//   minimum.style.display = 'none';
+// })
 
-// EXIT MINIMIZED MESSAGE BOX
-exitmin.addEventListener('click', function(){
-  maximum.style.display = 'none';
-  minimum.style.display = 'none';
-})
+// // EXIT MINIMIZED MESSAGE BOX
+// exitmin.addEventListener('click', function(){
+//   maximum.style.display = 'none';
+//   minimum.style.display = 'none';
+// })
 
-//MAXIMIZE MIN MESSAGE BOX
-maximize.addEventListener('click', function(){
-  maximum.style.display = 'block';
-  minimum.style.display = 'none';
-})
+// //MAXIMIZE MIN MESSAGE BOX
+// maximize.addEventListener('click', function(){
+//   maximum.style.display = 'block';
+//   minimum.style.display = 'none';
+// })
 
 socket = io.connect('http://' + document.domain + ':' + location.port )
 
@@ -114,7 +114,6 @@ socket.on('showadminmessage', function(data){
   var ticket = data['ticket']
   console.log(ticket)
 
-  document.getElementById('user').innerHTML = data['adminsmess']['username'];
   $admin_inbox_div = $("<div class='border' style='height:75px;margin-left:5px;margin-right:5px;border-top:none !important;border-right:none !important;border-left:none !important;'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + "<span style='color:gray'>" + data['adminsmess']['message'] + "</span>" + '</div>')
   $admin_inbox_div.attr('id', 'inbox-message' + ticket);
   
@@ -122,45 +121,67 @@ socket.on('showadminmessage', function(data){
   $('#inbox-message' + ticket).on('click', openmessagestream)
 
   function openmessagestream(){
+    console.log('This was clicked')
     var whoadie = document.getElementById('whoa');
+    $messagebox = $("<div style='width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;'>" + 
+    "<p style='border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;'>" + "<span class='user' style='margin-left:5px;'>" + 'Message' + "</span> <span style='float:right; margin-right:5px;'>"  + "<span class='minimize' style='margin-right:5px;'>" + '_'  + "</span>" + "<span class='messageexit' >" + 'x' + "</span></span></p>" + 
+    "<div class='border' class='messages' style='margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;'>" + "<div id='whoa'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + data['adminsmess']['message'] + '</div>' + "</div>" + 
+    "<div style='padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;'>" + 
+    "<form class='form3' method='POST'>" + "<textarea class='messageinput' cols='30' placeholder='Message'style='width:100%; min-height:25px; max-height:275px; border-radius: 5px;'>" + "</textarea>" + "<button id='sendbutton' class='btn btn-success' type='submit' style='width:100%;'>" + "Send" + "</button>" + "</form>" +
+    "</div>" + "</div>" + "</div>")
 
-    document.getElementById('maxbox').style.display = 'block';
+    console.log('My id is: #maxbox' + ticket);
+
+  
+    $messagebox.attr('class', 'maxbox' + ticket);
+
+    $(document).ready(function(){
+      $('.messageexit').on('click', function(){
+        $('.maxbox' + ticket).hide();
+      });
+
+      $('.minimize').on('click', function(){
+        $('.maxbox' + ticket).hide();
+        $('#minbox').show();
+      });
+
+      $('#maximize').on('click', function(){
+        $('.maxbox' + ticket).show();
+        $('#minbox').hide();
+      });
+    });
     
-    if(document.getElementById('messages').contains(whoadie)){
-      console.log('We already have a message shawty');
-    }else{
-      $('#messages').append("<div id='whoa'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + data['adminsmess']['message'] + '</div>')
-    }
+    $('#messagearea').append($messagebox)
+    document.getElementsByClassName('user').innerHTML = data['adminsmess']['username'];
   }
 });
 
 
-
-
-$('#form2').on('submit', function(e){
+$(document).on('submit', '.form3', function(e){
   e.preventDefault()
-  // console.log(document.getElementById('adminstatus'))
+  console.log(document.getElementById('adminstatus'))
+  
   if(document.getElementById('adminstatus').innerHTML == 'True'){
     socket.emit('messagestream', {
-      message: $('#messageinput').val(),
+      message: $('.messageinput').val(),
       username: document.getElementById('adminun').innerHTML,
       recipient: document.getElementById('user').innerHTML
     });
-    $('#messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('adminun').innerHTML + ': ' + '</span>' + $('#messageinput').val() + '</div>')
-    $('#messageinput').val('').focus()
+    $('.messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('adminun').innerHTML + ': ' + '</span>' + $('.messageinput').val() + '</div>')
+    $('.messageinput').val('').focus()
   }else{
     socket.emit('messagestream', {
-      message: $('#messageinput').val(),
+      message: $('.messageinput').val(),
       username: document.getElementById('un').innerHTML,
       recipient: document.getElementById('user').innerHTML
     });
-    $('#messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('un').innerHTML + ': ' + '</span>' + $('#messageinput').val() + '</div>')
-    $('#messageinput').val('').focus()
+    $('.messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('un').innerHTML + ': ' + '</span>' + $('.messageinput').val() + '</div>')
+    $('.messageinput').val('').focus()
   }
 });
 
 socket.on('playerroom', function(data){
   console.log('player room test')
   document.getElementById('user').innerHTML = data['username']
-  $('#messages').append('<div>' + "<span style='color:black;'>" + data['username'] + ': ' + '</span>' + data['message'] + '</div>')
+  $('.messages').append('<div>' + "<span style='color:black;'>" + data['username'] + ': ' + '</span>' + data['message'] + '</div>')
 })
