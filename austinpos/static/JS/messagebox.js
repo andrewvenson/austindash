@@ -121,18 +121,15 @@ socket.on('showadminmessage', function(data){
   $('#inbox-message' + ticket).on('click', openmessagestream)
 
   function openmessagestream(){
-    console.log('This was clicked')
-    var whoadie = document.getElementById('whoa');
+    console.log('Tahhhhhh tahhhhhh tahhhhhhh')
     $messagebox = $("<div style='width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;'>" + 
-    "<p style='border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;'>" + "<span class='user' style='margin-left:5px;'>" + 'Message' + "</span> <span style='float:right; margin-right:5px;'>"  + "<span class='minimize' style='margin-right:5px;'>" + '_'  + "</span>" + "<span class='messageexit' >" + 'x' + "</span></span></p>" + 
-    "<div class='border' class='messages' style='margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;'>" + "<div id='whoa'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + data['adminsmess']['message'] + '</div>' + "</div>" + 
+    "<p style='border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;'>" + "<span class='user' style='margin-left:5px;'>" + 'Message' + "</span>" +  "<span style='float:right; margin-right:5px;'>"  + "<span class='minimize' style='margin-right:5px;'>" + '_'  + "</span>" + "<span class='messageexit' >" + 'x' + "</span></span></p>" + 
+    "<div class='border' id='messages' style='margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;'>" + "<div id='whoa'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + data['adminsmess']['message'] + '</div>' + "</div>" + 
     "<div style='padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;'>" + 
     "<form class='form3' method='POST'>" + "<textarea class='messageinput' cols='30' placeholder='Message'style='width:100%; min-height:25px; max-height:275px; border-radius: 5px;'>" + "</textarea>" + "<button id='sendbutton' class='btn btn-success' type='submit' style='width:100%;'>" + "Send" + "</button>" + "</form>" +
     "</div>" + "</div>" + "</div>")
 
-    console.log('My id is: #maxbox' + ticket);
-
-  
+    // console.log('My id is: #maxbox' + ticket);
     $messagebox.attr('class', 'maxbox' + ticket);
 
     $(document).ready(function(){
@@ -152,36 +149,44 @@ socket.on('showadminmessage', function(data){
     });
     
     $('#messagearea').append($messagebox)
-    document.getElementsByClassName('user').innerHTML = data['adminsmess']['username'];
+    $('span.user').text(data['adminsmess']['username']);
+    document.getElementById('minuser').innerHTML = data['adminsmess']['username'];
+
   }
 });
 
 
-$(document).on('submit', '.form3', function(e){
+$(document).on('submit', 'form.form3', function(e){
   e.preventDefault()
-  console.log(document.getElementById('adminstatus'))
-  
+
   if(document.getElementById('adminstatus').innerHTML == 'True'){
+
+    console.log($('textarea.messageinput').val())
+    console.log(document.getElementById('adminstatus').innerHTML)
+    console.log(document.getElementById('adminun').innerHTML)
+    console.log($('span.user').text())
+
     socket.emit('messagestream', {
-      message: $('.messageinput').val(),
+      message: $('textarea.messageinput').val(),
       username: document.getElementById('adminun').innerHTML,
-      recipient: document.getElementById('user').innerHTML
+      recipient: $('span.user').text()
     });
-    $('.messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('adminun').innerHTML + ': ' + '</span>' + $('.messageinput').val() + '</div>')
-    $('.messageinput').val('').focus()
+    $('#messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('adminun').innerHTML + ': ' + '</span>' + $('textarea.messageinput').val() + '</div>')
+    $('textarea.messageinput').val('').focus()
   }else{
     socket.emit('messagestream', {
-      message: $('.messageinput').val(),
+      message: $('textarea.messageinput').val(),
       username: document.getElementById('un').innerHTML,
-      recipient: document.getElementById('user').innerHTML
+      recipient: $('span.user').text()
     });
-    $('.messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('un').innerHTML + ': ' + '</span>' + $('.messageinput').val() + '</div>')
-    $('.messageinput').val('').focus()
+    $('#messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('un').innerHTML + ': ' + '</span>' + $('textarea.messageinput').val() + '</div>')
+    $('textarea.messageinput').val('').focus()
   }
 });
 
 socket.on('playerroom', function(data){
   console.log('player room test')
-  document.getElementById('user').innerHTML = data['username']
-  $('.messages').append('<div>' + "<span style='color:black;'>" + data['username'] + ': ' + '</span>' + data['message'] + '</div>')
+  console.log(data)
+  $('span.user').text(data['username']);
+  $('#messages').append('<div>' + "<span style='color:black;'>" + data['username'] + ': ' + '</span>' + data['message'] + '</div>')
 })

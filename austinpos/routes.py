@@ -84,7 +84,6 @@ def adminselected(data):
 
 @socketio.on('displaymessage')
 def displaymessage(data):
-    
     if data['admin'] == current_user.username:
         print(data['adminsmess']['message'])
         print(current_user.username, current_user.sid)
