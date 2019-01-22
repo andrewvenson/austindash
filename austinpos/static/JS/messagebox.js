@@ -58,7 +58,7 @@ $('#submitform').on('submit', function(e){
 socket.on('privateadmintickets', function(data, ticket){
   var $divvyadmin = $("<div style='margin-bottom:10px;'></div>")
   $divvyadmin.attr('id', 'admin'+ticket)
-  var $divvy = $("<div class='col-sm-3 border' style='min-width:225px;height:200px;background-color:lightgray; margin-left:5px;border-radius:5px !important;'>" + '<h1>' + data['site'] + '</h1>' + '<h4>' + data['type'] + '</h4>' + '<p>' + data['username'] + '</p>' + '</div>')
+  var $divvy = $("<div class='col-sm-3 border' style='min-width:225px;height:200px; margin-left:5px;background-color:#e3e7ed; border-radius:5px !important;'>" + '<h1>' + data['site'] + '</h1>' + '<h4>' + data['type'] + '</h4>' + '<p>' + data['username'] + '</p>' + '</div>')
   $divvy.attr('id', 'ticket'+ ticket);
 
   
@@ -121,38 +121,41 @@ socket.on('showadminmessage', function(data){
   $('#inbox-message' + ticket).on('click', openmessagestream)
 
   function openmessagestream(){
-    console.log('Tahhhhhh tahhhhhh tahhhhhhh')
-    $messagebox = $("<div style='width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;'>" + 
-    "<p style='border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;'>" + "<span class='user' style='margin-left:5px;'>" + 'Message' + "</span>" +  "<span style='float:right; margin-right:5px;'>"  + "<span class='minimize' style='margin-right:5px;'>" + '_'  + "</span>" + "<span class='messageexit' >" + 'x' + "</span></span></p>" + 
-    "<div class='border' id='messages' style='margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;'>" + "<div id='whoa'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + data['adminsmess']['message'] + '</div>' + "</div>" + 
-    "<div style='padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;'>" + 
-    "<form class='form3' method='POST'>" + "<textarea class='messageinput' cols='30' placeholder='Message'style='width:100%; min-height:25px; max-height:275px; border-radius: 5px;'>" + "</textarea>" + "<button id='sendbutton' class='btn btn-success' type='submit' style='width:100%;'>" + "Send" + "</button>" + "</form>" +
-    "</div>" + "</div>" + "</div>")
-
-    // console.log('My id is: #maxbox' + ticket);
-    $messagebox.attr('class', 'maxbox' + ticket);
-
-    $(document).ready(function(){
-      $('.messageexit').on('click', function(){
-        $('.maxbox' + ticket).hide();
-      });
-
-      $('.minimize').on('click', function(){
-        $('.maxbox' + ticket).hide();
-        $('#minbox').show();
-      });
-
-      $('#maximize').on('click', function(){
-        $('.maxbox' + ticket).show();
-        $('#minbox').hide();
-      });
-    });
     
-    $('#messagearea').append($messagebox)
-    $('span.user').text(data['adminsmess']['username']);
-    document.getElementById('minuser').innerHTML = data['adminsmess']['username'];
-
-  }
+    if($('.maxbox' + ticket).length){
+      console.log(document.getElementsByClassName('maxbox' + ticket));
+      $('.maxbox' + ticket).show()
+    }else{
+        $messagebox = $("<div style='width:250px; position:fixed; bottom:0; height:375px; right: 100px; border: 1px solid black; padding-bottom:10px; border-radius: 5px; background-color: white; z-index:9999;'>" + 
+        "<p style='border-bottom:1px solid black; color:white; background-color: #3a414c; height:35px;'>" + "<span class='user' style='margin-left:5px;'>" + 'Message' + "</span>" +  "<span style='float:right; margin-right:5px;'>"  + "<span class='minimize' style='margin-right:5px;'>" + '_'  + "</span>" + "<span class='messageexit' >" + 'x' + "</span></span></p>" + 
+        "<div class='border' id='messages' style='margin-left:5px; border-radius:3px;padding-top:0px;color:gray; margin-right:5px; overflow:auto; height:200px;'>" + "<div id='whoa'>" + "<span style='color:black;'>" + data['adminsmess']['username'] + ': ' + "</span>" + data['adminsmess']['message'] + '</div>' + "</div>" + 
+        "<div style='padding-left:5px;padding-right:5px; position:absolute; bottom:0; margin-bottom:5px;'>" + 
+        "<form class='form3' method='POST'>" + "<textarea class='messageinput' cols='30' placeholder='Message'style='width:100%; min-height:25px; max-height:275px; border-radius: 5px;'>" + "</textarea>" + "<button id='sendbutton' class='btn btn-success' type='submit' style='width:100%;'>" + "Send" + "</button>" + "</form>" +
+        "</div>" + "</div>" + "</div>")
+    
+        $messagebox.attr('class', 'maxbox' + ticket);
+    
+        $(document).ready(function(){
+          $('.messageexit').on('click', function(){
+            $('.maxbox' + ticket).hide();
+          });
+    
+          $('.minimize').on('click', function(){
+            $('.maxbox' + ticket).hide();
+            $('#minbox').show();
+          });
+    
+          $('#maximize').on('click', function(){
+            $('.maxbox' + ticket).show();
+            $('#minbox').hide();
+          });
+        });
+        
+        $('#messagearea').append($messagebox)
+        $('span.user').text(data['adminsmess']['username']);
+        document.getElementById('minuser').innerHTML = data['adminsmess']['username'];
+      }
+    }
 });
 
 
