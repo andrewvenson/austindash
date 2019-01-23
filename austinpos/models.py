@@ -68,3 +68,9 @@ class Messages(db.Model):
 
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String())
+    recipient = db.Column(db.String(), nullable=True)
+    site = db.Column(db.String())
+    issue = db.Column(db.String())
+    message = db.Column(db.String())
+    

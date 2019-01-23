@@ -61,7 +61,8 @@ socket.on('privateadmintickets', function(data, ticket){
   var $divvy = $("<div class='col-sm-3 border' style='min-width:225px;height:200px; margin-left:5px;background-color:#e3e7ed; border-radius:5px !important;'>" + '<h1>' + data['site'] + '</h1>' + '<h4>' + data['type'] + '</h4>' + '<p>' + data['username'] + '</p>' + '</div>')
   $divvy.attr('id', 'ticket'+ ticket);
 
-  
+  console.log(data)
+
   $('#queue').append($divvyadmin);
   $('#admin' + ticket).append($divvy)
 
@@ -164,10 +165,10 @@ $(document).on('submit', 'form.form3', function(e){
 
   if(document.getElementById('adminstatus').innerHTML == 'True'){
 
-    console.log($('textarea.messageinput').val())
-    console.log(document.getElementById('adminstatus').innerHTML)
-    console.log(document.getElementById('adminun').innerHTML)
-    console.log($('span.user').text())
+    // console.log($('textarea.messageinput').val())
+    // console.log(document.getElementById('adminstatus').innerHTML)
+    // console.log(document.getElementById('adminun').innerHTML)
+    // console.log($('span.user').text())
 
     socket.emit('messagestream', {
       message: $('textarea.messageinput').val(),

@@ -72,7 +72,7 @@ def handle_my_custom_event(json):
 # SEND TO PRIVATE ADMIN TICKETS IN MESSAGEBOX.JS
 @socketio.on('adminticketblast')
 def adminticketblast(data):
-    db.session.add(Ticket())
+    db.session.add(Ticket(site = data['site'], user = data['username'], issue = data['type'], message = data['message']))
     db.session.commit()
     ticket = str(Ticket.query.order_by(Ticket.id.desc()).first().id)
     socketio.emit('privateadmintickets', (data, ticket) , broadcast=True)
@@ -96,6 +96,19 @@ def displaymessage(data):
 @socketio.on('messagestream')
 def messagestream(data):
     roomid = Users.query.filter_by(username = data['recipient']).first().sid
+    
+    
+    userrecipient = Ticket.query.filter_by(user = data['recipient']).first().recipient
+    
+    if userrecipient is None:
+        userrecipient.recipient = data['username']
+        db.session.commit()
+    else:
+        site_ = Ticket.query.filter_by(user = data['recipient']).first().site
+        ticket = Ticket.query.filter_by(user = data['recipient']).first().issue
+        
+        db.session.add(Ticket(site = site_, user = data['username'], issue = ticket, message = data['message'], recipient = data['recipient']))
+        db.session.commit()
     print('messagestream', data)
     socketio.emit('playerroom', data, room=roomid)
     
