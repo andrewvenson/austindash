@@ -174,7 +174,10 @@ $(document).on('submit', 'form.form3', function(e){
       message: $('textarea.messageinput').val(),
       username: document.getElementById('adminun').innerHTML,
       recipient: $('span.user').text()
+    
     });
+    console.log($('span.user').text())
+
     $('#messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('adminun').innerHTML + ': ' + '</span>' + $('textarea.messageinput').val() + '</div>')
     $('textarea.messageinput').val('').focus()
   }else{
@@ -183,6 +186,7 @@ $(document).on('submit', 'form.form3', function(e){
       username: document.getElementById('un').innerHTML,
       recipient: $('span.user').text()
     });
+    console.log($('span.user').text())
     $('#messages').append('<div>' + "<span style='color:black;'>" + document.getElementById('un').innerHTML + ': ' + '</span>' + $('textarea.messageinput').val() + '</div>')
     $('textarea.messageinput').val('').focus()
   }

@@ -98,8 +98,8 @@ def messagestream(data):
     roomid = Users.query.filter_by(username = data['recipient']).first().sid
     
     
-    userrecipient = Ticket.query.filter_by(user = data['recipient']).first().recipient
-    
+    userrecipient = Ticket.query.filter_by(user = data['recipient']).first()
+    print(userrecipient)
     if userrecipient is None:
         userrecipient.recipient = data['username']
         db.session.commit()
